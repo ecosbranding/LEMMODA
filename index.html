@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEM MODA | Luxury Streetwear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .video-container { height: 100vh; width: 100%; position: relative; overflow: hidden; }
+        video { object-fit: cover; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0.7; }
+        .hero-text { position: relative; z-index: 10; text-align: center; }
+        .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 10px; }
+        .bento-item { background: #111; border: 1px solid #222; height: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; transition: 0.4s; }
+        .bento-item:hover { border-color: #6DAE5A; transform: scale(0.98); }
+        .text-huge { font-size: 12vw; line-height: 0.8; letter-spacing: -0.05em; font-weight: 900; }
+        .accent { color: #6DAE5A; }
+    </style>
+</head>
+<body>
+
+    <section class="video-container flex items-center justify-center">
+        <video autoplay muted loop playsinline>
+            <source src="1000813159.mp4" type="video/mp4">
+        </video>
+        <div class="hero-text">
+            <h1 class="text-huge uppercase tracking-tighter">Tu<br><span class="accent italic">Identidad</span></h1>
+            <p class="mt-4 tracking-[1em] text-xs uppercase opacity-50">Luxury Streetwear / Quito</p>
+        </div>
+    </section>
+
+    <section class="py-20 bg-black">
+        <div class="px-4 mb-10">
+            <h2 class="text-4xl font-black uppercase">The Drop <span class="accent">01</span></h2>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-item md:col-span-2 md:row-span-2" style="background-image: url('tu-foto-1.jpg'); background-size: cover;">
+                <p class="text-xs tracking-widest uppercase">New Release</p>
+                <h3 class="text-2xl font-bold italic">Oversized Tech-Kit</h3>
+            </div>
+            <div class="bento-item bg-zinc-900">
+                <h3 class="text-xl font-black accent">HORMIGA</h3>
+                <p class="text-[10px] text-zinc-500 uppercase">Determinación Incansable</p>
+            </div>
+            <div class="bento-item bg-zinc-900 border-l-4 border-accent">
+                <h3 class="text-xl font-black">HOJA</h3>
+                <p class="text-[10px] text-zinc-500 uppercase">Adaptabilidad Sostenible</p>
+            </div>
+            <div class="bento-item md:col-span-2" style="background-image: url('tu-foto-2.jpg'); background-size: cover;">
+                 <h3 class="text-2xl font-bold">Limited Drop</h3>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
