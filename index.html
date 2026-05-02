@@ -3,550 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Víctor Carvajal | ORCA Studios">
-    <title>LEM MODA | High-End Streetwear Division & Selected Mod</title>
+    <title>LEM MODA | High-End Streetwear Division</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,300;0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,900;1,900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --brand-green: #6DAE5A;
-            --brand-black: #0a0a0a;
-            --brand-grey-light: #f7f7f7;
-            --brand-grey-dark: #1a1a1a;
-            --transition-main: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-            --transition-fast: all 0.3s ease;
+            --lem-green: #6DAE5A;
+            --lem-black: #080808;
+            --lem-white: #ffffff;
+            --lem-transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Urbanist', sans-serif;
-            background-color: #ffffff;
-            color: var(--brand-black);
+            background: var(--lem-white);
+            color: var(--lem-black);
             overflow-x: hidden;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Scrollbar Personalizado (Estética Pro) --- */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: var(--brand-black); border-radius: 10px; }
-
-        /* --- Motor de Animación de Secciones --- */
-        .section-view {
-            display: none;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: var(--transition-main);
+        /* --- SISTEMA DE PRECARGA (NIVEL PRO) --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--lem-black); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 1s ease;
         }
 
-        .section-view.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+        /* --- NAVEGACIÓN CINEMÁTICA --- */
+        .nav-master {
+            position: fixed; top: 0; width: 100%; padding: 30px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 5000; transition: var(--lem-transition);
+            background: rgba(255,255,255,0.01);
+            backdrop-filter: blur(0px);
         }
 
-        /* --- Header: Glassmorphism Blur Engine --- */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            z-index: 2000;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-            transition: var(--transition-main);
+        .nav-master.scrolled {
+            padding: 20px 60px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- Hero: Cinemática Visual --- */
-        .hero-container {
-            height: 95vh;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            background: #000;
-            position: relative;
-            overflow: hidden;
+        /* --- ENGINE DE SECCIONES (SPA) --- */
+        .page-wrapper {
+            display: none; opacity: 0; transform: scale(0.98);
+            transition: var(--lem-transition);
         }
 
-        .hero-video-render {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.6;
-            transform: scale(1.1);
-            filter: contrast(1.1) brightness(0.9);
+        .page-wrapper.active {
+            display: block; opacity: 1; transform: scale(1);
         }
 
-        /* --- Grid de Productos (Solución Final a Desorden) --- */
-        .catalog-mesh {
+        /* --- HERO: VISIÓN 2026 --- */
+        .hero-viewport {
+            height: 100vh; width: 100%; position: relative;
+            background: #000; overflow: hidden;
+            clip-path: inset(0 0 0 0);
+        }
+
+        .hero-video {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.5; transform: scale(1.1);
+            animation: slowZoom 20s infinite alternate;
+        }
+
+        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.2); } }
+
+        /* --- GRID DE PRODUCTOS: ARQUITECTURA LIMPIA --- */
+        .lem-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 15px;
+            gap: 20px; padding: 20px;
         }
 
         @media (min-width: 1024px) {
-            .catalog-mesh {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 35px;
-                padding: 50px;
-            }
+            .lem-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 60px; }
         }
 
-        .card-premium {
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition-main);
-            position: relative;
+        .product-item {
+            position: relative; transition: var(--lem-transition);
+            display: flex; flex-direction: column;
         }
 
-        .card-premium:hover {
-            transform: translateY(-12px);
+        .product-image-box {
+            width: 100%; aspect-ratio: 3/4; overflow: hidden;
+            background: #f4f4f4; border-radius: 2px;
         }
 
-        .media-box {
-            width: 100%;
-            aspect-ratio: 4/5;
-            overflow: hidden;
-            background: var(--brand-grey-light);
-            border-radius: 4px;
-            position: relative;
+        .product-image-box img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: var(--lem-transition);
         }
 
-        .media-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+        .product-item:hover .product-image-box img { transform: scale(1.1); }
+
+        /* --- INTERFAZ DE COMPRA --- */
+        .size-tag {
+            width: 40px; height: 40px; border: 1px solid #ddd;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 900; cursor: pointer;
+            transition: 0.3s;
         }
 
-        .card-premium:hover .media-box img {
-            transform: scale(1.12);
+        .size-tag.selected { background: #000; color: #fff; border-color: #000; }
+
+        .btn-buy {
+            width: 100%; padding: 20px; background: #000; color: #fff;
+            font-[900] text-[10px] uppercase tracking-[4px];
+            margin-top: 15px; transition: 0.4s;
         }
 
-        /* --- UI Controls (UX Refinada) --- */
-        .btn-size-selector {
-            width: 38px;
-            height: 38px;
-            border: 1px solid #e5e5e5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: 900;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            border-radius: 2px;
-        }
+        .btn-buy:hover { background: var(--lem-green); box-shadow: 0 15px 30px rgba(109,174,90,0.3); }
 
-        .btn-size-selector.active {
-            background: var(--brand-black);
-            color: #fff;
-            border-color: var(--brand-black);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        /* --- CARRITO (DRAWER ENGINE) --- */
+        #cart-drawer {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 450px;
+            height: 100vh; background: #fff; z-index: 6000;
+            transition: right 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -50px 0 100px rgba(0,0,0,0.1);
+            padding: 40px; display: flex; flex-direction: column;
         }
-
-        .btn-cta-black {
-            background: var(--brand-black);
-            color: #fff;
-            padding: 18px;
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 15px;
-            transition: var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-cta-black:hover {
-            background: var(--brand-green);
-            transform: translateY(-2px);
-        }
-
-        /* --- Panel de Carrito Dinámico --- */
-        #cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 450px;
-            height: 100vh;
-            background: #fff;
-            z-index: 3000;
-            transition: right 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-            box-shadow: -30px 0 70px rgba(0,0,0,0.15);
-            display: flex;
-            flex-direction: column;
-        }
-
-        #cart-sidebar.open { right: 0; }
-
-        /* --- Sección ADN (Editorial) --- */
-        .editorial-essence {
-            background: var(--brand-black);
-            color: #fff;
-            padding: 150px 20px;
-            position: relative;
-        }
-
-        .editorial-essence::before {
-            content: 'LEM';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 15rem;
-            font-weight: 900;
-            opacity: 0.03;
-            font-style: italic;
-        }
-
-        .filter-pill {
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 9px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: #f0f0f0;
-            color: #888;
-            transition: var(--transition-fast);
-        }
-
-        .filter-pill.active {
-            background: var(--brand-black);
-            color: #fff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+        #cart-drawer.open { right: 0; }
     </style>
 </head>
 <body>
 
-    <div id="cart-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-md z-[2500] hidden" onclick="toggleCart()"></div>
+    <div id="preloader">
+        <div class="text-white font-black text-4xl animate-pulse italic">LEM<span class="text-[#6DAE5A]">.</span></div>
+    </div>
 
-    <nav class="fixed top-0 w-full glass-nav py-6 px-8 md:px-20 flex justify-between items-center">
-        <div class="text-3xl font-black uppercase tracking-tighter cursor-pointer group" onclick="changeSection('home')">
-            LEM <span class="text-[#6DAE5A] group-hover:text-black transition-colors">MODA</span>
+    <nav class="nav-master" id="main-nav">
+        <div class="text-3xl font-black italic tracking-tighter cursor-pointer" onclick="view('home')">
+            LEM <span class="text-[#6DAE5A]">MODA</span>
         </div>
-        
-        <div class="hidden lg:flex space-x-14 text-[10px] font-black uppercase tracking-[0.3em]">
-            <span onclick="changeSection('home')" class="cursor-pointer hover:text-[#6DAE5A] transition">Home</span>
-            <span onclick="changeSection('shop')" class="cursor-pointer hover:text-[#6DAE5A] transition">Catálogo</span>
-            <span onclick="changeSection('adn')" class="cursor-pointer hover:text-[#6DAE5A] transition">Esencia 🐜</span>
+        <div class="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.3em]">
+            <span onclick="view('home')" class="cursor-pointer hover:text-[#6DAE5A]">Inception</span>
+            <span onclick="view('shop')" class="cursor-pointer hover:text-[#6DAE5A]">Collections</span>
+            <span onclick="view('essence')" class="cursor-pointer hover:text-[#6DAE5A]">Identity</span>
         </div>
-
-        <div class="flex items-center gap-10">
-            <button onclick="toggleCart()" class="relative transform hover:scale-110 transition">
-                <span class="text-2xl font-bold">🛒</span>
-                <span id="cart-badge" class="absolute -top-3 -right-3 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white">0</span>
-            </button>
-            <button onclick="changeSection('shop')" class="bg-black text-white px-10 py-3.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition shadow-xl">Shop</button>
-        </div>
+        <button onclick="toggleCart()" class="relative">
+            <span class="text-xl">🛒</span>
+            <span id="cart-count" class="absolute -top-3 -right-3 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
+        </button>
     </nav>
 
-    <aside id="cart-sidebar">
-        <div class="p-10 border-b flex justify-between items-center bg-zinc-50">
-            <div>
-                <h3 class="text-2xl font-black uppercase italic tracking-tighter">Tu Selección</h3>
-                <div class="h-1 w-10 bg-[#6DAE5A] mt-1"></div>
-            </div>
-            <button onclick="toggleCart()" class="text-3xl hover:rotate-90 transition">✕</button>
+    <div id="cart-drawer">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-3xl font-black italic uppercase">Bolsa</h2>
+            <button onclick="toggleCart()" class="text-2xl">✕</button>
         </div>
-        
-        <div id="cart-render-engine" class="flex-grow overflow-y-auto p-10 space-y-6">
+        <div id="cart-content" class="flex-grow overflow-y-auto space-y-6">
             </div>
-
-        <div class="p-10 border-t bg-white">
-            <div class="flex justify-between items-end mb-8">
-                <div>
-                    <p class="text-[9px] font-black text-zinc-300 uppercase tracking-widest mb-2">Total Estimado</p>
-                    <p id="total-val" class="text-4xl font-black tracking-tighter">$0.00</p>
-                </div>
-                <button onclick="clearCart()" class="text-[9px] font-black text-red-400 uppercase tracking-widest border-b border-red-200">Limpiar</button>
+        <div class="pt-10 border-t">
+            <div class="flex justify-between text-2xl font-black mb-8">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
             </div>
-            <button onclick="sendToWhatsApp()" class="w-full bg-black text-white py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-[#6DAE5A] transition shadow-2xl">Confirmar Pedido 🐜</button>
+            <button onclick="checkout()" class="w-full bg-black text-white py-6 font-black uppercase tracking-widest text-xs">Finalizar en WhatsApp</button>
         </div>
-    </aside>
+    </div>
 
-    <section id="home" class="section-view active pt-20">
-        <div class="hero-container">
-            <video autoplay muted loop playsinline class="hero-video-render">
+    <main id="home" class="page-wrapper active">
+        <div class="hero-viewport">
+            <video autoplay muted loop playsinline class="hero-video">
                 <source src="1000813695.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-10">
-                <p class="text-[#6DAE5A] font-black tracking-[1.2em] text-[10px] uppercase mb-6 animate-pulse">Ecuadorian Streetwear Division</p>
-                <h1 class="text-7xl md:text-[11rem] font-black text-white uppercase leading-[0.8] tracking-tighter mb-14">
-                    HIGH<br><span class="text-[#6DAE5A]">MYSTIC</span>
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-6">
+                <h1 class="text-7xl md:text-[12rem] font-black leading-[0.8] tracking-tighter uppercase italic mb-10">
+                    Urban<br><span class="text-[#6DAE5A]">Roots</span>
                 </h1>
-                <div class="flex flex-col md:flex-row gap-8">
-                    <button onclick="changeSection('shop')" class="bg-white text-black px-16 py-6 rounded-full font-black uppercase text-[11px] tracking-widest shadow-2xl hover:bg-[#6DAE5A] hover:text-white transition transform hover:-translate-y-1">Ver Colección</button>
-                    <button onclick="changeSection('adn')" class="border-2 border-white/20 text-white px-16 py-6 rounded-full font-black uppercase text-[11px] tracking-widest backdrop-blur-xl hover:bg-white/10 transition">Filosofía</button>
+                <p class="max-w-xl text-lg font-light italic mb-12 opacity-80">La esencia del streetwear de lujo con base en Quito. Diseños que desafían la norma.</p>
+                <button onclick="view('shop')" class="bg-white text-black px-16 py-6 rounded-full font-black uppercase text-xs tracking-[0.4em] hover:bg-[#6DAE5A] hover:text-white transition">Explorar Drop</button>
+            </div>
+        </div>
+    </main>
+
+    <main id="shop" class="page-wrapper pt-40 pb-32">
+        <div class="max-w-[1600px] mx-auto px-10">
+            <div class="mb-24">
+                <h2 class="text-8xl font-black italic uppercase tracking-tighter">Shop.</h2>
+                <div class="h-1 w-40 bg-[#6DAE5A] mt-4"></div>
+            </div>
+            
+            <div id="product-grid" class="lem-grid">
+                </div>
+        </div>
+    </main>
+
+    <main id="essence" class="page-wrapper bg-black text-white py-40">
+        <div class="max-w-5xl mx-auto px-10 text-center">
+            <h2 class="text-7xl md:text-[10rem] font-black italic uppercase leading-none mb-20 text-[#6DAE5A]">Esencia.</h2>
+            <div class="grid md:grid-cols-2 gap-20 text-left">
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-black italic uppercase">La Hormiga 🐜</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed">Símbolo de nuestra ética de trabajo. Persistencia, estructura y fuerza colectiva en cada una de nuestras piezas.</p>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-black italic uppercase">La Hoja</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed">Representa el crecimiento orgánico y la frescura de nuestras líneas de diseño en la escena urbana de Quito.</p>
                 </div>
             </div>
         </div>
-
-        <div class="py-40 px-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-32 items-center">
-            <div class="space-y-10">
-                <h2 class="text-7xl font-black uppercase italic leading-[0.85]">Cultura <br> de <br> <span class="text-[#6DAE5A]">Ambato.</span></h2>
-                <p class="text-zinc-500 text-xl font-light leading-relaxed italic border-l-8 border-[#6DAE5A] pl-10">"En LEM MODA, cada puntada en nuestra fábrica **Selected Mod** es un manifiesto. No fabricamos ropa, manufacturamos la identidad de una nueva generación ecuatoriana."</p>
-                <div class="flex gap-20">
-                    <div>
-                        <p class="text-6xl font-black tracking-tighter mb-1">HQ</p>
-                        <p class="text-[9px] font-black uppercase text-zinc-400 tracking-[0.3em]">Quito, EC</p>
-                    </div>
-                    <div>
-                        <p class="text-6xl font-black tracking-tighter mb-1">PRO</p>
-                        <p class="text-[9px] font-black uppercase text-zinc-400 tracking-[0.3em]">Selected Mod</p>
-                    </div>
-                </div>
-            </div>
-            <div class="relative">
-                <div class="absolute -inset-10 bg-[#6DAE5A]/10 blur-[120px] rounded-full"></div>
-                <img src="1000813670.jpg" class="relative w-full h-[750px] object-cover rounded-[5rem] shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-1000">
-            </div>
-        </div>
-    </section>
-
-    <section id="shop" class="section-view pt-40 pb-48">
-        <div class="px-8 max-w-[1600px] mx-auto">
-            <div class="flex flex-col xl:flex-row justify-between items-end mb-32 gap-16">
-                <div>
-                    <h2 class="text-8xl font-black uppercase italic tracking-tighter leading-none mb-10">Catalog.</h2>
-                    <div class="flex gap-12">
-                        <span onclick="setGenderFilter('Todos')" class="g-tab text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-black cursor-pointer">Unisex</span>
-                        <span onclick="setGenderFilter('Caballero')" class="g-tab text-[10px] font-black uppercase tracking-[0.2em] text-zinc-300 cursor-pointer hover:text-black transition">Hombre</span>
-                        <span onclick="setGenderFilter('Dama')" class="g-tab text-[10px] font-black uppercase tracking-[0.2em] text-zinc-300 cursor-pointer hover:text-black transition">Mujer</span>
-                    </div>
-                </div>
-                
-                <div class="flex overflow-x-auto w-full xl:w-auto pb-6 gap-6 no-scrollbar">
-                    <button onclick="setCategoryFilter('Todos')" class="c-tab filter-pill active">Todos</button>
-                    <button onclick="setCategoryFilter('Hoodies')" class="c-tab filter-pill">Hoodies</button>
-                    <button onclick="setCategoryFilter('Pantalones')" class="c-tab filter-pill">Pantalones</button>
-                    <button onclick="setCategoryFilter('Camisetas')" class="c-tab filter-pill">Camisetas</button>
-                </div>
-            </div>
-
-            <div id="product-grid" class="catalog-mesh">
-                </div>
-        </div>
-    </section>
-
-    <section id="adn" class="section-view">
-        <div class="editorial-essence">
-            <div class="max-w-6xl mx-auto relative z-10 px-6">
-                <span class="text-[#6DAE5A] font-black tracking-[0.6em] text-[11px] uppercase mb-16 block">The Soul of the Brand</span>
-                <h2 class="text-7xl md:text-[10rem] font-black italic uppercase leading-[0.8] mb-24">NUESTRA <br> <span class="text-[#6DAE5A]">RAÍZ.</span></h2>
-                
-                <div class="grid md:grid-cols-2 gap-16">
-                    <div class="p-16 bg-white/5 rounded-[4rem] border border-white/5 backdrop-blur-sm hover:border-[#6DAE5A]/30 transition duration-700">
-                        <h4 class="text-4xl font-black uppercase mb-8 italic text-[#6DAE5A]">Selected Mod</h4>
-                        <p class="text-zinc-400 text-xl leading-relaxed font-light italic">Nuestro búnker creativo en **Ambato**. Aquí es donde la tradición de la costura ecuatoriana se encuentra con los cortes industriales más agresivos del mercado.</p>
-                    </div>
-                    <div class="p-16 bg-white/5 rounded-[4rem] border border-white/5 backdrop-blur-sm hover:border-[#6DAE5A]/30 transition duration-700">
-                        <h4 class="text-4xl font-black uppercase mb-8 italic text-[#6DAE5A]">La Hormiga 🐜</h4>
-                        <p class="text-zinc-400 text-xl leading-relaxed font-light italic">No es solo un logo. Es nuestra ética: el trabajo en equipo, la fuerza desproporcionada y la construcción constante de un imperio desde la humildad.</p>
-                    </div>
-                </div>
-
-                <div class="mt-32 p-20 bg-[#6DAE5A] rounded-[5rem] text-black shadow-2xl transform -rotate-1 hover:rotate-0 transition-transform duration-1000">
-                    <h3 class="text-6xl font-black uppercase italic mb-10 tracking-tighter">Quito High-End Division</h3>
-                    <p class="text-2xl font-bold leading-tight max-w-4xl italic">"Existimos para elevar la vara. LEM MODA no compite por precio, compite por legado. Cada pieza es una inversión en la nueva era del diseño latino."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-32 px-10 border-t border-zinc-100">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
-            <div class="text-center md:text-left">
-                <h4 class="text-5xl font-black italic uppercase tracking-tighter">LEM MODA</h4>
-                <p class="text-[9px] font-black text-zinc-300 uppercase tracking-[0.6em] mt-5 italic">High-End Streetwear Division 2026</p>
-            </div>
-            <div class="flex gap-16 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
-                <a href="#" class="hover:text-[#6DAE5A] transition">Instagram</a>
-                <a href="#" class="hover:text-[#6DAE5A] transition">WhatsApp</a>
-                <a href="#" class="hover:text-[#6DAE5A] transition">Showroom</a>
-            </div>
-            <p class="text-[10px] text-zinc-200 font-black uppercase tracking-widest italic">Designed by Víctor Carvajal</p>
-        </div>
-    </footer>
+    </main>
 
     <script>
-        // --- BASE DE DATOS MAESTRA (100% PROFESIONAL) ---
-        const inventory = [
-            { id: 1, name: 'Navy Dayslay Hoodie', price: 85, category: 'Hoodies', gender: 'Caballero', image: '1000813647.jpeg' },
-            { id: 2, name: 'Tech Cargo Graphite', price: 115, category: 'Pantalones', gender: 'Caballero', image: '1000813649.jpg' },
-            { id: 3, name: 'Leaf Zip Pink Limited', price: 95, category: 'Hoodies', gender: 'Dama', image: '1000813651.jpg' },
-            { id: 4, name: 'Oversized Black Leaf', price: 45, category: 'Camisetas', gender: 'Dama', image: '1000813670.jpg' },
-            { id: 5, name: 'Grey Urban Core', price: 90, category: 'Hoodies', gender: 'Caballero', image: '1000813671.jpg' },
-            { id: 6, name: 'Essential White Tee', price: 38, category: 'Camisetas', gender: 'Dama', image: '1000813673.jpg' },
-            { id: 8, name: 'Acid Wash Street', price: 55, category: 'Camisetas', gender: 'Caballero', image: '1000813674.jpg' },
-            { id: 9, name: 'Shadow Jacket 2026', price: 155, category: 'Hoodies', gender: 'Caballero', image: '1000813683.jpg' },
-            { id: 10, name: 'Desert Storm Jogger', price: 100, category: 'Pantalones', gender: 'Dama', image: '1000813684.jpg' },
-            { id: 13, name: 'Carbon Tech Pant', price: 130, category: 'Pantalones', gender: 'Caballero', image: '1000813675.jpg' }
+        // --- DATA ENGINE ---
+        const products = [
+            { id: 1, name: "Navy Dayslay Hoodie", price: 85, img: "1000813647.jpeg" },
+            { id: 2, name: "Tech Cargo Graphite", price: 115, img: "1000813649.jpg" },
+            { id: 3, name: "Leaf Pink Limited", price: 95, img: "1000813651.jpg" },
+            { id: 4, name: "Oversized Black Leaf", price: 45, img: "1000813670.jpg" },
+            { id: 5, name: "Grey Urban Core", price: 88, img: "1000813671.jpg" },
+            { id: 6, name: "Essential White Tee", price: 35, img: "1000813673.jpg" },
+            { id: 7, name: "Midnight Cargo Dama", price: 105, img: "1000813672.jpg" },
+            { id: 8, name: "Acid Wash Street", price: 50, img: "1000813674.jpg" }
         ];
 
-        let state_cart = [];
-        let state_category = 'Todos';
-        let state_gender = 'Todos';
+        let cart = [];
 
-        // --- SISTEMA DE NAVEGACIÓN SPA ---
-        function changeSection(id) {
-            document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById(id);
-            target.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            if(id === 'shop') renderCatalog();
-            if(document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+        // --- NAVIGATION ENGINE ---
+        function view(id) {
+            document.querySelectorAll('.page-wrapper').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+            if(id === 'shop') renderProducts();
         }
 
-        // --- SISTEMA DE FILTRADO AVANZADO ---
-        function setCategoryFilter(val) {
-            state_category = val;
-            updateFilterVisuals();
-            renderCatalog();
-        }
-
-        function setGenderFilter(val) {
-            state_gender = val;
-            updateFilterVisuals();
-            renderCatalog();
-        }
-
-        function updateFilterVisuals() {
-            document.querySelectorAll('.c-tab').forEach(btn => {
-                btn.classList.toggle('active', btn.innerText === state_category);
-            });
-        }
-
-        // --- RENDERIZADOR DE CATÁLOGO (EL CORAZÓN DEL FRONTEND) ---
-        function renderCatalog() {
-            const container = document.getElementById('product-grid');
-            const filtered = inventory.filter(p => 
-                (state_category === 'Todos' || p.category === state_category) &&
-                (state_gender === 'Todos' || p.gender === state_gender)
-            );
-
-            container.innerHTML = filtered.map(p => `
-                <div class="card-premium">
-                    <div class="media-box">
-                        <img src="${p.image}" alt="${p.name}" loading="lazy">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest text-zinc-500">${p.gender}</div>
+        // --- UI RENDERER ---
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-item">
+                    <div class="product-image-box">
+                        <img src="${p.img}" loading="lazy">
                     </div>
-                    <div class="mt-8 flex flex-col flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-[11px] font-extrabold uppercase leading-tight tracking-tight w-2/3 italic">${p.name}</h4>
-                            <p class="text-[#6DAE5A] font-black text-xs leading-none">$${p.price}</p>
+                    <div class="py-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[11px] font-black uppercase italic w-2/3">${p.name}</h4>
+                            <span class="text-[11px] font-black text-[#6DAE5A]">$${p.price}</span>
                         </div>
-                        
-                        <div class="flex gap-2.5 my-6" id="sizes-${p.id}">
-                            ${['S','M','L','XL'].map(s => `
-                                <div class="btn-size-selector" onclick="handleSizeSelection(this)">${s}</div>
-                            `).join('')}
+                        <div class="flex gap-2" id="size-selector-${p.id}">
+                            ${['S','M','L','XL'].map(s => `<div class="size-tag" onclick="selectSize(this)">${s}</div>`).join('')}
                         </div>
-
-                        <button onclick="addToCartEngine(${p.id})" class="btn-cta-black">
-                            Añadir a Bolsa 🐜
-                        </button>
+                        <button onclick="addToCart(${p.id})" class="btn-buy">Añadir</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function handleSizeSelection(element) {
-            element.parentElement.querySelectorAll('.btn-size-selector').forEach(b => b.classList.remove('active'));
-            element.classList.add('active');
+        function selectSize(el) {
+            el.parentElement.querySelectorAll('.size-tag').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
         }
 
-        // --- SISTEMA DE CARRITO (LÓGICA EMPRESARIAL) ---
+        // --- CART ENGINE ---
         function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('open');
-            document.getElementById('cart-overlay').classList.toggle('hidden');
+            document.getElementById('cart-drawer').classList.toggle('open');
         }
 
-        function addToCartEngine(id) {
-            const size = document.querySelector(`#sizes-${id} .active`)?.innerText;
-            if(!size) return alert("🐜 Víctor, recuerda que el usuario debe elegir una talla.");
+        function addToCart(id) {
+            const size = document.querySelector(`#size-selector-${id} .selected`)?.innerText;
+            if(!size) return alert("Selecciona tu talla");
 
-            const product = inventory.find(x => x.id === id);
-            const entry = { ...product, size, cartId: Date.now() };
-            
-            state_cart.push(entry);
-            refreshCartUI();
-            
-            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+            const product = products.find(p => p.id === id);
+            cart.push({...product, size});
+            updateUI();
+            toggleCart();
         }
 
-        function refreshCartUI() {
-            const area = document.getElementById('cart-render-engine');
-            const badge = document.getElementById('cart-badge');
-            const total = document.getElementById('total-val');
+        function updateUI() {
+            const count = document.getElementById('cart-count');
+            const total = document.getElementById('cart-total');
+            const content = document.getElementById('cart-content');
 
-            if(state_cart.length === 0) {
-                area.innerHTML = `
-                    <div class="flex flex-col items-center justify-center py-24 opacity-20">
-                        <span class="text-7xl mb-6">🐜</span>
-                        <p class="text-[10px] font-black uppercase tracking-[0.5em]">Sin Artículos</p>
+            count.innerText = cart.length;
+            const sum = cart.reduce((acc, p) => acc + p.price, 0);
+            total.innerText = `$${sum.toFixed(2)}`;
+
+            content.innerHTML = cart.map((p, i) => `
+                <div class="flex gap-4 items-center bg-zinc-50 p-4 rounded-lg">
+                    <img src="${p.img}" class="w-16 h-20 object-cover rounded shadow-sm">
+                    <div class="flex-grow">
+                        <p class="text-[10px] font-black uppercase italic">${p.name}</p>
+                        <p class="text-[9px] text-zinc-400 font-bold uppercase mt-1">Talla: ${p.size}</p>
+                        <p class="text-[10px] font-black mt-2 text-[#6DAE5A]">$${p.price}</p>
                     </div>
-                `;
-            } else {
-                area.innerHTML = state_cart.map((item, index) => `
-                    <div class="flex items-center gap-6 p-4 bg-zinc-50 rounded-2xl border border-zinc-100 group">
-                        <img src="${item.image}" class="w-16 h-20 rounded-xl object-cover shadow-sm group-hover:scale-105 transition">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-start">
-                                <h5 class="text-[10px] font-black uppercase italic">${item.name}</h5>
-                                <button onclick="removeItem(${index})" class="text-zinc-300 hover:text-red-500 transition">✕</button>
-                            </div>
-                            <p class="text-[9px] text-zinc-400 font-bold uppercase mt-1">Talla: ${item.size}</p>
-                            <p class="text-[#6DAE5A] font-black text-sm mt-3">$${item.price}</p>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            badge.innerText = state_cart.length;
-            const totalSum = state_cart.reduce((acc, i) => acc + i.price, 0);
-            total.innerText = `$${totalSum.toFixed(2)}`;
+                    <button onclick="remove(${i})" class="text-zinc-300 hover:text-black">✕</button>
+                </div>
+            `).join('');
         }
 
-        function removeItem(idx) {
-            state_cart.splice(idx, 1);
-            refreshCartUI();
+        function remove(index) {
+            cart.splice(index, 1);
+            updateUI();
         }
 
-        function clearCart() {
-            state_cart = [];
-            refreshCartUI();
+        function checkout() {
+            if(cart.length === 0) return;
+            let msg = "🐜 *ORDEN LEM MODA*\n\n";
+            cart.forEach(p => msg += `• ${p.name} (${p.size}) - $${p.price}\n`);
+            msg += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
+            window.open(`https://wa.me/593979010077?text=${encodeURIComponent(msg)}`);
         }
 
-        // --- PASARELA DE WHATSAPP (DIRECTO A VÍCTOR) ---
-        function sendToWhatsApp() {
-            if(state_cart.length === 0) return;
-            
-            let message = "🐜 *NUEVO PEDIDO - LEM MODA*\n";
-            message += "------------------------------\n\n";
-            state_cart.forEach(i => {
-                message += `• *${i.name}*\nTalla: ${i.size} | Precio: $${i.price}\n\n`;
-            });
-            message += "------------------------------\n";
-            message += `*TOTAL A PAGAR: ${document.getElementById('total-val').innerText}*`;
-            
-            const waUrl = `https://wa.me/593979010077?text=${encodeURIComponent(message)}`;
-            window.open(waUrl, '_blank');
-        }
+        // --- UX EFFECTS ---
+        window.onscroll = () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        };
 
-        // --- LANZAMIENTO ---
         window.onload = () => {
-            renderCatalog();
+            setTimeout(() => {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(() => document.getElementById('preloader').style.display = 'none', 1000);
+            }, 1500);
+            renderProducts();
         };
     </script>
 </body>
