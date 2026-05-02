@@ -3,329 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | High-End Streetwear Division</title>
-    
+    <title>LEM MODA | High-End Streetwear Division 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,900;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --lem-green: #6DAE5A;
-            --lem-black: #080808;
-            --lem-white: #ffffff;
-            --lem-transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            --brand-green: #6DAE5A;
+            --brand-black: #0a0a0a;
+            --brand-white: #ffffff;
+            --bg-gray: #fcfcfc;
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Urbanist', sans-serif;
-            background: var(--lem-white);
-            color: var(--lem-black);
+            background-color: var(--brand-white);
+            color: var(--brand-black);
+            margin: 0;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
 
-        /* --- SISTEMA DE PRECARGA (NIVEL PRO) --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--lem-black); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 1s ease;
+        /* --- Utilidades de Scroll --- */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* --- Animaciones de Entrada --- */
+        .section-fade { display: none; opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .section-fade.active { display: block; opacity: 1; transform: translateY(0); }
+
+        /* --- Header de Lujo --- */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
-        /* --- NAVEGACIÓN CINEMÁTICA --- */
-        .nav-master {
-            position: fixed; top: 0; width: 100%; padding: 30px 60px;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 5000; transition: var(--lem-transition);
-            background: rgba(255,255,255,0.01);
-            backdrop-filter: blur(0px);
+        .nav-link {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            cursor: pointer;
         }
 
-        .nav-master.scrolled {
-            padding: 20px 60px;
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        /* --- ENGINE DE SECCIONES (SPA) --- */
-        .page-wrapper {
-            display: none; opacity: 0; transform: scale(0.98);
-            transition: var(--lem-transition);
-        }
-
-        .page-wrapper.active {
-            display: block; opacity: 1; transform: scale(1);
-        }
-
-        /* --- HERO: VISIÓN 2026 --- */
-        .hero-viewport {
-            height: 100vh; width: 100%; position: relative;
-            background: #000; overflow: hidden;
-            clip-path: inset(0 0 0 0);
-        }
-
-        .hero-video {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.5; transform: scale(1.1);
-            animation: slowZoom 20s infinite alternate;
-        }
-
-        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.2); } }
-
-        /* --- GRID DE PRODUCTOS: ARQUITECTURA LIMPIA --- */
-        .lem-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px; padding: 20px;
-        }
-
-        @media (min-width: 1024px) {
-            .lem-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 60px; }
-        }
-
-        .product-item {
-            position: relative; transition: var(--lem-transition);
-            display: flex; flex-direction: column;
-        }
-
-        .product-image-box {
-            width: 100%; aspect-ratio: 3/4; overflow: hidden;
-            background: #f4f4f4; border-radius: 2px;
-        }
-
-        .product-image-box img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: var(--lem-transition);
-        }
-
-        .product-item:hover .product-image-box img { transform: scale(1.1); }
-
-        /* --- INTERFAZ DE COMPRA --- */
-        .size-tag {
-            width: 40px; height: 40px; border: 1px solid #ddd;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 900; cursor: pointer;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-green);
             transition: 0.3s;
         }
 
-        .size-tag.selected { background: #000; color: #fff; border-color: #000; }
+        .nav-link:hover::after { width: 100%; }
 
-        .btn-buy {
-            width: 100%; padding: 20px; background: #000; color: #fff;
-            font-[900] text-[10px] uppercase tracking-[4px];
-            margin-top: 15px; transition: 0.4s;
+        /* --- Hero Section --- */
+        .hero-wrap {
+            height: 90vh;
+            position: relative;
+            background: #000;
+            clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+            overflow: hidden;
         }
 
-        .btn-buy:hover { background: var(--lem-green); box-shadow: 0 15px 30px rgba(109,174,90,0.3); }
-
-        /* --- CARRITO (DRAWER ENGINE) --- */
-        #cart-drawer {
-            position: fixed; top: 0; right: -100%; width: 100%; max-width: 450px;
-            height: 100vh; background: #fff; z-index: 6000;
-            transition: right 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: -50px 0 100px rgba(0,0,0,0.1);
-            padding: 40px; display: flex; flex-direction: column;
+        .hero-video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
         }
-        #cart-drawer.open { right: 0; }
+
+        /* --- Grid de Catálogo --- */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 15px;
+        }
+
+        @media (min-width: 1024px) {
+            .catalog-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 40px;
+                padding: 40px;
+            }
+        }
+
+        /* --- Tarjeta de Producto --- */
+        .card {
+            background: white;
+            border-radius: 35px;
+            padding: 15px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.07);
+            border-color: #f0f0f0;
+        }
+
+        .img-box {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 25px;
+            overflow: hidden;
+            background: #f8f8f8;
+            position: relative;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .card:hover .img-box img { transform: scale(1.1); }
+
+        /* --- Selectores de UI --- */
+        .size-btn {
+            border: 1px solid #eee;
+            padding: 6px 0;
+            width: 38px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .size-btn.selected {
+            background: var(--brand-black);
+            color: white;
+            border-color: var(--brand-black);
+        }
+
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .color-dot.selected {
+            border-color: var(--brand-green);
+            transform: scale(1.2);
+        }
+
+        /* --- Panel de Carrito --- */
+        #cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            transition: right 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -30px 0 90px rgba(0,0,0,0.1);
+        }
+
+        #cart-sidebar.open { right: 0; }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 4px;
+            gap: 12px;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* --- Filtros --- */
+        .chip {
+            padding: 10px 25px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: #f7f7f7;
+            color: #bbb;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        .chip.active {
+            background: var(--brand-black);
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .gender-link {
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ccc;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .gender-link.active {
+            color: var(--brand-black);
+            border-color: var(--brand-green);
+        }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="text-white font-black text-4xl animate-pulse italic">LEM<span class="text-[#6DAE5A]">.</span></div>
-    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-md z-[1500] hidden" onclick="toggleCart()"></div>
 
-    <nav class="nav-master" id="main-nav">
-        <div class="text-3xl font-black italic tracking-tighter cursor-pointer" onclick="view('home')">
+    <nav class="fixed top-0 w-full glass-header py-6 px-8 md:px-20 flex justify-between items-center">
+        <div class="text-3xl font-black tracking-tighter uppercase cursor-pointer select-none" onclick="goSection('home')">
             LEM <span class="text-[#6DAE5A]">MODA</span>
         </div>
-        <div class="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.3em]">
-            <span onclick="view('home')" class="cursor-pointer hover:text-[#6DAE5A]">Inception</span>
-            <span onclick="view('shop')" class="cursor-pointer hover:text-[#6DAE5A]">Collections</span>
-            <span onclick="view('essence')" class="cursor-pointer hover:text-[#6DAE5A]">Identity</span>
+        
+        <div class="hidden lg:flex space-x-12">
+            <span onclick="goSection('home')" class="nav-link">Inicio</span>
+            <span onclick="goSection('shop')" class="nav-link">Colección 2026</span>
+            <span onclick="goSection('adn')" class="nav-link">ADN 🐜</span>
         </div>
-        <button onclick="toggleCart()" class="relative">
-            <span class="text-xl">🛒</span>
-            <span id="cart-count" class="absolute -top-3 -right-3 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
-        </button>
+
+        <div class="flex items-center gap-8">
+            <button onclick="toggleCart()" class="relative">
+                <span class="text-xl">🛒</span>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white">0</span>
+            </button>
+            <button onclick="goSection('shop')" class="bg-black text-white px-10 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-[#6DAE5A] transition transform active:scale-95">Comprar</button>
+        </div>
     </nav>
 
-    <div id="cart-drawer">
-        <div class="flex justify-between items-center mb-10">
-            <h2 class="text-3xl font-black italic uppercase">Bolsa</h2>
-            <button onclick="toggleCart()" class="text-2xl">✕</button>
+    <div id="cart-sidebar">
+        <div class="p-8 border-b flex justify-between items-center bg-zinc-50/50">
+            <div>
+                <h3 class="text-2xl font-black uppercase italic">Tu Bolsa</h3>
+                <p class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-1">High-End Streetwear Division</p>
+            </div>
+            <button onclick="toggleCart()" class="text-2xl hover:rotate-90 transition">✕</button>
         </div>
-        <div id="cart-content" class="flex-grow overflow-y-auto space-y-6">
+        
+        <div id="cart-items" class="flex-grow overflow-y-auto p-8 space-y-6 no-scrollbar">
             </div>
-        <div class="pt-10 border-t">
-            <div class="flex justify-between text-2xl font-black mb-8">
-                <span>Total</span>
-                <span id="cart-total">$0.00</span>
+
+        <div class="p-8 border-t bg-white">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <p class="text-[10px] font-black text-zinc-300 uppercase tracking-[0.3em] mb-2">Total del Pedido</p>
+                    <p id="total-val" class="text-4xl font-black leading-none">$0.00</p>
+                </div>
+                <button onclick="clearAll()" class="text-[10px] font-black text-red-400 uppercase tracking-widest underline decoration-2 offset-4">Vaciar Todo</button>
             </div>
-            <button onclick="checkout()" class="w-full bg-black text-white py-6 font-black uppercase tracking-widest text-xs">Finalizar en WhatsApp</button>
+            <button onclick="sendOrder()" class="w-full bg-black text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.25em] flex items-center justify-center gap-4 hover:bg-[#6DAE5A] transition shadow-2xl group">
+                Confirmar vía WhatsApp 🐜
+                <span class="group-hover:translate-x-2 transition">→</span>
+            </button>
         </div>
     </div>
 
-    <main id="home" class="page-wrapper active">
-        <div class="hero-viewport">
-            <video autoplay muted loop playsinline class="hero-video">
-                <source src="1000813695.mp4" type="video/mp4">
+    <section id="home" class="section-fade active pt-24">
+        <div class="hero-wrap">
+            <video autoplay muted loop playsinline class="hero-video-bg">
+                <source src="1000813159.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-6">
-                <h1 class="text-7xl md:text-[12rem] font-black leading-[0.8] tracking-tighter uppercase italic mb-10">
-                    Urban<br><span class="text-[#6DAE5A]">Roots</span>
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
+                <h1 class="text-6xl md:text-[11rem] font-black text-white uppercase leading-[0.8] tracking-tighter mb-12">
+                    URBAN<br><span class="text-[#6DAE5A]">MYSTIC</span>
                 </h1>
-                <p class="max-w-xl text-lg font-light italic mb-12 opacity-80">La esencia del streetwear de lujo con base en Quito. Diseños que desafían la norma.</p>
-                <button onclick="view('shop')" class="bg-white text-black px-16 py-6 rounded-full font-black uppercase text-xs tracking-[0.4em] hover:bg-[#6DAE5A] hover:text-white transition">Explorar Drop</button>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <button onclick="goSection('shop')" class="bg-white text-black px-14 py-5 rounded-full font-black uppercase text-[11px] tracking-widest shadow-2xl hover:bg-[#6DAE5A] hover:text-white transition">Nueva Colección</button>
+                    <button onclick="goSection('adn')" class="border-2 border-white/20 text-white px-14 py-5 rounded-full font-black uppercase text-[11px] tracking-widest backdrop-blur-xl">Nuestra Esencia</button>
+                </div>
             </div>
         </div>
-    </main>
 
-    <main id="shop" class="page-wrapper pt-40 pb-32">
-        <div class="max-w-[1600px] mx-auto px-10">
-            <div class="mb-24">
-                <h2 class="text-8xl font-black italic uppercase tracking-tighter">Shop.</h2>
-                <div class="h-1 w-40 bg-[#6DAE5A] mt-4"></div>
+        <div class="py-32 px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-center">
+            <div class="space-y-10">
+                <h2 class="text-7xl font-black uppercase italic leading-[0.9]">Diseño <br> desde <br> <span class="text-[#6DAE5A]">Adentro.</span></h2>
+                <p class="text-zinc-500 text-xl font-light leading-relaxed italic border-l-4 border-[#6DAE5A] pl-8">"Cada pieza es un manifiesto. En LEM MODA no fabricamos ropa, construimos la identidad de una generación que valora la raíz y la visión."</p>
+                <div class="flex gap-10">
+                    <div>
+                        <p class="text-4xl font-black mb-1">2026</p>
+                        <p class="text-[9px] font-black uppercase text-zinc-400 tracking-widest">Año de Visión</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-black mb-1">AMB</p>
+                        <p class="text-[9px] font-black uppercase text-zinc-400 tracking-widest">Origen Textil</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-[4.5rem] overflow-hidden shadow-px rotate-2 scale-95">
+                <img src="1000813670.jpg" class="w-full h-[600px] object-cover">
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section-fade pt-32 pb-40">
+        <div class="px-8 max-w-[1600px] mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-end mb-20 gap-12">
+                <div>
+                    <h2 class="text-8xl font-black uppercase italic tracking-tighter leading-none mb-6">Store.</h2>
+                    <div class="flex gap-8">
+                        <span onclick="setGender('Todos')" class="g-link gender-link active">Todos</span>
+                        <span onclick="setGender('Caballero')" class="g-link gender-link">Caballero</span>
+                        <span onclick="setGender('Dama')" class="g-link gender-link">Dama</span>
+                    </div>
+                </div>
+                
+                <div class="flex overflow-x-auto w-full lg:w-auto pb-4 gap-4 no-scrollbar">
+                    <button onclick="setCategory('Todos')" class="cat-chip chip active">Todos</button>
+                    <button onclick="setCategory('Hoodies')" class="cat-chip chip">Hoodies</button>
+                    <button onclick="setCategory('Pantalones')" class="cat-chip chip">Pantalones</button>
+                    <button onclick="setCategory('Camisetas')" class="cat-chip chip">Camisetas</button>
+                    <button onclick="setCategory('Accesorios')" class="cat-chip chip">Accesorios</button>
+                </div>
+            </div>
+
+            <div id="grid-box" class="catalog-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="adn" class="section-fade bg-zinc-950 text-white pt-40 pb-40 px-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-32">
+                <span class="text-[#6DAE5A] font-black tracking-[0.8em] text-[10px] uppercase mb-10 block">The Ant and The Leaf</span>
+                <h2 class="text-7xl md:text-[9rem] font-black italic uppercase leading-[0.8] mb-12">NUESTRA <br> <span class="text-[#6DAE5A]">ALMA.</span></h2>
             </div>
             
-            <div id="product-grid" class="lem-grid">
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="p-16 bg-zinc-900/50 rounded-[4rem] border border-white/5 hover:border-[#6DAE5A]/50 transition duration-700">
+                    <h4 class="text-3xl font-black uppercase mb-8">Selected Mod</h4>
+                    <p class="text-zinc-500 text-lg leading-relaxed italic">Nuestra planta en **Ambato** es el corazón táctico. Aquí, la artesanía ecuatoriana se encuentra con la ingeniería textil para crear piezas de durabilidad eterna.</p>
                 </div>
-        </div>
-    </main>
-
-    <main id="essence" class="page-wrapper bg-black text-white py-40">
-        <div class="max-w-5xl mx-auto px-10 text-center">
-            <h2 class="text-7xl md:text-[10rem] font-black italic uppercase leading-none mb-20 text-[#6DAE5A]">Esencia.</h2>
-            <div class="grid md:grid-cols-2 gap-20 text-left">
-                <div class="space-y-6">
-                    <h3 class="text-3xl font-black italic uppercase">La Hormiga 🐜</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">Símbolo de nuestra ética de trabajo. Persistencia, estructura y fuerza colectiva en cada una de nuestras piezas.</p>
-                </div>
-                <div class="space-y-6">
-                    <h3 class="text-3xl font-black italic uppercase">La Hoja</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">Representa el crecimiento orgánico y la frescura de nuestras líneas de diseño en la escena urbana de Quito.</p>
+                <div class="p-16 bg-zinc-900/50 rounded-[4rem] border border-white/5 hover:border-[#6DAE5A]/50 transition duration-700">
+                    <h4 class="text-3xl font-black uppercase mb-8">Misión 2026</h4>
+                    <p class="text-zinc-500 text-lg leading-relaxed italic">Establecer a LEM MODA como el estandarte del diseño High-End en Quito, elevando el valor de lo "Hecho en Ecuador" a un plano de deseo internacional.</p>
                 </div>
             </div>
+
+            <div class="mt-20 p-20 bg-[#6DAE5A] rounded-[4rem] text-black text-center">
+                <h3 class="text-5xl font-black uppercase italic mb-6">¿Por qué la hormiga?</h3>
+                <p class="text-xl font-bold max-w-2xl mx-auto">Porque representa el trabajo incansable, la estructura colectiva y la fuerza desproporcionada. LEM MODA es el esfuerzo silencioso que carga con la belleza de lo natural (la hoja).</p>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <footer class="py-24 px-12 border-t">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <h4 class="text-3xl font-black italic uppercase">LEM MODA</h4>
+                <p class="text-[10px] font-black text-zinc-300 uppercase tracking-[0.5em] mt-3">High-End Streetwear Division</p>
+            </div>
+            <div class="text-[10px] font-black uppercase tracking-[0.3em] flex gap-10">
+                <a href="#" class="hover:text-[#6DAE5A]">Instagram</a>
+                <a href="#" class="hover:text-[#6DAE5A]">WhatsApp</a>
+                <a href="#" class="hover:text-[#6DAE5A]">Quito Store</a>
+            </div>
+            <p class="text-[9px] text-zinc-300 font-bold uppercase tracking-widest">© 2026 Víctor Carvajal - Director de Marketing</p>
+        </div>
+    </footer>
 
     <script>
-        // --- DATA ENGINE ---
+        // --- DATA DE PRODUCTOS REFORZADA (12 ITEMS) ---
         const products = [
-            { id: 1, name: "Navy Dayslay Hoodie", price: 85, img: "1000813647.jpeg" },
-            { id: 2, name: "Tech Cargo Graphite", price: 115, img: "1000813649.jpg" },
-            { id: 3, name: "Leaf Pink Limited", price: 95, img: "1000813651.jpg" },
-            { id: 4, name: "Oversized Black Leaf", price: 45, img: "1000813670.jpg" },
-            { id: 5, name: "Grey Urban Core", price: 88, img: "1000813671.jpg" },
-            { id: 6, name: "Essential White Tee", price: 35, img: "1000813673.jpg" },
-            { id: 7, name: "Midnight Cargo Dama", price: 105, img: "1000813672.jpg" },
-            { id: 8, name: "Acid Wash Street", price: 50, img: "1000813674.jpg" }
+            { id: 1, name: 'Navy Dayslay Hoodie', price: 85, cat: 'Hoodies', gen: 'Caballero', img: '1000813647.jpeg', col: ['#0c1a3e','#000','#555','#fff','#222'] },
+            { id: 2, name: 'Tech Cargo Graphite', price: 115, cat: 'Pantalones', gen: 'Caballero', img: '1000813649.jpg', col: ['#222','#000','#333','#444','#111'] },
+            { id: 3, name: 'Leaf Zip Pink Edition', price: 95, cat: 'Hoodies', gen: 'Dama', img: '1000813651.jpg', col: ['#ffc0cb','#000','#fff','#f0a','#ddd'] },
+            { id: 4, name: 'Oversized Black Leaf', price: 45, cat: 'Camisetas', gen: 'Dama', img: '1000813670.jpg', col: ['#000','#fff','#6DAE5A','#555','#ccc'] },
+            { id: 5, name: 'Grey Urban Core', price: 90, cat: 'Hoodies', gen: 'Caballero', img: '1000813671.jpg', col: ['#808080','#000','#fff','#333','#555'] },
+            { id: 6, name: 'Essential White Tee', price: 38, cat: 'Camisetas', gen: 'Dama', img: '1000813673.jpg', col: ['#fff','#eee','#ddd','#ccc','#bbb'] },
+            { id: 7, name: 'Midnight Cargo Dama', price: 110, cat: 'Pantalones', gen: 'Dama', img: '1000813672.jpg', col: ['#000','#111','#222','#333','#444'] },
+            { id: 8, name: 'Acid Wash Street', price: 55, cat: 'Camisetas', gen: 'Caballero', img: '1000813674.jpg', col: ['#444','#555','#333','#000','#222'] },
+            { id: 9, name: 'Cyberpunk Jacket 01', price: 165, cat: 'Hoodies', gen: 'Caballero', img: '1000813675.jpg', col: ['#000','#222','#111','#333','#444'] },
+            { id: 10, name: 'Minimalist Jogger', price: 95, cat: 'Pantalones', gen: 'Dama', img: '1000813676.jpg', col: ['#fff','#eee','#ddd','#ccc','#bbb'] },
+            { id: 11, name: 'LEM Sig Cap', price: 30, cat: 'Accesorios', gen: 'Caballero', img: '1000813677.jpg', col: ['#000','#fff','#6DAE5A','#f00','#00f'] },
+            { id: 12, name: 'VXO Special Hoodie', price: 120, cat: 'Hoodies', gen: 'Caballero', img: '1000813678.jpg', col: ['#000','#333','#6DAE5A','#555','#888'] }
         ];
 
         let cart = [];
+        let filterCat = 'Todos';
+        let filterGen = 'Todos';
 
-        // --- NAVIGATION ENGINE ---
-        function view(id) {
-            document.querySelectorAll('.page-wrapper').forEach(p => p.classList.remove('active'));
+        // --- NAVEGACIÓN ---
+        function goSection(id) {
+            document.querySelectorAll('.section-fade').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
-            if(id === 'shop') renderProducts();
+            if(id === 'shop') render();
+            if(document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
         }
 
-        // --- UI RENDERER ---
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = products.map(p => `
-                <div class="product-item">
-                    <div class="product-image-box">
-                        <img src="${p.img}" loading="lazy">
+        // --- FILTROS ---
+        function setCategory(val) {
+            filterCat = val;
+            updateFilterUI();
+            render();
+        }
+
+        function setGender(val) {
+            filterGen = val;
+            updateFilterUI();
+            render();
+        }
+
+        function updateFilterUI() {
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.innerText === filterCat));
+            document.querySelectorAll('.g-link').forEach(g => g.classList.toggle('active', g.innerText === filterGen));
+        }
+
+        // --- RENDERIZADO ---
+        function render() {
+            const grid = document.getElementById('grid-box');
+            const data = products.filter(p => 
+                (filterCat === 'Todos' || p.cat === filterCat) && 
+                (filterGen === 'Todos' || p.gen === filterGen)
+            );
+
+            grid.innerHTML = data.map(p => `
+                <div class="card">
+                    <div class="img-box shadow-sm">
+                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/400x500?text=LEM+MODA'">
+                        <div class="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full text-[7px] font-black uppercase text-zinc-500 tracking-widest">${p.gen}</div>
                     </div>
-                    <div class="py-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-[11px] font-black uppercase italic w-2/3">${p.name}</h4>
-                            <span class="text-[11px] font-black text-[#6DAE5A]">$${p.price}</span>
+                    <div class="mt-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-[11px] font-black uppercase leading-tight w-2/3">${p.name}</h4>
+                            <p class="text-[#6DAE5A] font-black text-xs">$${p.price}</p>
                         </div>
-                        <div class="flex gap-2" id="size-selector-${p.id}">
-                            ${['S','M','L','XL'].map(s => `<div class="size-tag" onclick="selectSize(this)">${s}</div>`).join('')}
+                        <div class="flex gap-2 my-4" id="col-${p.id}">
+                            ${p.col.map((c, i) => `<div class="color-dot ${i===0?'selected':''}" style="background:${c}" onclick="selUI(this, 'color-dot')"></div>`).join('')}
                         </div>
-                        <button onclick="addToCart(${p.id})" class="btn-buy">Añadir</button>
+                        <div class="flex gap-1.5 mb-6 overflow-x-auto no-scrollbar" id="siz-${p.id}">
+                            ${['XS','S','M','L','XL','XXL'].map(t => `<div class="size-btn" onclick="selUI(this, 'size-btn')">${t}</div>`).join('')}
+                        </div>
+                        <button onclick="add(${p.id})" class="mt-auto w-full bg-black text-white py-4 rounded-2xl text-[9px] font-black uppercase tracking-widest active:scale-95 transition shadow-lg hover:bg-[#6DAE5A]">Añadir a la bolsa</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function selectSize(el) {
-            el.parentElement.querySelectorAll('.size-tag').forEach(s => s.classList.remove('selected'));
+        function selUI(el, cls) {
+            el.parentElement.querySelectorAll('.'+cls).forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
         }
 
-        // --- CART ENGINE ---
+        // --- CARRITO LÓGICA ---
         function toggleCart() {
-            document.getElementById('cart-drawer').classList.toggle('open');
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
         }
 
-        function addToCart(id) {
-            const size = document.querySelector(`#size-selector-${id} .selected`)?.innerText;
-            if(!size) return alert("Selecciona tu talla");
+        function add(id) {
+            const size = document.querySelector(`#siz-${id} .selected`)?.innerText;
+            if(!size) return alert("Selecciona una talla 🐜");
+            
+            const p = products.find(x => x.id === id);
+            const color = document.querySelector(`#col-${id} .selected`).style.backgroundColor;
+            const key = `${id}-${size}-${color}`;
 
-            const product = products.find(p => p.id === id);
-            cart.push({...product, size});
-            updateUI();
-            toggleCart();
+            const item = cart.find(i => i.key === key);
+            if(item) item.qty++;
+            else cart.push({...p, size, color, qty: 1, key});
+            
+            updateCart();
+            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
         }
 
-        function updateUI() {
-            const count = document.getElementById('cart-count');
-            const total = document.getElementById('cart-total');
-            const content = document.getElementById('cart-content');
+        function changeQty(key, delta) {
+            const item = cart.find(i => i.key === key);
+            if(item) {
+                item.qty += delta;
+                if(item.qty < 1) remove(key);
+                updateCart();
+            }
+        }
 
-            count.innerText = cart.length;
-            const sum = cart.reduce((acc, p) => acc + p.price, 0);
-            total.innerText = `$${sum.toFixed(2)}`;
+        function remove(key) {
+            cart = cart.filter(i => i.key !== key);
+            updateCart();
+        }
 
-            content.innerHTML = cart.map((p, i) => `
-                <div class="flex gap-4 items-center bg-zinc-50 p-4 rounded-lg">
-                    <img src="${p.img}" class="w-16 h-20 object-cover rounded shadow-sm">
+        function clearAll() {
+            cart = [];
+            updateCart();
+        }
+
+        function updateCart() {
+            const box = document.getElementById('cart-items');
+            const badge = document.getElementById('cart-count');
+            const totalVal = document.getElementById('total-val');
+
+            box.innerHTML = cart.length ? cart.map(i => `
+                <div class="flex items-center gap-5 bg-zinc-50 p-4 rounded-3xl border border-zinc-100">
+                    <img src="${i.img}" class="w-16 h-20 rounded-2xl object-cover">
                     <div class="flex-grow">
-                        <p class="text-[10px] font-black uppercase italic">${p.name}</p>
-                        <p class="text-[9px] text-zinc-400 font-bold uppercase mt-1">Talla: ${p.size}</p>
-                        <p class="text-[10px] font-black mt-2 text-[#6DAE5A]">$${p.price}</p>
+                        <div class="flex justify-between">
+                            <h5 class="text-[10px] font-black uppercase">${i.name}</h5>
+                            <button onclick="remove('${i.key}')" class="text-zinc-300 hover:text-red-500">✕</button>
+                        </div>
+                        <p class="text-[9px] text-zinc-400 font-bold uppercase mt-1">Talla ${i.size}</p>
+                        <div class="flex items-center justify-between mt-3">
+                            <div class="qty-control">
+                                <button onclick="changeQty('${i.key}', -1)" class="qty-btn">-</button>
+                                <span class="text-xs font-black">${i.qty}</span>
+                                <button onclick="changeQty('${i.key}', 1)" class="qty-btn">+</button>
+                            </div>
+                            <p class="text-[#6DAE5A] font-black text-xs">$${i.price * i.qty}</p>
+                        </div>
                     </div>
-                    <button onclick="remove(${i})" class="text-zinc-300 hover:text-black">✕</button>
                 </div>
-            `).join('');
+            `).join('') : '<div class="text-center py-20 text-zinc-300 italic text-xs">Bolsa vacía 🐜</div>';
+
+            const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            totalVal.innerText = `$${total.toFixed(2)}`;
+            badge.innerText = cart.reduce((acc, i) => acc + i.qty, 0);
         }
 
-        function remove(index) {
-            cart.splice(index, 1);
-            updateUI();
-        }
-
-        function checkout() {
-            if(cart.length === 0) return;
-            let msg = "🐜 *ORDEN LEM MODA*\n\n";
-            cart.forEach(p => msg += `• ${p.name} (${p.size}) - $${p.price}\n`);
-            msg += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
+        function sendOrder() {
+            if(!cart.length) return;
+            let msg = "🐜 *NUEVA ORDEN LEM MODA 2026*\n\n";
+            cart.forEach(i => msg += `• ${i.name} [Talla ${i.size}] x${i.qty} - $${i.price * i.qty}\n`);
+            msg += `\n*TOTAL: ${document.getElementById('total-val').innerText}*`;
             window.open(`https://wa.me/593979010077?text=${encodeURIComponent(msg)}`);
         }
 
-        // --- UX EFFECTS ---
-        window.onscroll = () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        };
-
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => document.getElementById('preloader').style.display = 'none', 1000);
-            }, 1500);
-            renderProducts();
-        };
+        window.onload = render;
     </script>
 </body>
 </html>
