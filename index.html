@@ -3,289 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | Luxury Streetwear Ecuador 2026</title>
+    <title>LEM MODA 2026 | High-End Urban Identity</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;300;400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --brand-green: #6DAE5A; --dark-bg: #0a0a0a; }
-        body { background: #ffffff; color: #111; font-family: 'Urbanist', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-        
-        /* Animaciones Premium */
-        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Hero Section */
-        .hero-video-container { position: relative; height: 95vh; width: 100%; overflow: hidden; border-radius: 0 0 80px 80px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2); }
-        .hero-video { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Navegación */
-        .nav-glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        
-        /* Catálogo Grid Optimizado */
-        .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-        @media (min-width: 1024px) { .catalog-grid { grid-template-columns: repeat(4, 1fr); gap: 2.5rem; } }
-        
-        .product-card { position: relative; transition: all 0.5s ease; border-radius: 30px; padding: 10px; background: #fff; border: 1px solid transparent; }
-        .product-card:hover { border-color: #f0f0f0; transform: translateY(-10px); }
-        .product-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; border-radius: 25px; background: #f8f8f8; }
-        .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .product-card:hover .product-img-wrap img { transform: scale(1.1); }
-        
-        /* Selectores Visuales */
-        .size-btn { border: 1.5px solid #eee; padding: 6px 14px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .size-btn.active { background: #000; color: #fff; border-color: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .color-dot { width: 18px; height: 18px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        .color-dot.active { border-color: var(--brand-green); transform: scale(1.2); }
+        :root {
+            --brand-green: #6DAE5A;
+            --brand-black: #0a0a0a;
+            --brand-gray: #f8f8f8;
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
 
-        /* Sidebar Carrito */
-        #cart-sidebar { transform: translateX(100%); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 200; }
-        #cart-sidebar.open { transform: translateX(0); }
-        
-        .page-section { display: none; }
-        .active-section { display: block; }
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: #ffffff;
+            color: var(--brand-black);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Utilidades de Diseño --- */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .section-padding { padding: 120px 0; }
+
+        /* --- Animaciones --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Hero Visual --- */
+        .hero-clip {
+            clip-path: ellipse(150% 100% at 50% 0%);
+            height: 95vh;
+            position: relative;
+            background: #000;
+        }
+
+        .hero-video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        /* --- Componentes de Producto --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+        }
+        @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .product-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 35px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            border-color: #eee;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            border-radius: 25px;
+            background: var(--brand-gray);
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s ease;
+        }
+
+        .product-card:hover .img-container img { transform: scale(1.15); }
+
+        /* --- Custom UI Elements --- */
+        .size-selector {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .size-option {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid #efefef;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .size-option.active {
+            background: var(--brand-black);
+            color: #fff;
+            border-color: var(--brand-black);
+        }
+
+        /* --- Sidebar Carrito --- */
+        #cart-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: #fff;
+            z-index: 1000;
+            transition: right 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.1);
+            display: flex;
+            flex-col: column;
+        }
+
+        #cart-panel.open { right: 0; }
+
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: none;
+        }
+
+        .cart-overlay.show { display: block; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full z-[150] nav-glass transition-all duration-500 py-6 px-10 flex justify-between items-center">
-        <div class="text-3xl font-black tracking-tighter cursor-pointer select-none" onclick="changePage('inicio')">
-            LEM <span class="text-[#6DAE5A]">MODA</span>
-        </div>
-        <div class="hidden lg:flex space-x-12 items-center font-bold text-[11px] uppercase tracking-[0.2em]">
-            <a href="javascript:void(0)" onclick="changePage('inicio')" class="hover:text-[#6DAE5A] transition">Inicio</a>
-            <a href="javascript:void(0)" onclick="changePage('catalogo')" class="hover:text-[#6DAE5A] transition">Catálogo</a>
-            <a href="javascript:void(0)" onclick="changePage('adn')" class="hover:text-[#6DAE5A] transition">Filosofía</a>
-        </div>
-        <div class="flex items-center space-x-6">
-            <button onclick="toggleCart()" class="relative group">
-                <span class="text-xl">🛒</span>
-                <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
-            </button>
-            <button onclick="changePage('catalogo')" class="bg-black text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transform active:scale-95 transition-all shadow-xl">Comprar 2026</button>
-        </div>
-    </nav>
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
 
-    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[190] hidden" onclick="toggleCart()"></div>
-    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-white p-10 flex flex-col shadow-[-20px_0_60px_rgba(0,0,0,0.1)]">
-        <div class="flex justify-between items-center mb-12">
-            <h2 class="text-3xl font-black italic uppercase">Tu Selección</h2>
-            <button onclick="toggleCart()" class="text-xl hover:rotate-90 transition duration-300">✕</button>
+    <div id="cart-panel" class="p-8 md:p-12">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter">Tu Pedido</h2>
+            <button onclick="toggleCart()" class="text-2xl hover:rotate-90 transition duration-300">✕</button>
         </div>
-        <div id="cart-items" class="flex-grow overflow-y-auto space-y-6 pr-4">
+
+        <div id="cart-content" class="flex-grow overflow-y-auto space-y-6 pr-2">
+            <p id="empty-msg" class="text-gray-400 italic text-sm">Aún no has seleccionado ninguna pieza.</p>
+        </div>
+
+        <div class="border-t pt-10 mt-6">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total a pagar</p>
+                    <p id="cart-total" class="text-4xl font-black">$0.00</p>
+                </div>
+                <span class="text-[10px] font-bold text-gray-300 uppercase">IVA Incluido</span>
             </div>
-        <div class="border-t border-gray-100 pt-10 mt-8">
-            <div class="flex justify-between items-center mb-8">
-                <span class="text-gray-400 font-bold uppercase text-[10px] tracking-widest">Subtotal estimado</span>
-                <span id="cart-total" class="text-3xl font-black">$0.00</span>
-            </div>
-            <button onclick="checkoutWhatsApp()" class="w-full bg-[#6DAE5A] text-white py-6 rounded-3xl font-black uppercase tracking-[0.3em] hover:bg-black transition-all transform active:scale-95 shadow-2xl shadow-[#6DAE5A]/20">
-                Finalizar Vía WhatsApp 🐜
+            <button onclick="checkoutWhatsApp()" class="w-full bg-black text-white py-6 rounded-3xl font-black uppercase tracking-[0.3em] hover:bg-[#6DAE5A] transition shadow-2xl active:scale-95">
+                Confirmar WhatsApp 🐜
             </button>
         </div>
     </div>
 
-    <main id="section-inicio" class="page-section active-section fade-in-up">
-        <section class="hero-video-container">
-            <video autoplay muted loop playsinline class="hero-video">
+    <nav class="fixed top-0 w-full z-[500] glass-nav py-6 px-10 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="text-3xl font-black tracking-tighter cursor-pointer" onclick="showSection('home')">
+                LEM <span class="text-[#6DAE5A]">MODA</span>
+            </div>
+        </div>
+
+        <div class="hidden lg:flex space-x-12 items-center text-[11px] font-black uppercase tracking-[0.25em]">
+            <a href="javascript:void(0)" onclick="showSection('home')" class="nav-link hover:text-[#6DAE5A] transition">Inicio</a>
+            <a href="javascript:void(0)" onclick="showSection('shop')" class="nav-link hover:text-[#6DAE5A] transition">Catálogo 2026</a>
+            <a href="javascript:void(0)" onclick="showSection('brand')" class="nav-link hover:text-[#6DAE5A] transition">ADN / Esencia</a>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <button onclick="toggleCart()" class="relative p-2 group">
+                <span class="text-xl">🛒</span>
+                <span id="cart-counter" class="absolute -top-1 -right-1 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
+            </button>
+            <button onclick="showSection('shop')" class="bg-black text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition-all transform active:scale-95 shadow-xl">Shop Collection</button>
+        </div>
+    </nav>
+
+    <main id="home-section" class="page-section fade-in">
+        <section class="hero-clip">
+            <video autoplay muted loop playsinline class="hero-video-bg">
                 <source src="1000813159.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center text-white px-6">
-                <h1 class="text-7xl md:text-[11rem] font-black tracking-tighter leading-none mb-8">IDENTITY<br><span class="text-[#6DAE5A]">LEM</span></h1>
-                <p class="max-w-xl text-sm md:text-lg font-medium opacity-90 mb-10 tracking-wide uppercase italic">Streetwear de lujo fabricado en Ambato, diseñado para el mundo.</p>
-                <div class="flex space-x-4">
-                    <button onclick="changePage('catalogo')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#6DAE5A] hover:text-white transition-all shadow-2xl">Catálogo</button>
-                    <button onclick="changePage('adn')" class="border-2 border-white text-white px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">Nuestra Historia</button>
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6">
+                <span class="text-[10px] font-black tracking-[0.8em] uppercase mb-8 opacity-60">High-End Streetwear Division</span>
+                <h1 class="text-7xl md:text-[11rem] font-black leading-[0.8] tracking-tighter uppercase mb-12">
+                    NUEVA<br><span class="text-[#6DAE5A]">ERA</span>
+                </h1>
+                <div class="flex flex-col md:flex-row gap-5">
+                    <button onclick="showSection('shop')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#6DAE5A] hover:text-white transition shadow-2xl">Descubrir</button>
+                    <button onclick="showSection('brand')" class="border-2 border-white/30 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-white hover:text-black transition">Filosofía 🐜</button>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 px-10 text-center">
-            <div class="max-w-4xl mx-auto">
-                <span class="text-[10px] font-black tracking-[0.5em] text-[#6DAE5A] uppercase mb-6 block">ADN Corporativo</span>
-                <h2 class="text-5xl md:text-7xl font-black italic uppercase leading-tight mb-12">"Nuestra esencia se forja en la <span class="bg-[#6DAE5A] text-white px-4">hormiga</span> y la hoja."</h2>
-                <div class="grid md:grid-cols-2 gap-16 text-left border-t border-gray-100 pt-16 mt-16">
-                    <div>
-                        <h3 class="text-xl font-black mb-4 uppercase">Fabricación: Ambato</h3>
-                        <p class="text-gray-500 leading-relaxed italic">Nuestra planta SELECTED MOD produce cada pieza con precisión industrial y acabados artesanales, garantizando calidad de exportación.</p>
+        <section class="section-padding px-10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-20">
+                <div class="w-full md:w-1/2 space-y-8">
+                    <h2 class="text-6xl font-black uppercase italic tracking-tighter leading-none">Del Taller <br> a la <span class="text-[#6DAE5A]">Calle.</span></h2>
+                    <p class="text-gray-500 text-lg leading-relaxed italic">Cada pieza de **LEM MODA** cuenta una historia de perfeccionismo técnico. Fabricamos con Selected Mod en **Ambato** para entregar la máxima calidad en nuestra tienda de **Quito**.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100">
+                            <p class="text-4xl font-black">100%</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Ecuatoriano</p>
+                        </div>
+                        <div class="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100">
+                            <p class="text-4xl font-black">2026</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Colección</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-black mb-4 uppercase">Exhibición: Quito</h3>
-                        <p class="text-gray-500 leading-relaxed italic">En el corazón de la capital, LEM MODA ofrece una experiencia de compra exclusiva para quienes buscan elevar su estilo urbano.</p>
-                    </div>
+                </div>
+                <div class="w-full md:w-1/2 rounded-[3.5rem] overflow-hidden shadow-2xl">
+                    <video autoplay muted loop playsinline class="w-full h-[500px] object-cover">
+                        <source src="1000813645.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </section>
     </main>
 
-    <main id="section-catalogo" class="page-section pt-32 pb-32 fade-in-up">
-        <div class="max-w-[1400px] mx-auto px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+    <main id="shop-section" class="page-section hidden pt-40 pb-40">
+        <div class="max-w-[1500px] mx-auto px-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-10">
                 <div>
-                    <h2 class="text-7xl font-black uppercase italic tracking-tighter">New <br><span class="text-[#6DAE5A]">Drops.</span></h2>
-                    <p class="text-gray-400 font-bold uppercase text-[10px] tracking-[0.4em] mt-4">Invierno / Primavera 2026</p>
+                    <h2 class="text-8xl font-black uppercase italic tracking-tighter">Shop <br><span class="text-[#6DAE5A]">Online.</span></h2>
+                    <p class="text-gray-400 font-black uppercase text-[11px] tracking-[0.4em] mt-5">Streetwear Luxury Edition</p>
                 </div>
-                <div class="flex space-x-3 pb-2">
-                    <button class="bg-black text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Todos</button>
-                    <button class="bg-gray-50 text-gray-400 px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition">Hoodies</button>
-                    <button class="bg-gray-50 text-gray-400 px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition">Cargos</button>
+                <div class="flex flex-wrap gap-3 bg-zinc-100 p-2 rounded-3xl">
+                    <button class="bg-white px-10 py-4 rounded-2xl text-[10px] font-black uppercase shadow-sm">Todos</button>
+                    <button class="px-10 py-4 rounded-2xl text-[10px] font-black uppercase text-gray-400 hover:text-black transition">Hoodies</button>
+                    <button class="px-10 py-4 rounded-2xl text-[10px] font-black uppercase text-gray-400 hover:text-black transition">Cargos</button>
+                    <button class="px-10 py-4 rounded-2xl text-[10px] font-black uppercase text-gray-400 hover:text-black transition">Tees</button>
                 </div>
             </div>
 
-            <div class="catalog-grid" id="main-grid">
+            <div id="product-main-grid" class="product-grid">
                 </div>
         </div>
     </main>
 
-    <main id="section-adn" class="page-section pt-40 pb-40 fade-in-up bg-zinc-50">
+    <main id="brand-section" class="page-section hidden pt-40 pb-40 bg-[#0a0a0a] text-white">
         <div class="max-w-5xl mx-auto px-10 text-center">
-            <h2 class="text-8xl font-black uppercase italic tracking-tighter mb-16">Propósito <br><span class="text-[#6DAE5A]">2026.</span></h2>
-            <div class="bg-white p-20 rounded-[4rem] shadow-sm border border-gray-100 space-y-12">
-                <div>
-                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-gray-300 mb-4 italic">Misión</h4>
-                    <p class="text-3xl font-light italic leading-snug">Empoderar la identidad individual mediante el lujo urbano sostenible, fusionando tecnología textil de Ambato con visión global.</p>
+            <span class="text-[#6DAE5A] font-black tracking-[0.6em] text-[12px] uppercase mb-12 block">Filosofía de Vida</span>
+            <h2 class="text-7xl md:text-9xl font-black uppercase italic leading-[0.85] tracking-tighter mb-16">"La esencia <br> se forja en la <br><span class="text-[#6DAE5A]">hormiga</span> y la hoja."</h2>
+            
+            <div class="grid md:grid-cols-2 gap-20 text-left border-t border-white/10 pt-20">
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-black uppercase">Misión 2026</h4>
+                    <p class="text-zinc-500 text-xl font-light italic">Revolucionar la industria textil nacional mediante el diseño independiente de alto impacto, priorizando la durabilidad y la identidad urbana sobre la moda rápida.</p>
                 </div>
-                <div class="w-20 h-1 bg-black mx-auto"></div>
-                <div>
-                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-gray-300 mb-4 italic">Visión</h4>
-                    <p class="text-3xl font-light italic leading-snug">Posicionarnos como la marca líder de Streetwear en Latinoamérica para el cierre de 2026, expandiendo nuestra red de tiendas físicas en Quito.</p>
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-black uppercase">Fábrica Ambato</h4>
+                    <p class="text-zinc-500 text-xl font-light italic">Desde nuestra planta matriz **Selected Mod**, controlamos cada hilo y cada costura, asegurando que lo que sale de nuestras manos sea indestructible.</p>
                 </div>
+            </div>
+
+            <div class="mt-32 p-20 rounded-[4rem] border border-white/5 bg-zinc-900/50">
+                <p class="text-5xl font-black italic tracking-tighter mb-8">"Un contrato con la excelencia."</p>
+                <p class="text-zinc-400 uppercase text-xs tracking-widest">Víctor Carvajal — LEM MODA Division</p>
             </div>
         </div>
     </main>
 
-    <footer class="bg-black text-white pt-32 pb-16 px-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-20 border-b border-white/5 pb-24">
+    <footer class="bg-white pt-32 pb-16 px-10 border-t border-zinc-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-20 pb-24 border-b border-zinc-50">
             <div class="col-span-2">
-                <h4 class="text-4xl font-black italic uppercase mb-8">LEM MODA</h4>
-                <p class="text-gray-500 max-w-sm leading-relaxed text-sm italic">Innovación textil desde Ambato para la cultura urbana más exigente de Quito. No es solo ropa, es tu legado.</p>
+                <h4 class="text-4xl font-black italic uppercase mb-8">LEM <span class="text-[#6DAE5A]">MODA</span></h4>
+                <p class="text-zinc-400 max-w-sm text-sm leading-relaxed mb-10 italic">Nacimos del deseo de vestir con carácter. Orgullosamente diseñados en Ecuador, fabricados en Ambato y distribuidos en Quito.</p>
+                <div class="flex space-x-5">
+                    <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">IG</div>
+                    <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">TK</div>
+                    <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">WA</div>
+                </div>
             </div>
             <div>
-                <h5 class="font-black text-[#6DAE5A] text-[10px] uppercase tracking-widest mb-8">Ubicaciones</h5>
-                <ul class="space-y-4 text-gray-400 text-sm">
-                    <li><strong class="text-white">Fábrica:</strong> Ambato (Selected Mod)</li>
-                    <li><strong class="text-white">Store:</strong> Quito (Centro Norte)</li>
+                <h5 class="font-black uppercase text-[11px] tracking-widest mb-8 text-[#6DAE5A]">Ubicaciones</h5>
+                <ul class="space-y-4 text-sm text-zinc-500 font-medium">
+                    <li><strong class="text-black uppercase text-[10px]">Tienda Física</strong><br>Quito - Centro Comercial Iñaquito</li>
+                    <li><strong class="text-black uppercase text-[10px]">Fábrica Textil</strong><br>Ambato - Sector Industrial Selected Mod</li>
                 </ul>
             </div>
             <div>
-                <h5 class="font-black text-[#6DAE5A] text-[10px] uppercase tracking-widest mb-8">Contacto</h5>
-                <ul class="space-y-4 text-gray-400 text-sm italic">
-                    <li>ventas@lemmoda.com.ec</li>
-                    <li>+593 97 901 0077</li>
+                <h5 class="font-black uppercase text-[11px] tracking-widest mb-8 text-[#6DAE5A]">Soporte</h5>
+                <ul class="space-y-4 text-sm text-zinc-500 font-medium">
+                    <li>Guía de Tallas</li>
+                    <li>Cuidado de Prendas</li>
+                    <li>Política de Envíos</li>
+                    <li>Trabaja con Nosotros</li>
                 </ul>
             </div>
         </div>
         <div class="pt-12 text-center">
-            <p class="text-[9px] font-bold text-gray-600 uppercase tracking-[0.6em]">© 2026 LEM MODA - Luxury Streetwear Division</p>
+            <p class="text-[10px] font-black text-zinc-300 uppercase tracking-[0.5em]">© 2026 LEM MODA ECUADOR — Todos los derechos reservados</p>
         </div>
     </footer>
 
     <script>
-        // DATA DE PRODUCTOS REFORZADA
-        const stock = [
-            { id: 1, nombre: 'Navy Dayslay Hoodie', precio: 85, img: '1000813647.jpeg', cat: 'Hoodies', sizes: ['S', 'M', 'L'] },
-            { id: 2, nombre: 'Tech Cargo Navy', precio: 115, img: '1000813649.jpg', cat: 'Pants', sizes: ['30', '32', '34'] },
-            { id: 3, nombre: 'Leaf Zip-Up Woman', precio: 95, img: '1000813651.jpg', cat: 'Hoodies', sizes: ['S', 'M'] },
-            { id: 4, nombre: 'Oversized Black Leaf', precio: 45, img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500', cat: 'Tees', sizes: ['M', 'L', 'XL'] },
-            { id: 5, nombre: 'Desert Dust Crew', precio: 80, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500', cat: 'Hoodies', sizes: ['S', 'M', 'L'] },
-            { id: 6, nombre: 'Acid Wash Grey', precio: 120, img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500', cat: 'Pants', sizes: ['30', '32'] },
-            { id: 7, nombre: 'Street Sign Tee', precio: 40, img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500', cat: 'Tees', sizes: ['L', 'XL'] },
-            { id: 8, nombre: 'Midnight Bomber', precio: 150, img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500', cat: 'Jackets', sizes: ['M', 'L'] }
+        // --- BASE DE DATOS DE PRODUCTOS ---
+        const catalog = [
+            { id: 101, name: 'Navy Dayslay Hoodie', price: 85, img: '1000813647.jpeg', cat: 'Hoodies', sizes: ['S','M','L'] },
+            { id: 102, name: 'Tech Cargo Graphite', price: 110, img: '1000813649.jpg', cat: 'Cargos', sizes: ['30','32','34'] },
+            { id: 103, name: 'Leaf Woman Zip-Up', price: 95, img: '1000813651.jpg', cat: 'Hoodies', sizes: ['S','M'] },
+            { id: 104, name: 'Oversized Black Leaf', price: 45, img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500', cat: 'Tees', sizes: ['M','L','XL'] },
+            { id: 105, name: 'Signature Cream Hoodie', price: 80, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500', cat: 'Hoodies', sizes: ['S','M','L'] },
+            { id: 106, name: 'Urban Cargo Forest', price: 115, img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500', cat: 'Cargos', sizes: ['32','34'] },
+            { id: 107, name: 'Minimal White Tee', price: 35, img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500', cat: 'Tees', sizes: ['M','L'] },
+            { id: 108, name: 'Midnight Bomber Jacket', price: 160, img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500', cat: 'Jackets', sizes: ['M','L','XL'] }
         ];
 
         let cart = [];
 
-        // NAVEGACIÓN ENTRE SECCIONES
-        function changePage(targetId) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-section'));
-            document.getElementById(`section-${targetId}`).classList.add('active-section');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-            if(document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
-        }
-
-        // CARGA DINÁMICA DEL CATÁLOGO
-        function renderProducts() {
-            const grid = document.getElementById('main-grid');
-            grid.innerHTML = stock.map(p => `
-                <div class="product-card group">
-                    <div class="product-img-wrap shadow-2xl">
-                        <img src="${p.img}" loading="lazy">
-                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+        // --- MOTOR DE RENDERIZADO ---
+        function initShop() {
+            const grid = document.getElementById('product-main-grid');
+            grid.innerHTML = catalog.map(p => `
+                <div class="product-card fade-in">
+                    <div class="img-container shadow-xl">
+                        <img src="${p.img}" alt="${p.name}">
+                        <div class="absolute top-4 left-4 bg-white px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">${p.cat}</div>
                     </div>
-                    <div class="mt-8 px-2">
-                        <div class="flex justify-between items-start mb-3">
-                            <h4 class="font-bold uppercase text-[11px] tracking-tight w-2/3">${p.nombre}</h4>
-                            <p class="text-[#6DAE5A] font-black text-xs">$${p.precio}.00</p>
+                    <div class="mt-8">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-black uppercase text-[11px] leading-tight w-2/3">${p.name}</h4>
+                            <p class="text-[#6DAE5A] font-black text-xs">$${p.price.toFixed(2)}</p>
                         </div>
-                        <div class="flex gap-1 mb-5" id="sizes-${p.id}">
-                            ${p.sizes.map(s => `<span class="size-btn" onclick="selectSize(this)">${s}</span>`).join('')}
+                        <div class="size-selector" id="size-box-${p.id}">
+                            ${p.sizes.map(s => `<div class="size-option" onclick="selectSize(this)">${s}</div>`).join('')}
                         </div>
-                        <button onclick="addToCart(${p.id})" class="w-full bg-zinc-950 text-white py-3.5 rounded-2xl text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#6DAE5A] transition shadow-lg shadow-black/5">Añadir al Carrito</button>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-black text-white py-4 rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition transform active:scale-95 shadow-lg">Añadir al Carrito</button>
                     </div>
                 </div>
             `).join('');
         }
 
+        // --- LÓGICA DE NAVEGACIÓN ---
+        function showSection(id) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`${id}-section`).classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            if(id === 'shop') initShop();
+        }
+
+        // --- LÓGICA DE CARRITO ---
         function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('open');
-            document.getElementById('cart-overlay').classList.toggle('hidden');
+            document.getElementById('cart-panel').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('show');
         }
 
-        function selectSize(btn) {
-            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        function selectSize(el) {
+            el.parentElement.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+            el.classList.add('active');
         }
 
-        function addToCart(pid) {
-            const prod = stock.find(p => p.id === pid);
-            const size = document.querySelector(`#sizes-${pid} .size-btn.active`)?.innerText;
+        function addToCart(id) {
+            const p = catalog.find(x => x.id === id);
+            const sizeEl = document.querySelector(`#size-box-${id} .size-option.active`);
             
-            if (!size) { alert("Elige tu talla 🐜"); return; }
+            if(!sizeEl) { alert("Por favor, selecciona una talla 🐜"); return; }
             
-            const cartKey = `${pid}-${size}`;
-            const exists = cart.find(i => i.cartKey === cartKey);
-            
-            if (exists) { exists.qty++; } 
-            else { cart.push({...prod, size, qty: 1, cartKey}); }
-            
-            updateCartUI();
-            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+            const size = sizeEl.innerText;
+            const existing = cart.find(i => i.id === id && i.size === size);
+
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...p, size, qty: 1 });
+            }
+
+            updateUI();
+            if(!document.getElementById('cart-panel').classList.contains('open')) toggleCart();
         }
 
-        function updateCartUI() {
-            const container = document.getElementById('cart-items');
-            container.innerHTML = cart.map(item => `
-                <div class="flex items-center space-x-5 bg-zinc-50 p-5 rounded-[2rem] border border-gray-50">
+        function updateUI() {
+            const content = document.getElementById('cart-content');
+            const totalEl = document.getElementById('cart-total');
+            const counter = document.getElementById('cart-counter');
+
+            if(cart.length > 0) document.getElementById('empty-msg').style.display = 'none';
+
+            content.innerHTML = cart.map((item, idx) => `
+                <div class="flex items-center gap-5 bg-zinc-50 p-5 rounded-3xl border border-zinc-100">
                     <img src="${item.img}" class="w-20 h-20 rounded-2xl object-cover shadow-sm">
                     <div class="flex-grow">
-                        <h5 class="font-black text-[10px] uppercase leading-tight">${item.nombre}</h5>
-                        <p class="text-gray-400 text-[9px] font-bold mt-1 uppercase">Talla ${item.size} • Cant. ${item.qty}</p>
-                        <p class="text-[#6DAE5A] font-black text-xs mt-2">$${(item.precio * item.qty).toFixed(2)}</p>
+                        <h5 class="text-[10px] font-black uppercase leading-tight">${item.name}</h5>
+                        <p class="text-zinc-400 text-[9px] font-bold mt-1">Talla: ${item.size} | Cant: ${item.qty}</p>
+                        <p class="text-[#6DAE5A] font-black text-xs mt-2">$${(item.price * item.qty).toFixed(2)}</p>
                     </div>
-                    <button onclick="removeCartItem('${item.cartKey}')" class="text-gray-300 hover:text-red-500 p-2">✕</button>
+                    <button onclick="removeItem(${idx})" class="text-zinc-300 hover:text-red-500 transition">✕</button>
                 </div>
             `).join('');
 
-            const total = cart.reduce((acc, i) => acc + (i.precio * i.qty), 0);
-            const count = cart.reduce((acc, i) => acc + i.qty, 0);
-            
-            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
-            document.getElementById('cart-count').innerText = count;
+            const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            totalEl.innerText = `$${total.toFixed(2)}`;
+            counter.innerText = cart.reduce((acc, i) => acc + i.qty, 0);
         }
 
-        function removeCartItem(key) {
-            cart = cart.filter(i => i.cartKey !== key);
-            updateCartUI();
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateUI();
+            if(cart.length === 0) document.getElementById('empty-msg').style.display = 'block';
         }
 
         function checkoutWhatsApp() {
             if(cart.length === 0) return;
-            let text = "🐜 *NUEVO PEDIDO LEM MODA 2026*\n\n";
-            cart.forEach(i => text += `• ${i.nombre} | Talla: ${i.size} | Cant: ${i.qty} | $${(i.precio * i.qty)}\n`);
-            text += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
-            window.open(`https://wa.me/593979010077?text=${encodeURIComponent(text)}`, '_blank');
+            let msg = "🐜 *NUEVO PEDIDO LEM MODA 2026*\n\n";
+            cart.forEach(i => msg += `• ${i.name} [${i.size}] x${i.qty} - $${(i.price * i.qty).toFixed(2)}\n`);
+            msg += `\n*TOTAL A PAGAR: ${document.getElementById('cart-total').innerText}*`;
+            window.open(`https://wa.me/593979010077?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        window.onload = renderProducts;
+        // --- INICIALIZACIÓN ---
+        window.onload = () => {
+            console.log("LEM MODA Engine Ready.");
+            // Scroll reveal basic logic
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+            });
+            document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+        };
     </script>
 </body>
 </html>
