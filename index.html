@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | Streetwear Luxury</title>
+    <title>LEM MODA | Official Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -12,10 +12,13 @@
         .hero-video-vertical { height: 85vh; width: 100%; object-fit: cover; border-radius: 0 0 40px 40px; }
         .page-section { display: none; }
         .page-active { display: block; }
-        .fade-in { animation: fadeIn 0.5s ease-out; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* Estilos Carrito */
+        /* Carrito Flotante */
+        #cart-trigger { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: scale(0); }
+        #cart-trigger.visible { transform: scale(1); }
+        
         #cart-sidebar { transform: translateX(100%); transition: 0.3s ease-in-out; }
         #cart-sidebar.open { transform: translateX(0); }
     </style>
@@ -28,30 +31,32 @@
         </div>
         <div class="flex space-x-4 items-center">
             <button onclick="showPage('home')" class="text-[10px] font-bold uppercase tracking-widest hover:text-[#6DAE5A]">Inicio</button>
-            <button onclick="showPage('catalogo')" class="text-[10px] font-bold uppercase tracking-widest hover:text-[#6DAE5A]">Catálogo</button>
-            <button onclick="toggleCart()" class="relative bg-black text-white p-2 rounded-full px-4 text-[10px] font-black flex items-center">
-                🛒 <span id="cart-count" class="ml-2 text-[#6DAE5A]">0</span>
-            </button>
+            <button onclick="showPage('catalogo')" class="bg-black text-white px-8 py-2.5 rounded-full text-[10px] font-black tracking-widest hover:bg-[#6DAE5A] transition shadow-lg shadow-black/10">CATÁLOGO</button>
         </div>
     </nav>
 
+    <button id="cart-trigger" onclick="toggleCart()" class="fixed bottom-8 right-8 z-[130] bg-[#6DAE5A] text-white p-5 rounded-full shadow-2xl flex items-center justify-center">
+        <span class="text-xl">🛒</span>
+        <span id="cart-count-badge" class="ml-2 font-black">0</span>
+    </button>
+
     <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[110] hidden" onclick="toggleCart()"></div>
-    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white z-[120] p-8 shadow-2xl flex flex-col">
-        <div class="flex justify-between items-center mb-10">
-            <h2 class="text-2xl font-black uppercase italic">Tu Pedido</h2>
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-white z-[120] p-8 shadow-2xl flex flex-col">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-black uppercase italic">Tu Bolsa</h2>
             <button onclick="toggleCart()" class="text-2xl">✕</button>
         </div>
         
-        <div id="cart-items" class="flex-grow overflow-y-auto space-y-4">
+        <div id="cart-items" class="flex-grow overflow-y-auto space-y-6 pr-2">
             </div>
 
         <div class="border-t pt-6 mt-6">
-            <div class="flex justify-between font-black text-xl mb-6">
+            <div class="flex justify-between font-black text-2xl mb-6">
                 <span>TOTAL:</span>
                 <span id="cart-total">$0.00</span>
             </div>
-            <button onclick="clearCart()" class="w-full text-[10px] font-bold uppercase text-red-500 mb-4 border border-red-500 py-2 rounded-full hover:bg-red-50 transition">Eliminar Carrito Completo</button>
-            <button onclick="sendWhatsApp()" class="w-full bg-[#6DAE5A] text-white py-4 rounded-full font-black uppercase tracking-widest hover:bg-black transition">Finalizar Pedido</button>
+            <button onclick="clearCart()" class="w-full text-[10px] font-bold uppercase text-gray-400 mb-4 hover:text-red-500 transition">Vaciar Carrito</button>
+            <button onclick="sendWhatsApp()" class="w-full bg-black text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition shadow-xl">Finalizar Pedido vía WhatsApp</button>
         </div>
     </div>
 
@@ -62,24 +67,23 @@
             </video>
         </section>
 
-        <section class="py-20 text-center px-6">
-            <h1 class="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">Tu <br><span class="text-[#6DAE5A]">Esencia.</span></h1>
-            <p class="mt-6 text-[10px] tracking-[0.6em] text-gray-400 uppercase font-bold italic">Edición Limitada 2026</p>
+        <section class="py-24 text-center px-6">
+            <h1 class="text-7xl md:text-[10rem] font-black tracking-tighter uppercase leading-[0.85]">Tu <br><span class="text-[#6DAE5A]">Identidad.</span></h1>
+            <p class="mt-8 text-[11px] tracking-[0.6em] text-gray-400 uppercase font-black italic">Drop 2026 • Streetwear de Lujo</p>
         </section>
 
-        <section class="py-20 px-6 max-w-7xl mx-auto bg-zinc-50 rounded-[3rem]">
-            <h2 class="text-3xl font-black mb-12 italic uppercase tracking-tighter text-center">Novedades</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="rounded-3xl overflow-hidden h-[500px]">
+        <section class="py-20 px-6 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="rounded-[3rem] overflow-hidden h-[600px] shadow-xl">
                     <video autoplay muted loop playsinline class="w-full h-full object-cover">
                         <source src="1000813645.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="flex flex-col justify-center p-8 bg-white rounded-3xl border border-gray-100">
-                    <span class="text-[#6DAE5A] font-bold text-xs uppercase tracking-widest mb-4">Misión & Visión</span>
-                    <p class="text-3xl font-black italic mb-6">Determinación de la hormiga, adaptabilidad de la hoja.</p>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-8">Nuestra misión es fusionar el arte urbano con la sostenibilidad, creando una identidad global desde Ambato y Quito.</p>
-                    <button onclick="showPage('catalogo')" class="bg-black text-white px-10 py-4 rounded-full font-black uppercase text-[10px] tracking-widest w-fit">Ver Colección</button>
+                <div class="flex flex-col justify-center p-12 bg-zinc-50 rounded-[3rem] border border-gray-100">
+                    <span class="text-[#6DAE5A] font-black text-xs uppercase tracking-[0.3em] mb-6">Filosofía LEM</span>
+                    <h3 class="text-4xl md:text-5xl font-black italic mb-8 leading-tight">Determinación de la hormiga, adaptabilidad de la hoja.</h3>
+                    <p class="text-gray-500 text-lg leading-relaxed mb-10">Fusionamos el arte urbano con la sostenibilidad, creando una identidad global desde el centro de Ecuador para el mundo.</p>
+                    <button onclick="showPage('catalogo')" class="bg-black text-white px-12 py-5 rounded-full font-black uppercase text-xs tracking-widest w-fit hover:bg-[#6DAE5A] transition">Explorar Catálogo</button>
                 </div>
             </div>
         </section>
@@ -88,56 +92,67 @@
     <main id="catalogo-page" class="page-section pt-32 pb-20 px-6 bg-white min-h-screen fade-in">
         <div class="max-w-7xl mx-auto">
             
-            <section class="mb-24">
-                <div class="flex items-center space-x-4 mb-12 border-b-2 border-black pb-4">
-                    <span class="text-5xl font-black text-gray-100">01</span>
-                    <h3 class="text-2xl font-black uppercase italic tracking-widest">Hoodies & Oversized</h3>
+            <section class="mb-32">
+                <div class="flex items-center space-x-6 mb-16 border-b-4 border-black pb-6">
+                    <span class="text-7xl font-black text-gray-100 italic">01</span>
+                    <h3 class="text-3xl font-black uppercase italic tracking-tighter">Hoodies & Oversized</h3>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
                     <div class="group">
-                        <div class="aspect-[3/4] bg-gray-100 rounded-3xl overflow-hidden mb-4 border border-gray-50">
+                        <div class="aspect-[3/4] bg-zinc-50 rounded-[2.5rem] overflow-hidden mb-6 border border-gray-100 shadow-sm">
                             <img src="1000813647.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                         </div>
-                        <h4 class="font-black uppercase text-[11px] mb-1">Navy Dayslay Hoodie</h4>
-                        <p class="text-gray-400 text-[10px] mb-4">$85.00</p>
-                        <button onclick="addToCart('Navy Dayslay Hoodie', 85)" class="w-full bg-zinc-100 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-[#6DAE5A] hover:text-white transition">Agregar al Carrito</button>
+                        <h4 class="font-black uppercase text-xs mb-1">Navy Dayslay Hoodie</h4>
+                        <p class="text-[#6DAE5A] font-black text-sm mb-6">$85.00</p>
+                        <button onclick="addToCart('Navy Dayslay Hoodie', 85)" class="w-full bg-black text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition">Añadir +</button>
+                    </div>
+                    <div class="group">
+                        <div class="aspect-[3/4] bg-zinc-50 rounded-[2.5rem] overflow-hidden mb-6 border border-gray-100 shadow-sm">
+                            <img src="1000813651.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        </div>
+                        <h4 class="font-black uppercase text-xs mb-1">Forest Leaf Zip-up</h4>
+                        <p class="text-[#6DAE5A] font-black text-sm mb-6">$90.00</p>
+                        <button onclick="addToCart('Forest Leaf Zip-up', 90)" class="w-full bg-black text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition">Añadir +</button>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-24">
-                <div class="flex items-center space-x-4 mb-12 border-b-2 border-black pb-4">
-                    <span class="text-5xl font-black text-gray-100">02</span>
-                    <h3 class="text-2xl font-black uppercase italic tracking-widest">Tees & Graphics</h3>
+            <section class="mb-32">
+                <div class="flex items-center space-x-6 mb-16 border-b-4 border-black pb-6">
+                    <span class="text-7xl font-black text-gray-100 italic">02</span>
+                    <h3 class="text-3xl font-black uppercase italic tracking-tighter">Pantalones & Cargos</h3>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
                     <div class="group">
-                        <div class="aspect-[3/4] bg-gray-100 rounded-3xl overflow-hidden mb-4 border border-gray-50">
+                        <div class="aspect-[3/4] bg-zinc-50 rounded-[2.5rem] overflow-hidden mb-6 border border-gray-100 shadow-sm">
                             <img src="1000813649.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                         </div>
-                        <h4 class="font-black uppercase text-[11px] mb-1">Ant Graphic Tee</h4>
-                        <p class="text-gray-400 text-[10px] mb-4">$35.00</p>
-                        <button onclick="addToCart('Ant Graphic Tee', 35)" class="w-full bg-zinc-100 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-[#6DAE5A] hover:text-white transition">Agregar al Carrito</button>
+                        <h4 class="font-black uppercase text-xs mb-1">Essential Cargo Ash</h4>
+                        <p class="text-[#6DAE5A] font-black text-sm mb-6">$110.00</p>
+                        <button onclick="addToCart('Essential Cargo Ash', 110)" class="w-full bg-black text-white py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition">Añadir +</button>
                     </div>
                 </div>
             </section>
 
-            <section>
-                <div class="flex items-center space-x-4 mb-12 border-b-2 border-black pb-4">
-                    <span class="text-5xl font-black text-gray-100">03</span>
-                    <h3 class="text-2xl font-black uppercase italic tracking-widest">Accesorios</h3>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="group text-center p-10 bg-zinc-50 rounded-3xl">
-                        <p class="text-[10px] font-black uppercase text-gray-400">Próximamente</p>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
-    <footer class="bg-black text-white py-12 px-10 text-center">
-        <p class="text-[9px] font-black uppercase tracking-[0.4em] mb-4">© 2026 LEM MODA - Ambato • Quito • Ecuador</p>
+    <footer class="bg-black text-white pt-24 pb-12 px-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
+            <div>
+                <h3 class="text-4xl font-black italic mb-4">LEM MODA</h3>
+                <p class="text-[10px] text-gray-500 uppercase tracking-[0.5em] mb-8">DETERMINACIÓN • ADAPTABILIDAD</p>
+                <div class="flex space-x-6 justify-center md:justify-start">
+                    <a href="#" class="text-xs hover:text-[#6DAE5A] transition">Instagram</a>
+                    <a href="#" class="text-xs hover:text-[#6DAE5A] transition">TikTok</a>
+                    <a href="#" class="text-xs hover:text-[#6DAE5A] transition">Facebook</a>
+                </div>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-2 italic">Quito - Ambato - Ecuador</p>
+                <p class="text-[10px] font-black text-white uppercase tracking-widest">© 2026 TODOS LOS DERECHOS RESERVADOS LEM MODA</p>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -156,9 +171,26 @@
         }
 
         function addToCart(name, price) {
-            cart.push({ name, price, id: Date.now() });
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1, id: Date.now() });
+            }
             updateCart();
-            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+            // Mostrar botón flotante si no es visible
+            document.getElementById('cart-trigger').classList.add('visible');
+        }
+
+        function updateQuantity(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCart();
         }
 
         function removeFromCart(id) {
@@ -173,39 +205,52 @@
 
         function updateCart() {
             const itemsContainer = document.getElementById('cart-items');
-            const countLabel = document.getElementById('cart-count');
             const totalLabel = document.getElementById('cart-total');
+            const countBadge = document.getElementById('cart-count-badge');
             
             itemsContainer.innerHTML = '';
             let total = 0;
+            let totalItems = 0;
 
             cart.forEach(item => {
-                total += item.price;
+                total += (item.price * item.quantity);
+                totalItems += item.quantity;
                 itemsContainer.innerHTML += `
-                    <div class="flex justify-between items-center bg-zinc-50 p-4 rounded-2xl">
-                        <div>
-                            <h5 class="text-[10px] font-black uppercase">${item.name}</h5>
-                            <p class="text-[#6DAE5A] font-bold text-xs">$${item.price}</p>
+                    <div class="flex justify-between items-center bg-zinc-50 p-6 rounded-[2rem] border border-gray-100">
+                        <div class="flex-grow">
+                            <h5 class="text-xs font-black uppercase mb-1">${item.name}</h5>
+                            <p class="text-[#6DAE5A] font-bold text-sm">$${item.price}</p>
+                            
+                            <div class="flex items-center space-x-4 mt-3">
+                                <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 rounded-full border border-gray-300 font-bold">-</button>
+                                <span class="font-black text-sm">${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 rounded-full border border-gray-300 font-bold">+</button>
+                            </div>
                         </div>
-                        <button onclick="removeFromCart(${item.id})" class="text-red-500 font-bold px-2">❌</button>
+                        <button onclick="removeFromCart(${item.id})" class="text-red-500 font-bold ml-6 text-xl hover:scale-120 transition">❌</button>
                     </div>
                 `;
             });
 
-            countLabel.innerText = cart.length;
+            countBadge.innerText = totalItems;
             totalLabel.innerText = `$${total.toFixed(2)}`;
+
+            // Ocultar botón flotante si el carrito queda vacío
+            if (cart.length === 0) {
+                document.getElementById('cart-trigger').classList.remove('visible');
+            }
         }
 
         function sendWhatsApp() {
-            if (cart.length === 0) return alert("Tu carrito está vacío");
+            if (cart.length === 0) return;
 
             let mensaje = "🚀 *NUEVO PEDIDO - LEM MODA 2026*\n\nHola, quiero elevar mi identidad con estas prendas:\n\n";
-            cart.forEach((item, index) => {
-                mensaje += `${index + 1}. *${item.name}* - $${item.price}\n`;
+            cart.forEach(item => {
+                mensaje += `• *${item.name}* (${item.quantity} unidades) - $${(item.price * item.quantity).toFixed(2)}\n`;
             });
 
-            let total = cart.reduce((sum, item) => sum + item.price, 0);
-            mensaje += `\n*TOTAL A PAGAR: $${total.toFixed(2)}*\n\n¿Me confirman disponibilidad para concretar el pago? 🐜🌿`;
+            let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            mensaje += `\n*TOTAL ESTIMADO: $${total.toFixed(2)}*\n\n¿Podrían confirmarme disponibilidad? 🐜🌿`;
 
             const url = `https://wa.me/593979010077?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
