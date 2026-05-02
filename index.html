@@ -3,230 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | 2026 Collection</title>
+    <title>LEM MODA | Luxury Streetwear Ecuador 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --brand-green: #6DAE5A; }
-        body { background: #ffffff; color: #111; font-family: 'Urbanist', sans-serif; overflow-x: hidden; }
+        :root { --brand-green: #6DAE5A; --dark-bg: #0a0a0a; }
+        body { background: #ffffff; color: #111; font-family: 'Urbanist', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         
-        .hero-video-vertical { height: 85vh; width: 100%; object-fit: cover; border-radius: 0 0 50px 50px; background: #000; }
+        /* Animaciones Premium */
+        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Sistema de Navegación entre páginas */
-        .page-section { display: none; }
-        .page-active { display: block; }
+        /* Hero Section */
+        .hero-video-container { position: relative; height: 95vh; width: 100%; overflow: hidden; border-radius: 0 0 80px 80px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2); }
+        .hero-video { width: 100%; height: 100%; object-fit: cover; }
         
-        .fade-in { animation: fadeIn 0.6s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Navegación */
+        .nav-glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        
+        /* Catálogo Grid Optimizado */
+        .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (min-width: 1024px) { .catalog-grid { grid-template-columns: repeat(4, 1fr); gap: 2.5rem; } }
+        
+        .product-card { position: relative; transition: all 0.5s ease; border-radius: 30px; padding: 10px; background: #fff; border: 1px solid transparent; }
+        .product-card:hover { border-color: #f0f0f0; transform: translateY(-10px); }
+        .product-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; border-radius: 25px; background: #f8f8f8; }
+        .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .product-card:hover .product-img-wrap img { transform: scale(1.1); }
+        
+        /* Selectores Visuales */
+        .size-btn { border: 1.5px solid #eee; padding: 6px 14px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .size-btn.active { background: #000; color: #fff; border-color: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .color-dot { width: 18px; height: 18px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        .color-dot.active { border-color: var(--brand-green); transform: scale(1.2); }
 
-        .bento-item { background: #f9f9f9; border-radius: 32px; overflow: hidden; transition: 0.4s; }
-        .bento-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-
-        /* Carrito UI */
-        #cart-trigger { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: scale(0); pointer-events: none; }
-        #cart-trigger.visible { transform: scale(1); pointer-events: auto; }
-        #cart-sidebar { transform: translateX(100%); transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Sidebar Carrito */
+        #cart-sidebar { transform: translateX(100%); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 200; }
         #cart-sidebar.open { transform: translateX(0); }
-
-        /* Selectores de Talla y Color */
-        .size-btn.active { background: black; color: white; border-color: black; }
-        .color-btn.active { outline: 2px solid var(--brand-green); outline-offset: 2px; }
+        
+        .page-section { display: none; }
+        .active-section { display: block; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full flex justify-between items-center px-8 py-5 bg-white/90 backdrop-blur-md z-[100] border-b border-gray-100">
-        <div class="text-2xl font-black tracking-tighter cursor-pointer uppercase" onclick="showPage('home')">
+    <nav class="fixed top-0 w-full z-[150] nav-glass transition-all duration-500 py-6 px-10 flex justify-between items-center">
+        <div class="text-3xl font-black tracking-tighter cursor-pointer select-none" onclick="changePage('inicio')">
             LEM <span class="text-[#6DAE5A]">MODA</span>
         </div>
-        <div class="flex space-x-6 items-center">
-            <button onclick="showPage('home')" class="text-[10px] font-black uppercase tracking-widest hover:text-[#6DAE5A]">Inicio</button>
-            <button onclick="showPage('catalogo')" class="bg-black text-white px-8 py-2.5 rounded-full text-[10px] font-black tracking-widest hover:bg-[#6DAE5A] transition shadow-lg shadow-black/10">CATÁLOGO</button>
+        <div class="hidden lg:flex space-x-12 items-center font-bold text-[11px] uppercase tracking-[0.2em]">
+            <a href="javascript:void(0)" onclick="changePage('inicio')" class="hover:text-[#6DAE5A] transition">Inicio</a>
+            <a href="javascript:void(0)" onclick="changePage('catalogo')" class="hover:text-[#6DAE5A] transition">Catálogo</a>
+            <a href="javascript:void(0)" onclick="changePage('adn')" class="hover:text-[#6DAE5A] transition">Filosofía</a>
+        </div>
+        <div class="flex items-center space-x-6">
+            <button onclick="toggleCart()" class="relative group">
+                <span class="text-xl">🛒</span>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
+            </button>
+            <button onclick="changePage('catalogo')" class="bg-black text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transform active:scale-95 transition-all shadow-xl">Comprar 2026</button>
         </div>
     </nav>
 
-    <button id="cart-trigger" onclick="toggleCart()" class="fixed bottom-8 right-8 z-[130] bg-[#6DAE5A] text-white p-5 rounded-full shadow-2xl flex items-center justify-center">
-        <span class="text-xl">🛒</span>
-        <span id="cart-count-badge" class="ml-2 font-black text-sm">0</span>
-    </button>
-
-    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[110] hidden" onclick="toggleCart()"></div>
-    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-[480px] bg-white z-[120] p-10 shadow-2xl flex flex-col">
-        <div class="flex justify-between items-center mb-10">
-            <h2 class="text-3xl font-black uppercase italic">Tu Bolsa</h2>
-            <button onclick="toggleCart()" class="text-2xl">✕</button>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[190] hidden" onclick="toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-white p-10 flex flex-col shadow-[-20px_0_60px_rgba(0,0,0,0.1)]">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-3xl font-black italic uppercase">Tu Selección</h2>
+            <button onclick="toggleCart()" class="text-xl hover:rotate-90 transition duration-300">✕</button>
         </div>
-        <div id="cart-items" class="flex-grow overflow-y-auto space-y-6"></div>
-        <div class="border-t pt-8 mt-6">
-            <div class="flex justify-between font-black text-2xl mb-8"><span>TOTAL:</span><span id="cart-total">$0.00</span></div>
-            <button onclick="clearCart()" class="w-full text-[10px] font-bold uppercase text-gray-400 mb-4 hover:text-red-500 transition">Vaciar Carrito</button>
-            <button onclick="sendWhatsApp()" class="w-full bg-black text-white py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition shadow-xl">Finalizar vía WhatsApp</button>
+        <div id="cart-items" class="flex-grow overflow-y-auto space-y-6 pr-4">
+            </div>
+        <div class="border-t border-gray-100 pt-10 mt-8">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-gray-400 font-bold uppercase text-[10px] tracking-widest">Subtotal estimado</span>
+                <span id="cart-total" class="text-3xl font-black">$0.00</span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-[#6DAE5A] text-white py-6 rounded-3xl font-black uppercase tracking-[0.3em] hover:bg-black transition-all transform active:scale-95 shadow-2xl shadow-[#6DAE5A]/20">
+                Finalizar Vía WhatsApp 🐜
+            </button>
         </div>
     </div>
 
-    <main id="home-page" class="page-section page-active fade-in">
-        <section class="pt-20">
-            <video autoplay muted loop playsinline class="hero-video-vertical shadow-2xl">
+    <main id="section-inicio" class="page-section active-section fade-in-up">
+        <section class="hero-video-container">
+            <video autoplay muted loop playsinline class="hero-video">
                 <source src="1000813159.mp4" type="video/mp4">
             </video>
+            <div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center text-white px-6">
+                <h1 class="text-7xl md:text-[11rem] font-black tracking-tighter leading-none mb-8">IDENTITY<br><span class="text-[#6DAE5A]">LEM</span></h1>
+                <p class="max-w-xl text-sm md:text-lg font-medium opacity-90 mb-10 tracking-wide uppercase italic">Streetwear de lujo fabricado en Ambato, diseñado para el mundo.</p>
+                <div class="flex space-x-4">
+                    <button onclick="changePage('catalogo')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-[#6DAE5A] hover:text-white transition-all shadow-2xl">Catálogo</button>
+                    <button onclick="changePage('adn')" class="border-2 border-white text-white px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">Nuestra Historia</button>
+                </div>
+            </div>
         </section>
 
-        <section class="py-24 text-center px-6">
-            <h1 class="text-7xl md:text-[10rem] font-black tracking-tighter uppercase leading-[0.85]">Tu <br><span class="text-[#6DAE5A]">Identidad.</span></h1>
-            <p class="mt-8 text-[11px] tracking-[0.6em] text-gray-400 uppercase font-black italic text-center w-full">Luxury Streetwear 2026</p>
-        </section>
-
-        <section class="py-20 px-8 max-w-7xl mx-auto">
-            <h2 class="text-3xl font-black mb-12 italic uppercase tracking-tighter">Últimos Lanzamientos</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bento-item md:col-span-2 md:row-span-2 h-[600px] relative">
-                    <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                        <source src="1000813645.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-10 left-10 bg-black/40 backdrop-blur-md p-6 rounded-3xl text-white">
-                        <p class="text-[10px] font-bold uppercase tracking-widest mb-2">Trending Now</p>
-                        <h4 class="text-2xl font-black uppercase">Navy Dayslay Kit</h4>
+        <section class="py-32 px-10 text-center">
+            <div class="max-w-4xl mx-auto">
+                <span class="text-[10px] font-black tracking-[0.5em] text-[#6DAE5A] uppercase mb-6 block">ADN Corporativo</span>
+                <h2 class="text-5xl md:text-7xl font-black italic uppercase leading-tight mb-12">"Nuestra esencia se forja en la <span class="bg-[#6DAE5A] text-white px-4">hormiga</span> y la hoja."</h2>
+                <div class="grid md:grid-cols-2 gap-16 text-left border-t border-gray-100 pt-16 mt-16">
+                    <div>
+                        <h3 class="text-xl font-black mb-4 uppercase">Fabricación: Ambato</h3>
+                        <p class="text-gray-500 leading-relaxed italic">Nuestra planta SELECTED MOD produce cada pieza con precisión industrial y acabados artesanales, garantizando calidad de exportación.</p>
                     </div>
-                </div>
-                <div class="bento-item md:col-span-2 h-[290px] bg-[#6DAE5A] p-12 flex items-center text-white">
-                    <p class="text-4xl font-black uppercase leading-none italic">Determinación y Estilo en cada costura.</p>
-                </div>
-                <div class="bento-item h-[290px] bg-zinc-900 text-white p-10 flex flex-col justify-between">
-                    <h4 class="font-black uppercase text-sm tracking-widest">Street Cargo</h4>
-                    <p class="text-[10px] text-gray-400 uppercase italic">Edición Limitada</p>
-                </div>
-                <div class="bento-item h-[290px] flex items-center justify-center bg-zinc-50 border border-gray-100">
-                    <span class="text-xs font-black uppercase tracking-[0.4em] text-gray-300 italic">LEM MODA</span>
+                    <div>
+                        <h3 class="text-xl font-black mb-4 uppercase">Exhibición: Quito</h3>
+                        <p class="text-gray-500 leading-relaxed italic">En el corazón de la capital, LEM MODA ofrece una experiencia de compra exclusiva para quienes buscan elevar su estilo urbano.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <main id="catalogo-page" class="page-section pt-32 pb-20 px-8 bg-white min-h-screen fade-in">
-        <div class="max-w-7xl mx-auto">
-            
-            <section class="mb-32">
-                <div class="flex items-center space-x-6 mb-16 border-b-4 border-black pb-8">
-                    <span class="text-8xl font-black text-gray-100 italic">01</span>
-                    <h3 class="text-5xl font-black uppercase italic tracking-tighter">MEN COLLECTION</h3>
+    <main id="section-catalogo" class="page-section pt-32 pb-32 fade-in-up">
+        <div class="max-w-[1400px] mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <h2 class="text-7xl font-black uppercase italic tracking-tighter">New <br><span class="text-[#6DAE5A]">Drops.</span></h2>
+                    <p class="text-gray-400 font-bold uppercase text-[10px] tracking-[0.4em] mt-4">Invierno / Primavera 2026</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-                    
-                    <div class="product-card" id="m1">
-                        <div class="aspect-[3/4] rounded-[3rem] overflow-hidden mb-8 shadow-2xl bg-zinc-100">
-                            <img src="1000813647.jpeg" class="w-full h-full object-cover">
-                        </div>
-                        <h4 class="font-black uppercase text-xl mb-2">Navy Dayslay Hoodie</h4>
-                        <p class="text-[#6DAE5A] font-black text-lg mb-8">$85.00</p>
-                        
-                        <div class="mb-6">
-                            <p class="text-[9px] font-black uppercase text-gray-400 mb-4 tracking-widest">Tallas Disponibles</p>
-                            <div class="flex flex-wrap gap-2 size-container">
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-3 py-1.5 rounded-xl text-[10px] font-black transition">XS</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-3 py-1.5 rounded-xl text-[10px] font-black transition">S</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-3 py-1.5 rounded-xl text-[10px] font-black transition">M</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-3 py-1.5 rounded-xl text-[10px] font-black transition">L</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-3 py-1.5 rounded-xl text-[10px] font-black transition">XL</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-3 py-1.5 rounded-xl text-[10px] font-black transition">XXL</button>
-                            </div>
-                        </div>
-
-                        <div class="mb-10">
-                            <p class="text-[9px] font-black uppercase text-gray-400 mb-4 tracking-widest">Colores</p>
-                            <div class="flex gap-4 color-container">
-                                <button onclick="selectColor(this, 'Negro')" class="color-btn w-7 h-7 rounded-full bg-black"></button>
-                                <button onclick="selectColor(this, 'Gris')" class="color-btn w-7 h-7 rounded-full bg-gray-500"></button>
-                                <button onclick="selectColor(this, 'Verde')" class="color-btn w-7 h-7 rounded-full bg-[#6DAE5A]"></button>
-                                <button onclick="selectColor(this, 'Azul')" class="color-btn w-7 h-7 rounded-full bg-blue-900"></button>
-                                <button onclick="selectColor(this, 'Blanco')" class="color-btn w-7 h-7 rounded-full bg-white border border-gray-200"></button>
-                            </div>
-                        </div>
-                        <button onclick="handleAddToCart('m1', 'Navy Dayslay Hoodie', 85)" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition shadow-xl">Añadir al Pedido</button>
-                    </div>
-
-                    <div class="product-card" id="m2">
-                        <div class="aspect-[3/4] rounded-[3rem] overflow-hidden mb-8 shadow-2xl bg-zinc-100">
-                            <img src="1000813649.jpg" class="w-full h-full object-cover">
-                        </div>
-                        <h4 class="font-black uppercase text-xl mb-2">Essential Tech Cargo</h4>
-                        <p class="text-[#6DAE5A] font-black text-lg mb-8">$110.00</p>
-                        
-                        <div class="mb-6">
-                            <p class="text-[9px] font-black uppercase text-gray-400 mb-4 tracking-widest">Talla Pantalón</p>
-                            <div class="flex flex-wrap gap-2 size-container">
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">30</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">32</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">34</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">36</button>
-                            </div>
-                        </div>
-                        <button onclick="handleAddToCart('m2', 'Essential Tech Cargo', 110)" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition">Añadir al Pedido</button>
-                    </div>
-
+                <div class="flex space-x-3 pb-2">
+                    <button class="bg-black text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">Todos</button>
+                    <button class="bg-gray-50 text-gray-400 px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition">Hoodies</button>
+                    <button class="bg-gray-50 text-gray-400 px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition">Cargos</button>
                 </div>
-            </section>
+            </div>
 
-            <section class="mb-32">
-                <div class="flex items-center space-x-6 mb-16 border-b-4 border-black pb-8">
-                    <span class="text-8xl font-black text-gray-100 italic">02</span>
-                    <h3 class="text-5xl font-black uppercase italic tracking-tighter">WOMAN COLLECTION</h3>
+            <div class="catalog-grid" id="main-grid">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-                    
-                    <div class="product-card" id="w1">
-                        <div class="aspect-[3/4] rounded-[3rem] overflow-hidden mb-8 shadow-2xl bg-zinc-200">
-                            <img src="1000813651.jpg" class="w-full h-full object-cover">
-                        </div>
-                        <h4 class="font-black uppercase text-xl mb-2">Leaf Zip-Up Woman</h4>
-                        <p class="text-[#6DAE5A] font-black text-lg mb-8">$90.00</p>
-                        
-                        <div class="mb-6">
-                            <p class="text-[9px] font-black uppercase text-gray-400 mb-4 tracking-widest">Talla</p>
-                            <div class="flex flex-wrap gap-2 size-container">
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">XS</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">S</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">M</button>
-                                <button onclick="selectSize(this)" class="size-btn border border-gray-200 px-4 py-2 rounded-xl text-xs font-black transition">L</button>
-                            </div>
-                        </div>
-
-                        <div class="mb-10">
-                            <p class="text-[9px] font-black uppercase text-gray-400 mb-4 tracking-widest">Color</p>
-                            <div class="flex gap-4 color-container">
-                                <button onclick="selectColor(this, 'Blanco')" class="color-btn w-8 h-8 rounded-full bg-white border border-gray-200"></button>
-                                <button onclick="selectColor(this, 'Negro')" class="color-btn w-8 h-8 rounded-full bg-black"></button>
-                                <button onclick="selectColor(this, 'Menta')" class="color-btn w-8 h-8 rounded-full bg-emerald-100"></button>
-                                <button onclick="selectColor(this, 'Rosa')" class="color-btn w-8 h-8 rounded-full bg-pink-100"></button>
-                            </div>
-                        </div>
-                        <button onclick="handleAddToCart('w1', 'Leaf Zip-Up Woman', 90)" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition shadow-xl">Añadir al Pedido</button>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
-    <footer class="bg-black text-white pt-24 pb-12 px-10 text-center">
-        <h3 class="text-5xl font-black italic tracking-tighter mb-10">LEM MODA</h3>
-        <p class="text-[10px] text-gray-600 uppercase tracking-widest font-black italic">© 2026 LEM MODA • QUITO - AMBATO</p>
+    <main id="section-adn" class="page-section pt-40 pb-40 fade-in-up bg-zinc-50">
+        <div class="max-w-5xl mx-auto px-10 text-center">
+            <h2 class="text-8xl font-black uppercase italic tracking-tighter mb-16">Propósito <br><span class="text-[#6DAE5A]">2026.</span></h2>
+            <div class="bg-white p-20 rounded-[4rem] shadow-sm border border-gray-100 space-y-12">
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-gray-300 mb-4 italic">Misión</h4>
+                    <p class="text-3xl font-light italic leading-snug">Empoderar la identidad individual mediante el lujo urbano sostenible, fusionando tecnología textil de Ambato con visión global.</p>
+                </div>
+                <div class="w-20 h-1 bg-black mx-auto"></div>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-gray-300 mb-4 italic">Visión</h4>
+                    <p class="text-3xl font-light italic leading-snug">Posicionarnos como la marca líder de Streetwear en Latinoamérica para el cierre de 2026, expandiendo nuestra red de tiendas físicas en Quito.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black text-white pt-32 pb-16 px-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-20 border-b border-white/5 pb-24">
+            <div class="col-span-2">
+                <h4 class="text-4xl font-black italic uppercase mb-8">LEM MODA</h4>
+                <p class="text-gray-500 max-w-sm leading-relaxed text-sm italic">Innovación textil desde Ambato para la cultura urbana más exigente de Quito. No es solo ropa, es tu legado.</p>
+            </div>
+            <div>
+                <h5 class="font-black text-[#6DAE5A] text-[10px] uppercase tracking-widest mb-8">Ubicaciones</h5>
+                <ul class="space-y-4 text-gray-400 text-sm">
+                    <li><strong class="text-white">Fábrica:</strong> Ambato (Selected Mod)</li>
+                    <li><strong class="text-white">Store:</strong> Quito (Centro Norte)</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-black text-[#6DAE5A] text-[10px] uppercase tracking-widest mb-8">Contacto</h5>
+                <ul class="space-y-4 text-gray-400 text-sm italic">
+                    <li>ventas@lemmoda.com.ec</li>
+                    <li>+593 97 901 0077</li>
+                </ul>
+            </div>
+        </div>
+        <div class="pt-12 text-center">
+            <p class="text-[9px] font-bold text-gray-600 uppercase tracking-[0.6em]">© 2026 LEM MODA - Luxury Streetwear Division</p>
+        </div>
     </footer>
 
     <script>
+        // DATA DE PRODUCTOS REFORZADA
+        const stock = [
+            { id: 1, nombre: 'Navy Dayslay Hoodie', precio: 85, img: '1000813647.jpeg', cat: 'Hoodies', sizes: ['S', 'M', 'L'] },
+            { id: 2, nombre: 'Tech Cargo Navy', precio: 115, img: '1000813649.jpg', cat: 'Pants', sizes: ['30', '32', '34'] },
+            { id: 3, nombre: 'Leaf Zip-Up Woman', precio: 95, img: '1000813651.jpg', cat: 'Hoodies', sizes: ['S', 'M'] },
+            { id: 4, nombre: 'Oversized Black Leaf', precio: 45, img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500', cat: 'Tees', sizes: ['M', 'L', 'XL'] },
+            { id: 5, nombre: 'Desert Dust Crew', precio: 80, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500', cat: 'Hoodies', sizes: ['S', 'M', 'L'] },
+            { id: 6, nombre: 'Acid Wash Grey', precio: 120, img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500', cat: 'Pants', sizes: ['30', '32'] },
+            { id: 7, nombre: 'Street Sign Tee', precio: 40, img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500', cat: 'Tees', sizes: ['L', 'XL'] },
+            { id: 8, nombre: 'Midnight Bomber', precio: 150, img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500', cat: 'Jackets', sizes: ['M', 'L'] }
+        ];
+
         let cart = [];
 
-        // FUNCIÓN CLAVE: Muestra la página correcta
-        function showPage(pageId) {
-            // Oculta todas las secciones
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('page-active');
-            });
-            // Muestra la seleccionada
-            const target = document.getElementById(pageId + '-page');
-            if(target) {
-                target.classList.add('page-active');
-            }
+        // NAVEGACIÓN ENTRE SECCIONES
+        function changePage(targetId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-section'));
+            document.getElementById(`section-${targetId}`).classList.add('active-section');
             window.scrollTo({top: 0, behavior: 'smooth'});
             if(document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+        }
+
+        // CARGA DINÁMICA DEL CATÁLOGO
+        function renderProducts() {
+            const grid = document.getElementById('main-grid');
+            grid.innerHTML = stock.map(p => `
+                <div class="product-card group">
+                    <div class="product-img-wrap shadow-2xl">
+                        <img src="${p.img}" loading="lazy">
+                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    </div>
+                    <div class="mt-8 px-2">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="font-bold uppercase text-[11px] tracking-tight w-2/3">${p.nombre}</h4>
+                            <p class="text-[#6DAE5A] font-black text-xs">$${p.precio}.00</p>
+                        </div>
+                        <div class="flex gap-1 mb-5" id="sizes-${p.id}">
+                            ${p.sizes.map(s => `<span class="size-btn" onclick="selectSize(this)">${s}</span>`).join('')}
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-zinc-950 text-white py-3.5 rounded-2xl text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#6DAE5A] transition shadow-lg shadow-black/5">Añadir al Carrito</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function toggleCart() {
@@ -239,103 +235,57 @@
             btn.classList.add('active');
         }
 
-        function selectColor(btn, colorName) {
-            btn.parentElement.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            btn.dataset.colorName = colorName;
-        }
-
-        function handleAddToCart(cardId, name, price) {
-            const card = document.getElementById(cardId);
-            const size = card.querySelector('.size-btn.active')?.innerText;
-            const color = card.querySelector('.color-btn.active')?.dataset.colorName || "Estándar";
-
-            if (!size) {
-                alert("Por favor selecciona una Talla 🐜🌿");
-                return;
-            }
-
-            const itemKey = `${name}-${size}-${color}`;
-            const existing = cart.find(i => i.key === itemKey);
-
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ key: itemKey, name, price, size, color, quantity: 1, id: Date.now() });
-            }
-
-            updateCart();
-            document.getElementById('cart-trigger').classList.add('visible');
-            toggleCart();
-        }
-
-        function updateQuantity(id, change) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
-            }
-            updateCart();
-        }
-
-        function clearCart() {
-            cart = [];
-            updateCart();
-        }
-
-        function updateCart() {
-            const container = document.getElementById('cart-items');
-            const totalLabel = document.getElementById('cart-total');
-            const badge = document.getElementById('cart-count-badge');
+        function addToCart(pid) {
+            const prod = stock.find(p => p.id === pid);
+            const size = document.querySelector(`#sizes-${pid} .size-btn.active`)?.innerText;
             
-            container.innerHTML = '';
-            let total = 0;
-            let totalItems = 0;
+            if (!size) { alert("Elige tu talla 🐜"); return; }
+            
+            const cartKey = `${pid}-${size}`;
+            const exists = cart.find(i => i.cartKey === cartKey);
+            
+            if (exists) { exists.qty++; } 
+            else { cart.push({...prod, size, qty: 1, cartKey}); }
+            
+            updateCartUI();
+            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+        }
 
-            cart.forEach(item => {
-                total += (item.price * item.quantity);
-                totalItems += item.quantity;
-                container.innerHTML += `
-                    <div class="bg-zinc-50 p-6 rounded-[2.5rem] border border-gray-100">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h5 class="font-black text-sm uppercase">${item.name}</h5>
-                                <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-1">Talla: ${item.size} | Color: ${item.color}</p>
-                                <p class="text-[#6DAE5A] font-black text-sm mt-2">$${item.price}</p>
-                            </div>
-                            <button onclick="removeFromCart(${item.id})" class="text-xl">✕</button>
-                        </div>
-                        <div class="flex items-center space-x-6">
-                            <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 rounded-full border border-gray-200 font-bold">-</button>
-                            <span class="font-black text-sm">${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 rounded-full border border-gray-200 font-bold">+</button>
-                        </div>
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center space-x-5 bg-zinc-50 p-5 rounded-[2rem] border border-gray-50">
+                    <img src="${item.img}" class="w-20 h-20 rounded-2xl object-cover shadow-sm">
+                    <div class="flex-grow">
+                        <h5 class="font-black text-[10px] uppercase leading-tight">${item.nombre}</h5>
+                        <p class="text-gray-400 text-[9px] font-bold mt-1 uppercase">Talla ${item.size} • Cant. ${item.qty}</p>
+                        <p class="text-[#6DAE5A] font-black text-xs mt-2">$${(item.precio * item.qty).toFixed(2)}</p>
                     </div>
-                `;
-            });
+                    <button onclick="removeCartItem('${item.cartKey}')" class="text-gray-300 hover:text-red-500 p-2">✕</button>
+                </div>
+            `).join('');
 
-            badge.innerText = totalItems;
-            totalLabel.innerText = `$${total.toFixed(2)}`;
-            if (cart.length === 0) {
-                document.getElementById('cart-trigger').classList.remove('visible');
-            }
+            const total = cart.reduce((acc, i) => acc + (i.precio * i.qty), 0);
+            const count = cart.reduce((acc, i) => acc + i.qty, 0);
+            
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('cart-count').innerText = count;
         }
 
-        function removeFromCart(id) {
-            cart = cart.filter(i => i.id !== id);
-            updateCart();
+        function removeCartItem(key) {
+            cart = cart.filter(i => i.cartKey !== key);
+            updateCartUI();
         }
 
-        function sendWhatsApp() {
-            if (cart.length === 0) return;
-            let msg = "🐜 *NUEVO PEDIDO - LEM MODA*\n\nHola, quiero concretar la compra de estos productos:\n\n";
-            cart.forEach(item => {
-                msg += `• *${item.name}*\n  Talla: ${item.size} | Color: ${item.color}\n  Cant: ${item.quantity} | Total: $${(item.price * item.quantity).toFixed(2)}\n\n`;
-            });
-            let total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-            msg += `*TOTAL DEL PEDIDO: $${total.toFixed(2)}*\n\n¿Están disponibles para envío hoy? 🌿`;
-            window.open(`https://wa.me/593979010077?text=${encodeURIComponent(msg)}`, '_blank');
+        function checkoutWhatsApp() {
+            if(cart.length === 0) return;
+            let text = "🐜 *NUEVO PEDIDO LEM MODA 2026*\n\n";
+            cart.forEach(i => text += `• ${i.nombre} | Talla: ${i.size} | Cant: ${i.qty} | $${(i.precio * i.qty)}\n`);
+            text += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
+            window.open(`https://wa.me/593979010077?text=${encodeURIComponent(text)}`, '_blank');
         }
+
+        window.onload = renderProducts;
     </script>
 </body>
 </html>
