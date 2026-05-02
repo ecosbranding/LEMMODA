@@ -3,130 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | Streetwear Luxury</title>
+    <title>LEM MODA | Tu Identidad</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --brand-green: #6DAE5A;
-            --brand-brown: #5C4033;
-            --brand-gold: #A88F6D;
-        }
-        body { background-color: #ffffff; color: #1a1a1a; font-family: 'Urbanist', sans-serif; }
-        .accent-green { color: var(--brand-green); }
-        .bg-green { background-color: var(--brand-green); }
-        .border-brown { border-color: var(--brand-brown); }
-        
-        /* Animación suave para el catálogo */
-        .product-card:hover img { transform: scale(1.05); }
-        .product-card img { transition: transform 0.5s ease; }
+        body { background: #ffffff; color: #111; font-family: 'Urbanist', sans-serif; overflow-x: hidden; }
+        .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 15px; }
+        .bento-item { background: #f9f9f9; border-radius: 24px; overflow: hidden; position: relative; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        .bento-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .accent-green { color: #6DAE5A; }
     </style>
 </head>
 <body>
 
-    <nav class="flex justify-between items-center px-10 py-6 sticky top-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-        <div class="text-2xl font-black tracking-tighter">LEM <span class="accent-green">MODA</span></div>
-        <div class="space-x-8 text-xs font-bold uppercase tracking-widest">
-            <a href="#adn" class="hover:text-[#6DAE5A]">ADN</a>
-            <a href="#catalogo" class="hover:text-[#6DAE5A]">Catálogo</a>
-            <a href="#ubicacion" class="hover:text-[#6DAE5A]">Tiendas</a>
-        </div>
-    </nav>
-
-    <section class="h-screen flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 p-12 lg:p-24">
-            <h1 class="text-7xl lg:text-9xl font-black leading-none tracking-tighter mb-6">
-                TU <span class="text-gray-300">IDEN-</span><br>TIDAD.
-            </h1>
-            <p class="text-xl text-gray-500 mb-8 max-w-md italic">Streetwear de lujo diseñado con la determinación de la hormiga y la vida de la hoja.</p>
-            <a href="#catalogo" class="inline-block bg-black text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-[#6DAE5A] transition">Ver Catálogo</a>
-        </div>
-        <div class="md:w-1/2 h-full bg-gray-100 relative">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                <source src="1000813159.mp4" type="video/mp4">
-            </video>
-        </div>
+    <section class="flex flex-col items-center justify-center pt-20 pb-10 text-center">
+        <h1 class="text-7xl md:text-9xl font-black tracking-tighter leading-none mb-4 uppercase">
+            Tu <span class="accent-green">Identidad.</span>
+        </h1>
+        <p class="text-[10px] tracking-[0.5em] font-bold text-gray-400 uppercase">Luxury Streetwear / Quito</p>
     </section>
 
-    <section id="adn" class="py-24 px-10 bg-gray-50">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <img src="1000813631.jpg" class="w-full max-w-sm mx-auto" alt="Logo LEM MODA">
-            </div>
-            <div>
-                <h2 class="text-5xl font-black mb-8 border-l-8 border-[#5C4033] pl-6 uppercase">Nuestra Filosofía</h2>
-                <p class="text-gray-600 leading-relaxed mb-6">
-                    En <strong>LEM MODA</strong>, adoptamos la determinación incansable de la hormiga y la adaptabilidad sostenible de la hoja. Nuestra esencia se forja en estos símbolos: avanzamos siempre con propósito y hacemos de la sostenibilidad nuestro estándar.
-                </p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="p-4 border border-[#A88F6D]/30 rounded">
-                        <span class="font-black text-2xl accent-green">01</span>
-                        <p class="text-xs font-bold uppercase">Materiales Eco-Luxe</p>
-                    </div>
-                    <div class="p-4 border border-[#A88F6D]/30 rounded">
-                        <span class="font-black text-2xl accent-green">02</span>
-                        <p class="text-xs font-bold uppercase">Corte Brutalista</p>
-                    </div>
+    <section class="max-w-7xl mx-auto mb-20">
+        <div class="bento-grid">
+            <div class="bento-item col-span-4 md:col-span-2 row-span-2 h-[600px]">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <source src="1000813159.mp4" type="video/mp4">
+                </video>
+                <div class="absolute bottom-8 left-8 text-white">
+                    <h2 class="text-4xl font-black italic uppercase">New Drop</h2>
                 </div>
+            </div>
+
+            <div class="bento-item col-span-2 md:col-span-1 p-8 flex flex-col justify-center border border-gray-100">
+                <img src="1000813631.jpg" class="w-16 mb-4" alt="Logo">
+                <h3 class="font-black uppercase text-xl mb-2">Nuestro <span class="accent-green">ADN</span></h3>
+                <p class="text-xs text-gray-500 leading-relaxed">Determinación de la hormiga. Vida de la hoja.</p>
+            </div>
+
+            <div class="bento-item col-span-2 md:col-span-1 bg-gray-100">
+                <img src="tu-foto-catalogo.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+            </div>
+
+            <div class="bento-item col-span-4 md:col-span-2 bg-[#111] text-white p-10 flex justify-between items-end">
+                <div>
+                    <p class="text-[10px] uppercase tracking-widest opacity-50 mb-2">Ubicación</p>
+                    <h4 class="text-2xl font-bold">Quito & Ambato</h4>
+                </div>
+                <a href="https://wa.me/593979010077" class="bg-white text-black px-6 py-3 rounded-full font-black text-xs uppercase">WhatsApp</a>
             </div>
         </div>
     </section>
-
-    <section id="catalogo" class="py-24 px-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-end mb-12">
-                <h2 class="text-6xl font-black tracking-tighter uppercase">Drop <span class="text-gray-300">2026</span></h2>
-                <p class="text-xs font-bold uppercase accent-green tracking-widest">Quito - Ambato - Medellín</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="product-card group">
-                    <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4 relative">
-                        <span class="absolute top-4 left-4 bg-black text-white text-[10px] px-3 py-1 font-bold z-10">BEST SELLER</span>
-                        <img src="tu-producto-1.jpg" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-black text-lg uppercase">Oversized Zip-Up Hoodie</h3>
-                    <p class="text-gray-400 text-sm mb-2 italic">Navy Dayslay Collection</p>
-                    <p class="font-bold text-[#5C4033]">$85.00</p>
-                </div>
-
-                <div class="product-card group">
-                    <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-                        <img src="tu-producto-2.jpg" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-black text-lg uppercase">Techwear Cargo Pants</h3>
-                    <p class="text-gray-400 text-sm mb-2 italic">Industrial Pulse Drop</p>
-                    <p class="font-bold text-[#5C4033]">$110.00</p>
-                </div>
-
-                <div class="product-card group">
-                    <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-                        <img src="tu-producto-3.jpg" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-black text-lg uppercase">Ant Graphic Tee</h3>
-                    <p class="text-gray-400 text-sm mb-2 italic">Essential DNA Series</p>
-                    <p class="font-bold text-[#5C4033]">$45.00</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="ubicacion" class="bg-black text-white py-20 px-10">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
-            <div>
-                <h3 class="text-3xl font-black mb-6 italic">LEM MODA</h3>
-                <p class="text-gray-500 text-sm">Quito: Tienda física en el corazón de la capital.<br>Ambato: Fábrica de sueños y moda al por mayor.</p>
-            </div>
-            <div>
-                <h4 class="font-bold uppercase text-xs tracking-widest mb-4 accent-green">Contacto</h4>
-                <p class="text-sm">WhatsApp: 097 901 0077</p>
-                <p class="text-sm">Instagram: @lem_moda</p>
-            </div>
-            <div class="text-right">
-                <p class="text-[10px] text-gray-700 uppercase">© 2026 Víctor Carvajal - ORCA Studios</p>
-            </div>
-        </div>
-    </footer>
 
 </body>
 </html>
