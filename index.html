@@ -3,148 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | Official Site</title>
+    <title>LEM MODA | Streetwear Luxury</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --brand-green: #6DAE5A; --brand-brown: #5C4033; }
+        :root { --brand-green: #6DAE5A; }
         body { background: #ffffff; color: #111; font-family: 'Urbanist', sans-serif; overflow-x: hidden; }
-        
         .hero-video-vertical { height: 85vh; width: 100%; object-fit: cover; border-radius: 0 0 40px 40px; }
         .page-section { display: none; }
         .page-active { display: block; }
-        
-        /* Animación suave entre páginas */
-        .fade-in { animation: fadeIn 0.6s ease-out; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .bento-item { background: #f9f9f9; border-radius: 24px; overflow: hidden; transition: 0.4s; }
-        .bento-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        
+        /* Estilos Carrito */
+        #cart-sidebar { transform: translateX(100%); transition: 0.3s ease-in-out; }
+        #cart-sidebar.open { transform: translateX(0); }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full flex justify-between items-center px-8 py-5 bg-white/90 backdrop-blur-md z-[100] border-b border-gray-100">
+    <nav class="fixed top-0 w-full flex justify-between items-center px-6 py-5 bg-white/90 backdrop-blur-md z-[100] border-b border-gray-100">
         <div class="text-2xl font-black tracking-tighter cursor-pointer uppercase" onclick="showPage('home')">
             LEM <span class="text-[#6DAE5A]">MODA</span>
         </div>
-        <div class="flex space-x-6 items-center">
+        <div class="flex space-x-4 items-center">
             <button onclick="showPage('home')" class="text-[10px] font-bold uppercase tracking-widest hover:text-[#6DAE5A]">Inicio</button>
-            <button onclick="showPage('catalogo')" class="bg-black text-white px-6 py-2 rounded-full text-[10px] font-black tracking-widest hover:bg-[#6DAE5A] transition shadow-lg shadow-black/10">CATÁLOGO</button>
+            <button onclick="showPage('catalogo')" class="text-[10px] font-bold uppercase tracking-widest hover:text-[#6DAE5A]">Catálogo</button>
+            <button onclick="toggleCart()" class="relative bg-black text-white p-2 rounded-full px-4 text-[10px] font-black flex items-center">
+                🛒 <span id="cart-count" class="ml-2 text-[#6DAE5A]">0</span>
+            </button>
         </div>
     </nav>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[110] hidden" onclick="toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white z-[120] p-8 shadow-2xl flex flex-col">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-2xl font-black uppercase italic">Tu Pedido</h2>
+            <button onclick="toggleCart()" class="text-2xl">✕</button>
+        </div>
+        
+        <div id="cart-items" class="flex-grow overflow-y-auto space-y-4">
+            </div>
+
+        <div class="border-t pt-6 mt-6">
+            <div class="flex justify-between font-black text-xl mb-6">
+                <span>TOTAL:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button onclick="clearCart()" class="w-full text-[10px] font-bold uppercase text-red-500 mb-4 border border-red-500 py-2 rounded-full hover:bg-red-50 transition">Eliminar Carrito Completo</button>
+            <button onclick="sendWhatsApp()" class="w-full bg-[#6DAE5A] text-white py-4 rounded-full font-black uppercase tracking-widest hover:bg-black transition">Finalizar Pedido</button>
+        </div>
+    </div>
 
     <main id="home-page" class="page-section page-active fade-in">
         <section class="pt-20">
             <video autoplay muted loop playsinline class="hero-video-vertical shadow-2xl">
-                <source src="1000813159.mp4" type="video/mp4">
+                <source src="1000813652.mp4" type="video/mp4">
             </video>
         </section>
 
         <section class="py-20 text-center px-6">
-            <h1 class="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">Tu <br><span class="text-[#6DAE5A]">Identidad.</span></h1>
-            <p class="mt-6 text-[10px] tracking-[0.6em] text-gray-400 uppercase font-bold">Luxury Streetwear 2026</p>
+            <h1 class="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">Tu <br><span class="text-[#6DAE5A]">Esencia.</span></h1>
+            <p class="mt-6 text-[10px] tracking-[0.6em] text-gray-400 uppercase font-bold italic">Edición Limitada 2026</p>
         </section>
 
-        <section class="py-20 px-6 max-w-7xl mx-auto">
-            <h2 class="text-3xl font-black mb-12 italic uppercase tracking-tighter">Últimos Lanzamientos</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bento-item md:col-span-2 md:row-span-2 h-[600px] relative">
+        <section class="py-20 px-6 max-w-7xl mx-auto bg-zinc-50 rounded-[3rem]">
+            <h2 class="text-3xl font-black mb-12 italic uppercase tracking-tighter text-center">Novedades</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="rounded-3xl overflow-hidden h-[500px]">
                     <video autoplay muted loop playsinline class="w-full h-full object-cover">
                         <source src="1000813645.mp4" type="video/mp4">
                     </video>
-                    <div class="absolute bottom-6 left-6 bg-black/30 backdrop-blur-md p-4 rounded-xl text-white">
-                        <p class="text-[10px] font-bold uppercase">Trending Now</p>
-                        <h4 class="text-xl font-black">Navy Dayslay Kit</h4>
-                    </div>
                 </div>
-                <div class="bento-item md:col-span-2 h-[290px] bg-[#6DAE5A] p-10 flex items-center text-white">
-                    <p class="text-3xl font-black uppercase leading-tight">Determinación y Estilo en cada costura.</p>
-                </div>
-                <div class="bento-item h-[290px]">
-                    <div class="p-6">
-                        <h4 class="font-black uppercase text-sm">Street Cargo</h4>
-                        <p class="text-[10px] text-gray-400">Edición Limitada</p>
-                    </div>
-                </div>
-                <div class="bento-item h-[290px] flex items-center justify-center">
-                    <img src="1000813631.jpg" class="w-24 grayscale opacity-20" alt="Logo">
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 px-10 bg-[#6DAE5A] text-white">
-            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-10">
-                    <h3 class="text-5xl font-black uppercase tracking-tighter italic">Misión & Visión</h3>
-                    <div class="border-l-4 border-white pl-6">
-                        <h4 class="font-bold text-xs uppercase mb-2">Misión</h4>
-                        <p class="text-white/80 text-sm">Inspirar identidad propia fusionando el arte urbano con la sostenibilidad ambiental.</p>
-                    </div>
-                    <div class="border-l-4 border-white pl-6">
-                        <h4 class="font-bold text-xs uppercase mb-2">Visión 2026</h4>
-                        <p class="text-white/80 text-sm">Ser la marca referente de Luxury Streetwear en Latinoamérica.</p>
-                    </div>
-                </div>
-                <div class="bg-white/10 p-12 rounded-[3rem] backdrop-blur-md border border-white/20">
-                    <p class="text-3xl font-light italic leading-tight">"Determinación de la hormiga, adaptabilidad de la hoja."</p>
+                <div class="flex flex-col justify-center p-8 bg-white rounded-3xl border border-gray-100">
+                    <span class="text-[#6DAE5A] font-bold text-xs uppercase tracking-widest mb-4">Misión & Visión</span>
+                    <p class="text-3xl font-black italic mb-6">Determinación de la hormiga, adaptabilidad de la hoja.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">Nuestra misión es fusionar el arte urbano con la sostenibilidad, creando una identidad global desde Ambato y Quito.</p>
+                    <button onclick="showPage('catalogo')" class="bg-black text-white px-10 py-4 rounded-full font-black uppercase text-[10px] tracking-widest w-fit">Ver Colección</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <main id="catalogo-page" class="page-section pt-32 pb-20 px-6 bg-gray-50 min-h-screen fade-in">
+    <main id="catalogo-page" class="page-section pt-32 pb-20 px-6 bg-white min-h-screen fade-in">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-24">
-                <h2 class="text-6xl font-black uppercase italic tracking-tighter">Catálogo <span class="text-[#6DAE5A]">2026</span></h2>
-            </div>
-
-            <div class="space-y-32">
-                <div>
-                    <div class="flex items-center space-x-4 mb-10 border-b-2 border-black pb-4">
-                        <span class="text-5xl font-black text-gray-200">01</span>
-                        <h3 class="text-2xl font-black uppercase tracking-widest">Hoodies & Oversized</h3>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div class="bg-white p-5 rounded-[2rem] shadow-sm group">
-                            <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100 mb-4">
-                                <img src="tu-foto-hoodie.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            </div>
-                            <h4 class="font-black uppercase text-[11px]">Zip-Up Essential</h4>
-                            <p class="text-[#6DAE5A] font-bold text-xs mt-1">$85.00</p>
-                        </div>
-                        </div>
+            
+            <section class="mb-24">
+                <div class="flex items-center space-x-4 mb-12 border-b-2 border-black pb-4">
+                    <span class="text-5xl font-black text-gray-100">01</span>
+                    <h3 class="text-2xl font-black uppercase italic tracking-widest">Hoodies & Oversized</h3>
                 </div>
-
-                <div>
-                    <div class="flex items-center space-x-4 mb-10 border-b-2 border-black pb-4">
-                        <span class="text-5xl font-black text-gray-200">02</span>
-                        <h3 class="text-2xl font-black uppercase tracking-widest">Pantalones & Cargos</h3>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div class="bg-white p-5 rounded-[2rem] shadow-sm group">
-                            <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100 mb-4">
-                                <img src="tu-foto-pantalon.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            </div>
-                            <h4 class="font-black uppercase text-[11px]">Tech Cargo Navy</h4>
-                            <p class="text-[#6DAE5A] font-bold text-xs mt-1">$110.00</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="group">
+                        <div class="aspect-[3/4] bg-gray-100 rounded-3xl overflow-hidden mb-4 border border-gray-50">
+                            <img src="1000813647.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                         </div>
+                        <h4 class="font-black uppercase text-[11px] mb-1">Navy Dayslay Hoodie</h4>
+                        <p class="text-gray-400 text-[10px] mb-4">$85.00</p>
+                        <button onclick="addToCart('Navy Dayslay Hoodie', 85)" class="w-full bg-zinc-100 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-[#6DAE5A] hover:text-white transition">Agregar al Carrito</button>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <section class="mb-24">
+                <div class="flex items-center space-x-4 mb-12 border-b-2 border-black pb-4">
+                    <span class="text-5xl font-black text-gray-100">02</span>
+                    <h3 class="text-2xl font-black uppercase italic tracking-widest">Tees & Graphics</h3>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="group">
+                        <div class="aspect-[3/4] bg-gray-100 rounded-3xl overflow-hidden mb-4 border border-gray-50">
+                            <img src="1000813649.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        </div>
+                        <h4 class="font-black uppercase text-[11px] mb-1">Ant Graphic Tee</h4>
+                        <p class="text-gray-400 text-[10px] mb-4">$35.00</p>
+                        <button onclick="addToCart('Ant Graphic Tee', 35)" class="w-full bg-zinc-100 py-3 rounded-xl text-[10px] font-black uppercase hover:bg-[#6DAE5A] hover:text-white transition">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex items-center space-x-4 mb-12 border-b-2 border-black pb-4">
+                    <span class="text-5xl font-black text-gray-100">03</span>
+                    <h3 class="text-2xl font-black uppercase italic tracking-widest">Accesorios</h3>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="group text-center p-10 bg-zinc-50 rounded-3xl">
+                        <p class="text-[10px] font-black uppercase text-gray-400">Próximamente</p>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
     <footer class="bg-black text-white py-12 px-10 text-center">
-        <p class="text-[10px] font-black uppercase tracking-[0.4em] mb-4">© 2026 LEM MODA - Todos los derechos reservados</p>
-        <p class="text-[8px] text-gray-600 uppercase tracking-widest">Víctor Carvajal | ORCA Studios | Ambato - Quito - Medellín</p>
+        <p class="text-[9px] font-black uppercase tracking-[0.4em] mb-4">© 2026 LEM MODA - Ambato • Quito • Ecuador</p>
     </footer>
 
     <script>
+        let cart = [];
+
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('page-active'));
             document.getElementById(pageId + '-page').classList.add('page-active');
             window.scrollTo({top: 0, behavior: 'smooth'});
+            if(document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price, id: Date.now() });
+            updateCart();
+            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCart();
+        }
+
+        function updateCart() {
+            const itemsContainer = document.getElementById('cart-items');
+            const countLabel = document.getElementById('cart-count');
+            const totalLabel = document.getElementById('cart-total');
+            
+            itemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price;
+                itemsContainer.innerHTML += `
+                    <div class="flex justify-between items-center bg-zinc-50 p-4 rounded-2xl">
+                        <div>
+                            <h5 class="text-[10px] font-black uppercase">${item.name}</h5>
+                            <p class="text-[#6DAE5A] font-bold text-xs">$${item.price}</p>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-red-500 font-bold px-2">❌</button>
+                    </div>
+                `;
+            });
+
+            countLabel.innerText = cart.length;
+            totalLabel.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function sendWhatsApp() {
+            if (cart.length === 0) return alert("Tu carrito está vacío");
+
+            let mensaje = "🚀 *NUEVO PEDIDO - LEM MODA 2026*\n\nHola, quiero elevar mi identidad con estas prendas:\n\n";
+            cart.forEach((item, index) => {
+                mensaje += `${index + 1}. *${item.name}* - $${item.price}\n`;
+            });
+
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            mensaje += `\n*TOTAL A PAGAR: $${total.toFixed(2)}*\n\n¿Me confirman disponibilidad para concretar el pago? 🐜🌿`;
+
+            const url = `https://wa.me/593979010077?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
         }
     </script>
 </body>
