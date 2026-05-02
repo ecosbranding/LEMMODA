@@ -3,127 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | 2026 Official Site</title>
+    <title>LEM MODA | Streetwear Luxury 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --green: #6DAE5A; --brown: #5C4033; }
+        :root { --green: #6DAE5A; }
         body { background: #ffffff; color: #111; font-family: 'Urbanist', sans-serif; scroll-behavior: smooth; }
         .accent-green { color: var(--green); }
-        .bg-green { background-color: var(--green); }
-        .bento-item { background: #fdfdfd; border-radius: 24px; overflow: hidden; position: relative; transition: 0.5s; border: 1px solid #f0f0f0; }
-        .bento-item:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
+        .bento-item { background: #fcfcfc; border-radius: 28px; overflow: hidden; position: relative; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid #f0f0f0; }
+        .bento-item:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.06); }
+        .video-container video { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
 
-    <nav class="flex justify-between items-center px-6 md:px-10 py-6 sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+    <nav class="flex justify-between items-center px-8 py-6 sticky top-0 bg-white/80 backdrop-blur-xl z-[100] border-b border-gray-50">
         <div class="text-2xl font-black tracking-tighter uppercase">Lem <span class="accent-green">Moda</span></div>
-        <div class="hidden md:flex space-x-8 items-center">
-            <a href="#adn" class="text-[10px] font-bold uppercase tracking-widest hover:text-[#6DAE5A]">Nosotros</a>
-            <a href="#lanzamientos" class="text-[10px] font-bold uppercase tracking-widest hover:text-[#6DAE5A]">Lanzamientos</a>
-            <a href="#catalogo" class="bg-black text-white px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] hover:bg-[#6DAE5A] transition">CATÁLOGO</a>
+        <div class="hidden md:flex space-x-10 items-center">
+            <a href="#adn" class="text-[10px] font-black uppercase tracking-[0.2em] hover:text-[#6DAE5A] transition">Nosotros</a>
+            <a href="#lanzamientos" class="text-[10px] font-black uppercase tracking-[0.2em] hover:text-[#6DAE5A] transition">Lanzamientos</a>
+            <a href="#catalogo" class="bg-black text-white px-8 py-2.5 rounded-full text-[10px] font-black tracking-[0.2em] hover:bg-[#6DAE5A] transition shadow-lg shadow-black/10">CATÁLOGO</a>
         </div>
     </nav>
 
-    <header class="min-h-screen flex flex-col md:flex-row items-center border-b border-gray-100">
-        <div class="md:w-1/2 p-10 lg:p-24">
-            <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-4">Est. 2019 / Ecuador</p>
-            <h1 class="text-6xl lg:text-9xl font-black leading-none tracking-tighter mb-6 uppercase">Tu <br>Identi-<br><span class="text-gray-200">dad.</span></h1>
-            <p class="text-gray-500 italic text-lg max-w-sm">Elevando el streetwear a una expresión de lujo y propósito.</p>
+    <header class="min-h-screen flex flex-col md:flex-row items-center overflow-hidden">
+        <div class="md:w-1/2 p-10 lg:p-24 z-10">
+            <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-300 mb-6 block">Quito • Ambato • Medellín</span>
+            <h1 class="text-7xl lg:text-[10rem] font-black leading-[0.85] tracking-tighter mb-8 uppercase">Tu <br>Iden-<br><span class="text-gray-100">tidad.</span></h1>
+            <p class="text-gray-500 italic text-xl max-w-sm border-l-2 border-black pl-6">Elevando el streetwear a una expresión de lujo y propósito.</p>
         </div>
-        <div class="md:w-1/2 h-[60vh] md:h-screen w-full">
+        <div class="md:w-1/2 h-[70vh] md:h-screen w-full grayscale hover:grayscale-0 transition duration-1000">
             <video autoplay muted loop playsinline class="w-full h-full object-cover">
                 <source src="1000813159.mp4" type="video/mp4">
             </video>
         </div>
     </header>
 
-    <section id="adn" class="py-24 px-6 md:px-10 bg-zinc-50">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-xs font-black uppercase tracking-[0.5em] accent-green mb-6 italic">Corporativo</h2>
-                <h3 class="text-5xl font-black tracking-tighter mb-10 leading-tight">DETERMINACIÓN <br>& ADAPTABILIDAD.</h3>
+    <section id="adn" class="py-32 px-10 bg-zinc-50/50">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="relative">
+                <div class="absolute -top-20 -left-10 text-[12rem] font-black text-gray-100/50 select-none">LEM</div>
+                <h3 class="text-5xl font-black tracking-tighter mb-12 relative z-10">DETERMINACIÓN <br>& ADAPTABILIDAD.</h3>
                 <div class="space-y-12">
-                    <div>
-                        <h4 class="font-bold uppercase text-xs mb-3 text-black">Misión</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed border-l-2 border-[#6DAE5A] pl-4">Inspirar identidad propia a través de prendas de alta calidad que fusionan el arte urbano con la sostenibilidad ambiental.</p>
+                    <div class="group">
+                        <h4 class="font-black uppercase text-[11px] mb-3 tracking-widest accent-green group-hover:translate-x-2 transition-transform">Nuestra Misión</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Inspirar identidad propia a través de prendas de alta calidad que fusionan el arte urbano con la sostenibilidad ambiental.</p>
                     </div>
-                    <div>
-                        <h4 class="font-bold uppercase text-xs mb-3 text-black">Visión 2026</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed border-l-2 border-[#6DAE5A] pl-4">Ser la marca referente de Luxury Streetwear en Latinoamérica, expandiendo nuestra huella desde Quito hacia el mundo con procesos éticos.</p>
+                    <div class="group">
+                        <h4 class="font-black uppercase text-[11px] mb-3 tracking-widest accent-green group-hover:translate-x-2 transition-transform">Visión 2026</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Ser la marca referente de Luxury Streetwear en Latinoamérica, proyectando nuestra esencia desde Ecuador al mundo.</p>
                     </div>
                 </div>
             </div>
-            <div class="bg-white p-12 rounded-[2.5rem] shadow-xl shadow-gray-200/50 text-center border border-gray-100">
-                <p class="text-3xl md:text-4xl font-light italic text-gray-800 leading-tight">
+            <div class="bg-white p-16 rounded-[3rem] shadow-2xl shadow-gray-100 text-center border border-gray-100 relative overflow-hidden">
+                <img src="1000813631.jpg" class="absolute top-0 right-0 w-32 opacity-5" alt="Background Ant">
+                <p class="text-4xl font-light italic text-gray-800 leading-tight mb-8">
                     "Nuestra esencia se forja en la <strong>hormiga</strong> y la <strong>hoja</strong>."
                 </p>
-                <p class="mt-6 text-[10px] font-black uppercase tracking-[0.3em] text-[#5C4033]">ADN LEM MODA</p>
+                <span class="text-[10px] font-black uppercase tracking-[0.4em] bg-black text-white px-6 py-2 rounded-full">ADN LEM MODA</span>
             </div>
         </div>
     </section>
 
-    <section id="lanzamientos" class="py-24 px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-5xl md:text-7xl font-black tracking-tighter uppercase italic">Lanzamientos <span class="text-gray-200">2026</span></h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            <div class="bento-item md:col-span-2 md:row-span-2 h-[600px]">
-                <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                    <source src="1000813645.mp4" type="video/mp4">
-                </video>
-                <div class="absolute bottom-8 left-8 text-white bg-black/40 backdrop-blur-md p-6 rounded-2xl">
-                    <p class="text-[10px] font-bold uppercase tracking-widest mb-1">Trending Now</p>
-                    <h4 class="text-3xl font-black uppercase italic">Navy Dayslay Kit</h4>
-                </div>
-            </div>
-            <div class="bento-item md:col-span-2 h-[280px] bg-[#6DAE5A] p-10 flex items-center">
-                <p class="text-white text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">La evolución del lujo sostenible.</p>
-            </div>
-            <div class="bento-item h-[296px] bg-gray-100">
-                <div class="p-8">
-                    <h4 class="font-black uppercase text-xl">Street <br>Cargo</h4>
-                    <p class="text-[10px] uppercase font-bold mt-2 text-gray-400">Próximamente</p>
-                </div>
-            </div>
-            <div class="bento-item h-[296px] bg-gray-100 flex items-center justify-center p-6 text-center">
-                 <img src="1000813631.jpg" class="w-32 opacity-20 grayscale" alt="Logo">
-            </div>
-        </div>
-    </section>
-
-    <section id="catalogo" class="py-24 px-6 md:px-10 border-t border-gray-100">
+    <section id="lanzamientos" class="py-32 px-6">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-6xl font-black mb-20 tracking-tighter uppercase italic">Catálogo <span class="accent-green">Completo</span></h2>
-
-            <div class="mb-24">
-                <div class="flex items-center space-x-4 mb-12">
-                    <span class="text-4xl font-black text-gray-100">01</span>
-                    <h3 class="font-black uppercase text-xl tracking-widest border-b-2 border-black pb-2">Hoodies & Oversized</h3>
+            <div class="mb-20">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em] text-center mb-4 text-[#6DAE5A]">Próximamente</p>
+                <h2 class="text-6xl md:text-8xl font-black text-center tracking-tighter uppercase italic">Lanzamientos <span class="text-gray-200">2026</span></h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="bento-item md:col-span-2 md:row-span-2 h-[650px]">
+                    <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                        <source src="1000813645.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 text-white">
+                        <p class="text-[10px] font-bold uppercase tracking-widest mb-2 accent-green">Drop #01</p>
+                        <h4 class="text-4xl font-black uppercase italic tracking-tighter">Navy Dayslay Kit</h4>
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                
+                <div class="bento-item md:col-span-2 h-[310px] bg-[#6DAE5A] p-12 flex items-center">
+                    <p class="text-white text-4xl font-black uppercase tracking-tighter leading-none">La evolución <br>del lujo <br>sostenible.</p>
+                </div>
+                
+                <div class="bento-item h-[310px] bg-zinc-900 text-white p-8 flex flex-col justify-between">
+                    <h4 class="font-black uppercase text-xl italic tracking-widest">Street <br>Cargo</h4>
+                    <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center">→</div>
+                </div>
+                
+                <div class="bento-item h-[310px] flex items-center justify-center bg-gray-50">
+                    <img src="1000813631.jpg" class="w-24 grayscale opacity-30" alt="Logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalogo" class="py-32 px-10 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-7xl font-black mb-24 tracking-tighter uppercase italic text-center md:text-left">Catálogo <span class="accent-green">Completo</span></h2>
+
+            <div class="mb-32">
+                <div class="flex items-baseline space-x-6 mb-12">
+                    <span class="text-6xl font-black text-gray-100">01</span>
+                    <h3 class="font-black uppercase text-2xl tracking-[0.2em]">Hoodies & Oversized</h3>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
                     <div class="group cursor-pointer">
-                        <div class="aspect-[3/4] bg-gray-50 rounded-2xl overflow-hidden mb-4 border border-gray-100">
-                            <img src="tu-imagen-h1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Hoodie">
+                        <div class="aspect-[3/4] bg-zinc-50 rounded-3xl overflow-hidden mb-6 border border-gray-100">
+                            <img src="h1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Prenda">
                         </div>
-                        <h5 class="font-black text-xs uppercase tracking-tight">Oversized Zip-Up</h5>
+                        <h5 class="font-black text-xs uppercase mb-1">Oversized Zip-Up</h5>
                         <p class="text-gray-400 text-[10px] font-bold">$85.00</p>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-24">
-                <div class="flex items-center space-x-4 mb-12">
-                    <span class="text-4xl font-black text-gray-100">02</span>
-                    <h3 class="font-black uppercase text-xl tracking-widest border-b-2 border-black pb-2">Pantalones & Cargos</h3>
+            <div>
+                <div class="flex items-baseline space-x-6 mb-12">
+                    <span class="text-6xl font-black text-gray-100">02</span>
+                    <h3 class="font-black uppercase text-2xl tracking-[0.2em]">Pantalones & Cargos</h3>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
                     <div class="group cursor-pointer">
-                        <div class="aspect-[3/4] bg-gray-50 rounded-2xl overflow-hidden mb-4 border border-gray-100">
-                            <img src="tu-imagen-p1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Pants">
+                        <div class="aspect-[3/4] bg-zinc-50 rounded-3xl overflow-hidden mb-6 border border-gray-100">
+                            <img src="p1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Prenda">
                         </div>
-                        <h5 class="font-black text-xs uppercase tracking-tight">Tech Cargo Navy</h5>
+                        <h5 class="font-black text-xs uppercase mb-1">Tech Cargo Navy</h5>
                         <p class="text-gray-400 text-[10px] font-bold">$110.00</p>
                     </div>
                 </div>
@@ -131,31 +138,31 @@
         </div>
     </section>
 
-    <footer class="bg-[#111] text-white py-20 px-10">
+    <footer class="bg-black text-white pt-32 pb-12 px-10">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between gap-12 mb-16">
-                <div class="md:w-1/3">
-                    <h3 class="text-4xl font-black italic mb-6">LEM MODA</h3>
-                    <p class="text-gray-500 text-[10px] uppercase tracking-widest leading-loose">
-                        Diseño independiente desde 2015. Orgullosamente fabricado en Ambato, Ecuador.
+            <div class="grid md:grid-cols-3 gap-20 mb-24">
+                <div>
+                    <h3 class="text-5xl font-black italic mb-8 tracking-tighter">LEM MODA</h3>
+                    <p class="text-gray-500 text-[10px] uppercase tracking-[0.3em] leading-loose">
+                        Est. 2015. Fabricación ética en Ambato, Ecuador. Consultoría por ORCA Studios.
                     </p>
                 </div>
-                <div class="grid grid-cols-2 gap-10 md:w-2/3">
-                    <div>
-                        <h4 class="text-[10px] font-black uppercase tracking-[0.3em] mb-6 accent-green">Legal</h4>
-                        <ul class="text-[10px] text-gray-400 space-y-3 uppercase tracking-widest">
-                            <li>© 2026 Todos los derechos reservados.</li>
-                            <li>Víctor Carvajal - ORCA Studios.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-[10px] font-black uppercase tracking-[0.3em] mb-6 accent-green">Ubicación</h4>
-                        <p class="text-[10px] text-gray-400 uppercase tracking-widest leading-loose">Quito - Ecuador<br>Ambato - Fábrica Mayorista</p>
-                    </div>
+                <div class="space-y-4">
+                    <h4 class="text-[11px] font-black uppercase tracking-widest accent-green mb-6">Políticas</h4>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest">© 2026 TODOS LOS DERECHOS RESERVADOS.</p>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest">VÍCTOR CARVAJAL - DIRECTOR CREATIVO.</p>
+                </div>
+                <div>
+                    <h4 class="text-[11px] font-black uppercase tracking-widest accent-green mb-6">Sedes</h4>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest leading-loose">Quito - Pichincha<br>Ambato - Tungurahua<br>Medellín - Colombia</p>
                 </div>
             </div>
-            <div class="border-t border-zinc-800 pt-10 text-center">
-                <p class="text-[8px] text-zinc-600 uppercase tracking-[0.5em]">Bogotá • Medellín • Quito • Ambato</p>
+            <div class="border-t border-zinc-900 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex space-x-6">
+                    <a href="#" class="text-[10px] text-zinc-600 hover:text-white uppercase tracking-widest transition">Instagram</a>
+                    <a href="#" class="text-[10px] text-zinc-600 hover:text-white uppercase tracking-widest transition">TikTok</a>
+                </div>
+                <p class="text-[8px] text-zinc-700 uppercase tracking-[1em]">IDENTITY • POWER • NATURE</p>
             </div>
         </div>
     </footer>
