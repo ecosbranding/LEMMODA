@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEM MODA | High-End Luxury Streetwear 2026</title>
+    <title>LEM MODA | High-End Streetwear Division 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -12,8 +12,8 @@
             --brand-green: #6DAE5A;
             --brand-black: #0a0a0a;
             --brand-white: #ffffff;
-            --bg-gray: #f4f4f4;
-            --transition-smooth: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --bg-gray: #f8f8f8;
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         body {
@@ -25,429 +25,454 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Corrección de Layout Móvil --- */
-        .page-section { min-height: 100vh; width: 100%; display: none; }
-        .active { display: block !important; animation: fadeIn 0.8s ease; }
+        /* --- Animaciones de Transición --- */
+        .section-fade { display: none; opacity: 0; transform: translateY(20px); transition: var(--transition); }
+        .section-fade.active { display: block; opacity: 1; transform: translateY(0); }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Header Optimizado --- */
+        /* --- Header Premium --- */
         .glass-header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
             z-index: 1000;
         }
 
-        /* --- Hero Section --- */
-        .hero-visual {
+        /* --- Hero Section Visual --- */
+        .hero-container {
+            height: 95vh;
             position: relative;
-            height: 100vh;
-            width: 100%;
             background: #000;
             overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
         }
 
         .hero-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        .hero-content {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            z-index: 10;
-        }
-
-        /* --- Catálogo Grid 2x2 en Móvil / 4x4 en Desktop --- */
-        .main-grid {
+        /* --- Catálogo Grid 2x2 Móvil / 4x4 Desktop --- */
+        .catalog-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            padding: 10px;
+            padding: 15px;
         }
 
         @media (min-width: 1024px) {
-            .main-grid {
+            .catalog-grid {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 30px;
+                gap: 35px;
                 padding: 40px;
             }
         }
 
-        .product-card {
-            background: var(--brand-white);
-            border-radius: 30px;
-            padding: 12px;
-            transition: var(--transition-smooth);
+        .card {
+            background: white;
+            border-radius: 35px;
+            padding: 15px;
+            transition: var(--transition);
             border: 1px solid transparent;
             display: flex;
             flex-direction: column;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
             border-color: #eee;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
         }
 
-        .image-box {
+        .img-container {
             width: 100%;
-            aspect-ratio: 4/5;
-            border-radius: 22px;
+            aspect-ratio: 3/4;
+            border-radius: 25px;
             overflow: hidden;
             background: var(--bg-gray);
+            position: relative;
         }
 
-        .image-box img {
+        .img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* --- Botones y Selectores --- */
-        .btn-primary {
-            background: var(--brand-black);
-            color: white;
-            border-radius: 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition-smooth);
-        }
-
-        .btn-primary:hover {
-            background: var(--brand-green);
-            transform: scale(1.02);
-        }
-
-        .size-chip {
-            padding: 8px 12px;
-            border: 1px solid #eee;
+        /* --- UI de Selectores --- */
+        .size-btn {
+            border: 1px solid #e5e5e5;
+            padding: 6px 0;
+            width: 40px;
             border-radius: 12px;
             font-size: 10px;
-            font-weight: 900;
+            font-weight: 800;
+            text-align: center;
             cursor: pointer;
+            transition: 0.3s;
         }
 
-        .size-chip.selected {
+        .size-btn.selected {
             background: var(--brand-black);
             color: white;
             border-color: var(--brand-black);
         }
 
-        /* --- Panel de Carrito (Corrección de Solapamiento) --- */
-        #side-cart {
+        .color-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .color-circle.selected {
+            border-color: var(--brand-green);
+            transform: scale(1.1);
+        }
+
+        /* --- Carrito Side-Panel --- */
+        #cart-panel {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
             height: 100vh;
             background: white;
             z-index: 2000;
-            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: right 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
-            box-shadow: -15px 0 50px rgba(0,0,0,0.1);
+            box-shadow: -20px 0 80px rgba(0,0,0,0.15);
         }
 
-        #side-cart.open { right: 0; }
+        #cart-panel.open { right: 0; }
 
-        .cart-header { padding: 30px; border-bottom: 1px solid #f0f0f0; }
-        .cart-body { flex: 1; overflow-y: auto; padding: 20px; }
-        .cart-footer { padding: 30px; background: #fafafa; border-top: 1px solid #f0f0f0; }
-
-        .cart-item-ui {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 20px;
-            border: 1px solid #f0f0f0;
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            backdrop-blur: 5px;
+            z-index: 1500;
+            display: none;
         }
+
+        .cart-overlay.active { display: block; }
 
         /* Estilo para los filtros */
-        .filter-pill {
-            padding: 12px 25px;
-            border-radius: 15px;
+        .filter-chip {
+            padding: 10px 24px;
+            border-radius: 14px;
             font-size: 11px;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
-            background: #f5f5f5;
+            letter-spacing: 1px;
+            background: #f0f0f0;
             color: #999;
-            transition: 0.3s;
+            transition: 0.4s;
+            white-space: nowrap;
         }
 
-        .filter-pill.active {
-            background: white;
-            color: black;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        .filter-chip.active {
+            background: var(--brand-black);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 w-full glass-header py-5 px-6 md:px-12 flex justify-between items-center">
-        <div class="text-2xl font-black tracking-tighter uppercase cursor-pointer" onclick="goTo('home')">
+    <div id="overlay" class="cart-overlay" onclick="toggleCart()"></div>
+
+    <nav class="fixed top-0 w-full glass-header py-5 px-8 md:px-16 flex justify-between items-center">
+        <div class="text-3xl font-black tracking-tighter uppercase cursor-pointer" onclick="navigate('home')">
             LEM <span class="text-[#6DAE5A]">MODA</span>
         </div>
         
-        <div class="hidden lg:flex space-x-10 text-[10px] font-black uppercase tracking-widest">
-            <a href="#" onclick="goTo('home')">Inicio</a>
-            <a href="#" onclick="goTo('shop')">Tienda</a>
-            <a href="#" onclick="goTo('adn')">Esencia</a>
+        <div class="hidden lg:flex space-x-12 text-[10px] font-black uppercase tracking-[0.3em]">
+            <a href="javascript:void(0)" onclick="navigate('home')" class="hover:text-[#6DAE5A]">Inicio</a>
+            <a href="javascript:void(0)" onclick="navigate('shop')" class="hover:text-[#6DAE5A]">Catálogo</a>
+            <a href="javascript:void(0)" onclick="navigate('adn')" class="hover:text-[#6DAE5A]">Esencia</a>
         </div>
 
-        <div class="flex items-center gap-4">
-            <button onclick="openCart()" class="relative p-2 bg-gray-50 rounded-full">
-                <span>🛒</span>
-                <span id="badge" class="absolute -top-1 -right-1 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
+        <div class="flex items-center gap-6">
+            <button onclick="toggleCart()" class="relative group">
+                <span class="text-xl">🛒</span>
+                <span id="cart-badge" class="absolute -top-2 -right-2 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
             </button>
-            <button onclick="goTo('shop')" class="bg-black text-white px-6 py-3 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg">Shop</button>
+            <button onclick="navigate('shop')" class="bg-black text-white px-8 py-3 rounded-full text-[9px] font-black uppercase tracking-widest shadow-xl transform active:scale-95 transition">Shop 2026</button>
         </div>
     </nav>
 
-    <div id="cart-overlay" class="fixed inset-0 bg-black/40 z-[1500] hidden backdrop-blur-sm" onclick="openCart()"></div>
-    <div id="side-cart">
-        <div class="cart-header flex justify-between items-center">
-            <h3 class="text-2xl font-black italic uppercase">Tu Selección</h3>
-            <button onclick="openCart()" class="text-xl">✕</button>
+    <div id="cart-panel">
+        <div class="p-8 border-b flex justify-between items-center">
+            <h3 class="text-2xl font-black italic uppercase">Bolsa de Compra</h3>
+            <button onclick="toggleCart()" class="text-xl">✕</button>
         </div>
-        <div id="cart-items-container" class="cart-body">
-            <p id="msg-empty" class="text-center text-gray-400 mt-20 italic">No hay piezas seleccionadas aún.</p>
+        <div id="cart-content" class="flex-grow overflow-y-auto p-8">
+            <p id="cart-empty" class="text-center text-gray-400 mt-20 italic">La bolsa está vacía. Selecciona una pieza 🐜</p>
         </div>
-        <div class="cart-footer">
-            <div class="flex justify-between items-center mb-6">
+        <div class="p-8 bg-zinc-50 border-t">
+            <div class="flex justify-between items-center mb-8">
                 <div>
-                    <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Subtotal</p>
-                    <p id="total-price" class="text-4xl font-black">$0.00</p>
+                    <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Total Estimado</p>
+                    <p id="cart-total" class="text-4xl font-black">$0.00</p>
                 </div>
                 <p class="text-[8px] font-bold text-zinc-300 uppercase">IVA Incluido</p>
             </div>
-            <button onclick="checkout()" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-[#6DAE5A] transition shadow-2xl">
-                Confirmar WhatsApp 🐜
+            <button onclick="checkout()" class="w-full bg-black text-white py-6 rounded-3xl font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-[#6DAE5A] transition shadow-2xl">
+                Enviar a WhatsApp 🐜
             </button>
         </div>
     </div>
 
-    <section id="home" class="page-section active">
-        <div class="hero-visual">
+    <section id="home" class="section-fade active">
+        <div class="hero-container">
             <video autoplay muted loop playsinline class="hero-video">
                 <source src="1000813159.mp4" type="video/mp4">
             </video>
-            <div class="hero-content">
-                <p class="text-[9px] font-black tracking-[0.6em] uppercase mb-6 bg-black/20 px-4 py-2 rounded-full">New Season 2026</p>
-                <h1 class="text-6xl md:text-[10rem] font-black leading-[0.85] tracking-tighter uppercase mb-10">
-                    NUEVA<br><span class="text-[#6DAE5A]">ERA</span>
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
+                <span class="text-[10px] font-black tracking-[0.7em] text-white/60 uppercase mb-8">Selected Mod / Ambato - Quito</span>
+                <h1 class="text-6xl md:text-[10rem] font-black leading-[0.85] tracking-tighter text-white uppercase mb-12">
+                    NUEVA<br><span class="text-[#6DAE5A]">VISIÓN</span>
                 </h1>
-                <div class="flex flex-col md:flex-row gap-4 w-full max-w-xs md:max-w-none justify-center">
-                    <button onclick="goTo('shop')" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase tracking-widest text-[11px] shadow-2xl">Descubrir</button>
-                    <button onclick="goTo('adn')" class="border-2 border-white/40 text-white px-10 py-5 rounded-full font-black uppercase tracking-widest text-[11px] backdrop-blur-sm">Filosofía 🐜</button>
+                <div class="flex flex-col md:flex-row gap-5">
+                    <button onclick="navigate('shop')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest text-[11px] shadow-2xl">Ver Colección</button>
+                    <button onclick="navigate('adn')" class="border-2 border-white/30 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-[11px] backdrop-blur-md">Nuestra Esencia</button>
                 </div>
             </div>
         </div>
 
-        <div class="py-24 px-8 max-w-6xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-6">
-                    <h2 class="text-5xl font-black uppercase italic leading-none">Identidad <br> de <span class="text-[#6DAE5A]">Origen.</span></h2>
-                    <p class="text-gray-500 leading-relaxed italic text-lg">Cada prenda es concebida con el rigor técnico de nuestra planta **Selected Mod** en **Ambato**, para ser exhibida con orgullo en nuestra tienda de **Quito**.</p>
-                </div>
-                <div class="rounded-[3rem] overflow-hidden shadow-2xl rotate-2">
-                    <video autoplay muted loop playsinline class="w-full h-80 object-cover">
-                        <source src="1000813645.mp4" type="video/mp4">
-                    </video>
-                </div>
+        <div class="py-32 px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="space-y-8">
+                <h2 class="text-6xl font-black uppercase italic leading-none">Cultura <br> de <span class="text-[#6DAE5A]">Diseño.</span></h2>
+                <p class="text-gray-500 text-lg leading-relaxed italic">De nuestra fábrica en **Ambato** a las calles de **Quito**. LEM MODA representa el punto de encuentro entre la manufactura ética y el lujo urbano 2026.</p>
+                <button onclick="navigate('shop')" class="text-[10px] font-black uppercase tracking-[0.4em] border-b-2 border-[#6DAE5A] pb-2">Explorar Productos</button>
+            </div>
+            <div class="rounded-[4rem] overflow-hidden shadow-2xl rotate-1">
+                <img src="1000813670.jpg" class="w-full h-[500px] object-cover">
             </div>
         </div>
     </section>
 
-    <section id="shop" class="page-section pt-32 pb-20">
-        <div class="px-8 max-w-[1400px] mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+    <section id="shop" class="section-fade pt-32 pb-20">
+        <div class="px-8 max-w-[1500px] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-10">
                 <div>
-                    <h2 class="text-7xl font-black uppercase italic tracking-tighter leading-none">Shop <br><span class="text-[#6DAE5A]">Online.</span></h2>
-                    <p class="text-zinc-400 font-black uppercase text-[10px] tracking-[0.4em] mt-4">Luxury Streetwear Edition</p>
+                    <h2 class="text-7xl font-black uppercase italic tracking-tighter leading-none">Shop <br><span class="text-[#6DAE5A]">Global.</span></h2>
+                    <p class="text-zinc-400 font-black uppercase text-[10px] tracking-[0.4em] mt-4">High-End Streetwear Division</p>
                 </div>
-                <div class="flex overflow-x-auto w-full md:w-auto pb-4 md:pb-0 gap-3 scrollbar-hide">
-                    <button class="filter-pill active">Todos</button>
-                    <button class="filter-pill">Hoodies</button>
-                    <button class="filter-pill">Cargos</button>
-                    <button class="filter-pill">Tees</button>
+                <div class="flex overflow-x-auto w-full md:w-auto pb-4 gap-3 no-scrollbar">
+                    <button onclick="filter('Todos')" class="filter-chip active">Todos</button>
+                    <button onclick="filter('Hoodies')" class="filter-chip">Hoodies</button>
+                    <button onclick="filter('Pantalones')" class="filter-chip">Pantalones</button>
+                    <button onclick="filter('Camisetas')" class="filter-chip">Camisetas</button>
                 </div>
             </div>
 
-            <div id="grid-container" class="main-grid">
+            <div id="main-catalog" class="catalog-grid">
                 </div>
         </div>
     </section>
 
-    <section id="adn" class="page-section bg-zinc-950 text-white pt-40 pb-40">
-        <div class="max-w-4xl mx-auto px-10 text-center">
-            <span class="text-[#6DAE5A] font-black tracking-[0.5em] text-[10px] uppercase mb-10 block">Nuestra Esencia</span>
-            <h2 class="text-6xl md:text-8xl font-black italic uppercase leading-none mb-12">"La esencia se forja en la hormiga y la hoja."</h2>
-            <p class="text-zinc-500 text-xl font-light italic leading-relaxed mb-20">No creemos en la moda efímera. Creemos en piezas que resisten el tiempo y definen la cultura urbana de Ecuador.</p>
+    <section id="adn" class="section-fade bg-zinc-950 text-white pt-40 pb-40">
+        <div class="max-w-5xl mx-auto px-10">
+            <div class="text-center mb-24">
+                <span class="text-[#6DAE5A] font-black tracking-[0.6em] text-[10px] uppercase mb-8 block">Nuestra Esencia</span>
+                <h2 class="text-6xl md:text-8xl font-black italic uppercase leading-none mb-12">"La esencia se forja en la hormiga y la hoja."</h2>
+                <p class="text-zinc-500 text-xl font-light italic leading-relaxed max-w-2xl mx-auto">Creemos en el streetwear que trasciende. Calidad premium desde la fábrica **Selected Mod** en Ambato.</p>
+            </div>
             
-            <div class="grid md:grid-cols-2 gap-10 text-left">
-                <div class="p-10 bg-zinc-900/50 rounded-[2.5rem] border border-white/5">
-                    <h4 class="text-xl font-black uppercase mb-4 text-[#6DAE5A]">Misión</h4>
-                    <p class="text-zinc-400 text-sm font-medium italic">Liderar el streetwear de lujo en Latinoamérica para 2026, exportando la calidad textil de Ambato al mundo.</p>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="p-12 bg-zinc-900 rounded-[3rem] border border-white/5 group hover:border-[#6DAE5A] transition">
+                    <h4 class="text-2xl font-black uppercase mb-6 text-[#6DAE5A]">Misión 2026</h4>
+                    <p class="text-zinc-400 leading-relaxed italic">Liderar la industria textil de lujo en Ecuador, demostrando que el diseño local tiene el estándar global necesario para conquistar cualquier mercado.</p>
                 </div>
-                <div class="p-10 bg-zinc-900/50 rounded-[2.5rem] border border-white/5">
-                    <h4 class="text-xl font-black uppercase mb-4 text-[#6DAE5A]">Fábrica</h4>
-                    <p class="text-zinc-400 text-sm font-medium italic">Operamos bajo el sello de **Selected Mod**, garantizando procesos de fabricación ética y tecnología de punta.</p>
+                <div class="p-12 bg-zinc-900 rounded-[3rem] border border-white/5 group hover:border-[#6DAE5A] transition">
+                    <h4 class="text-2xl font-black uppercase mb-6 text-[#6DAE5A]">Manufactura</h4>
+                    <p class="text-zinc-400 leading-relaxed italic">Operamos con tecnología de punta en **Selected Mod**, garantizando que cada costura sea perfecta antes de llegar a nuestra tienda en **Quito**.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-white py-20 px-10 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+    <footer class="bg-white py-24 px-10 border-t">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
             <div>
-                <h4 class="text-3xl font-black uppercase italic">LEM MODA</h4>
-                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Orgullo Ecuatoriano 2026</p>
+                <h4 class="text-4xl font-black uppercase italic">LEM MODA</h4>
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-4">The Ant and The Leaf Identity</p>
             </div>
-            <div class="flex gap-8 text-[9px] font-black uppercase tracking-widest">
-                <a href="#">Instagram</a>
-                <a href="#">TikTok</a>
-                <a href="#">WhatsApp</a>
+            <div class="grid grid-cols-2 gap-20">
+                <div class="flex flex-col gap-4 text-[10px] font-black uppercase tracking-widest">
+                    <span class="text-[#6DAE5A] mb-2">Social</span>
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                    <a href="#">Facebook</a>
+                </div>
+                <div class="flex flex-col gap-4 text-[10px] font-black uppercase tracking-widest">
+                    <span class="text-[#6DAE5A] mb-2">Contacto</span>
+                    <a href="#">Quito Store</a>
+                    <a href="#">Selected Mod</a>
+                    <a href="#">WhatsApp</a>
+                </div>
             </div>
-            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-widest text-center">Desarrollado para Presentación Corporativa - Víctor Carvajal</p>
+        </div>
+        <div class="mt-24 pt-10 border-t border-gray-100 flex justify-between items-center">
+            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-[0.5em]">© 2026 Víctor Carvajal - Director de Marketing MyS Models</p>
+            <p class="text-[9px] text-gray-300 font-bold uppercase tracking-widest">Ecuador</p>
         </div>
     </footer>
 
     <script>
-        // --- BASE DE DATOS DE PRODUCTOS ---
+        // --- BASE DE DATOS DE INVENTARIO ---
         const inventory = [
-            { id: 1, name: 'Navy Dayslay Hoodie', price: 85, img: '1000813647.jpeg', cat: 'Hoodies' },
-            { id: 2, name: 'Tech Cargo Graphite', price: 115, img: '1000813649.jpg', cat: 'Cargos' },
-            { id: 3, name: 'Leaf Zip-Up Pink', price: 95, img: '1000813651.jpg', cat: 'Hoodies' },
-            { id: 4, name: 'Oversized Black Leaf', price: 45, img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500', cat: 'Tees' },
-            { id: 5, name: 'Cream Essential Tee', price: 40, img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500', cat: 'Tees' },
-            { id: 6, name: 'Urban Jacket 2026', price: 160, img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500', cat: 'Jackets' },
-            { id: 7, name: 'Grey Acid Cargo', price: 120, img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500', cat: 'Cargos' },
-            { id: 8, name: 'Midnight Hoodie', price: 90, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500', cat: 'Hoodies' }
+            { id: 1, name: 'Navy Dayslay Hoodie', price: 85, img: '1000813647.jpeg', cat: 'Hoodies', colors: ['#0c1a3e', '#000', '#eee'] },
+            { id: 2, name: 'Tech Cargo Graphite', price: 115, img: '1000813649.jpg', cat: 'Pantalones', colors: ['#2c2c2c', '#000'] },
+            { id: 3, name: 'Leaf Zip-Up Pink', price: 95, img: '1000813651.jpg', cat: 'Hoodies', colors: ['#ffc0cb', '#000'] },
+            { id: 4, name: 'Oversized Black Leaf', price: 45, img: '1000813670.jpg', cat: 'Camisetas', colors: ['#000', '#fff'] },
+            { id: 5, name: 'Grey Urban Hoodie', price: 90, img: '1000813671.jpg', cat: 'Hoodies', colors: ['#808080', '#000'] },
+            { id: 6, name: 'Beige Cargo 2026', price: 110, img: '1000813672.jpg', cat: 'Pantalones', colors: ['#f5f5dc', '#000'] },
+            { id: 7, name: 'Acid Wash Tee', price: 50, img: '1000813673.jpg', cat: 'Camisetas', colors: ['#444', '#222'] },
+            { id: 8, name: 'Midnight Jacket', price: 155, img: '1000813674.jpg', cat: 'Pantalones', colors: ['#000'] }
         ];
 
         let cart = [];
 
-        // --- NAVEGACIÓN ---
-        function goTo(id) {
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+        // --- SISTEMA DE NAVEGACIÓN ---
+        function navigate(id) {
+            document.querySelectorAll('.section-fade').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
-            if(id === 'shop') renderProducts();
-            if(document.getElementById('side-cart').classList.contains('open')) openCart();
+            if(id === 'shop') renderProducts(inventory);
+            if(document.getElementById('cart-panel').classList.contains('open')) toggleCart();
         }
 
-        // --- RENDERIZADO DE TIENDA ---
-        function renderProducts() {
-            const container = document.getElementById('grid-container');
-            container.innerHTML = inventory.map(p => `
-                <div class="product-card">
-                    <div class="image-box">
-                        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/400x500?text=LEM+MODA'">
-                        <span class="absolute top-3 left-3 bg-white/90 px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">${p.cat}</span>
+        // --- RENDERIZADO DEL CATÁLOGO ---
+        function renderProducts(items) {
+            const container = document.getElementById('main-catalog');
+            container.innerHTML = items.map(p => `
+                <div class="card">
+                    <div class="img-container shadow-lg">
+                        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x800?text=LEM+MODA'">
+                        <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest text-zinc-500">${p.cat}</div>
                     </div>
-                    <div class="mt-5 flex flex-col flex-1">
-                        <h4 class="text-[11px] font-black uppercase leading-tight mb-1">${p.name}</h4>
-                        <p class="text-[#6DAE5A] font-black text-xs mb-4">$${p.price.toFixed(2)}</p>
+                    <div class="mt-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-[11px] font-black uppercase leading-tight w-2/3">${p.name}</h4>
+                            <p class="text-[#6DAE5A] font-black text-xs">$${p.price}.00</p>
+                        </div>
                         
-                        <div class="flex gap-1 mb-4" id="sizes-${p.id}">
-                            <div class="size-chip" onclick="selS(this)">S</div>
-                            <div class="size-chip" onclick="selS(this)">M</div>
-                            <div class="size-chip" onclick="selS(this)">L</div>
+                        <div class="flex gap-2 mt-2 mb-4" id="color-box-${p.id}">
+                            ${p.colors.map((c, index) => `
+                                <div class="color-circle ${index === 0 ? 'selected' : ''}" style="background-color: ${c}" onclick="selColor(this)"></div>
+                            `).join('')}
                         </div>
 
-                        <button onclick="buy(${p.id})" class="mt-auto w-full bg-black text-white py-3 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition">
-                            Añadir
+                        <div class="flex gap-1.5 mb-6 overflow-x-auto no-scrollbar" id="size-box-${p.id}">
+                            ${['XS','S','M','L','XL','XXL'].map(t => `
+                                <div class="size-btn" onclick="selSize(this)">${t}</div>
+                            `).join('')}
+                        </div>
+
+                        <button onclick="addToCart(${p.id})" class="mt-auto w-full bg-zinc-950 text-white py-4 rounded-2xl text-[9px] font-black uppercase tracking-widest hover:bg-[#6DAE5A] transition shadow-xl">
+                            Añadir a la bolsa
                         </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function selS(el) {
-            el.parentElement.querySelectorAll('.size-chip').forEach(c => c.classList.remove('selected'));
+        // --- FILTROS FUNCIONALES ---
+        function filter(cat) {
+            const filtered = cat === 'Todos' ? inventory : inventory.filter(p => p.cat === cat);
+            renderProducts(filtered);
+            
+            // UI de botones de filtro
+            document.querySelectorAll('.filter-chip').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText === cat) btn.classList.add('active');
+            });
+        }
+
+        // --- LÓGICA DE SELECCIÓN ---
+        function selSize(el) {
+            el.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function selColor(el) {
+            el.parentElement.querySelectorAll('.color-circle').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
         }
 
         // --- LÓGICA DE CARRITO ---
-        function openCart() {
-            document.getElementById('side-cart').classList.toggle('open');
-            document.getElementById('cart-overlay').classList.toggle('hidden');
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
         }
 
-        function buy(id) {
-            const sizeEl = document.querySelector(`#sizes-${id} .selected`);
-            if(!sizeEl) { alert("Elige tu talla 🐜"); return; }
-            
-            const p = inventory.find(x => x.id === id);
-            const size = sizeEl.innerText;
+        function addToCart(id) {
+            const size = document.querySelector(`#size-box-${id} .selected`)?.innerText;
+            if(!size) return alert("Por favor elige una talla 🐜");
+
+            const product = inventory.find(p => p.id === id);
             const key = `${id}-${size}`;
+            
+            const existing = cart.find(item => item.key === key);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({...product, size, qty: 1, key});
+            }
 
-            const item = cart.find(i => i.key === key);
-            if(item) { item.qty++; } else { cart.push({...p, size, qty: 1, key}); }
-
-            updateCartUI();
-            if(!document.getElementById('side-cart').classList.contains('open')) openCart();
+            updateUI();
+            if(!document.getElementById('cart-panel').classList.contains('open')) toggleCart();
         }
 
-        function updateCartUI() {
-            const box = document.getElementById('cart-items-container');
-            const total = document.getElementById('total-price');
-            const badge = document.getElementById('badge');
+        function updateUI() {
+            const container = document.getElementById('cart-content');
+            const badge = document.getElementById('cart-badge');
+            const totalDisplay = document.getElementById('cart-total');
 
-            if(cart.length > 0) document.getElementById('msg-empty').style.display = 'none';
+            if(cart.length > 0) document.getElementById('cart-empty').style.display = 'none';
+            else document.getElementById('cart-empty').style.display = 'block';
 
-            box.innerHTML = cart.map((i, index) => `
-                <div class="cart-item-ui">
-                    <img src="${i.img}" class="w-16 h-16 rounded-xl object-cover" onerror="this.src='https://via.placeholder.com/100'">
+            container.innerHTML = cart.map((item, index) => `
+                <div class="flex items-center gap-5 mb-6 bg-zinc-50 p-4 rounded-3xl border border-gray-100">
+                    <img src="${item.img}" class="w-16 h-20 rounded-xl object-cover shadow-sm">
                     <div class="flex-grow">
-                        <h5 class="text-[10px] font-black uppercase">${i.name}</h5>
-                        <p class="text-zinc-400 text-[9px] font-bold mt-1">Talla: ${i.size} | Cant: ${i.qty}</p>
-                        <p class="text-[#6DAE5A] font-black text-xs mt-1">$${(i.price * i.qty).toFixed(2)}</p>
+                        <h5 class="text-[10px] font-black uppercase">${item.name}</h5>
+                        <p class="text-zinc-400 text-[9px] font-bold mt-1 uppercase">Talla ${item.size} • Cant. ${item.qty}</p>
+                        <p class="text-[#6DAE5A] font-black text-xs mt-2">$${(item.price * item.qty).toFixed(2)}</p>
                     </div>
-                    <button onclick="del(${index})" class="text-zinc-300 hover:text-red-500">✕</button>
+                    <button onclick="remove(${index})" class="text-zinc-300 hover:text-red-500 transition">✕</button>
                 </div>
             `).join('');
 
-            const sum = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
-            total.innerText = `$${sum.toFixed(2)}`;
+            const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            totalDisplay.innerText = `$${total.toFixed(2)}`;
             badge.innerText = cart.reduce((acc, i) => acc + i.qty, 0);
         }
 
-        function del(idx) {
+        function remove(idx) {
             cart.splice(idx, 1);
-            updateCartUI();
-            if(cart.length === 0) document.getElementById('msg-empty').style.display = 'block';
+            updateUI();
         }
 
         function checkout() {
             if(cart.length === 0) return;
-            let msg = "🐜 *ORDEN LEM MODA 2026*\n\n";
-            cart.forEach(i => msg += `• ${i.name} [Talla ${i.size}] x${i.qty} - $${(i.price * i.qty).toFixed(2)}\n`);
-            msg += `\n*TOTAL: ${document.getElementById('total-price').innerText}*`;
+            let msg = "🐜 *NUEVA ORDEN LEM MODA 2026*\n\n";
+            cart.forEach(i => msg += `• ${i.name} [${i.size}] x${i.qty} - $${(i.price * i.qty).toFixed(2)}\n`);
+            msg += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
             window.open(`https://wa.me/593979010077?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        window.onload = () => { if(window.innerWidth > 1024) renderProducts(); };
+        // Carga inicial
+        window.onload = () => { if(window.location.hash === '#shop') navigate('shop'); else renderProducts(inventory); };
     </script>
 </body>
 </html>
