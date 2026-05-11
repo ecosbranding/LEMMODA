@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LEM MODA - High-End Streetwear Division | Quito">
-    <title>LEM MODA | Digital Flagship Store</title>
+    <meta name="description" content="LEM MODA - División de Streetwear de Alta Gama | Ecuador">
+    <title>LEM MODA | Tienda Oficial</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,700;0,900;1,900&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- PRELOADER --- */
+        /* --- PANTALLA DE CARGA --- */
         #preloader {
             position: fixed; inset: 0;
             background: var(--brand-black); z-index: 9999;
@@ -48,7 +48,7 @@
 
         @keyframes fillProgress { to { width: 100%; } }
 
-        /* --- NAVIGATION: LOGO VERSION --- */
+        /* --- NAVEGACIÓN --- */
         .nav-master {
             position: fixed; top: 0; width: 100%; z-index: 5000;
             padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
@@ -62,7 +62,7 @@
 
         .logo-box img { height: 40px; width: auto; object-fit: contain; }
 
-        /* --- SECTIONS --- */
+        /* --- MOTOR DE VISTAS --- */
         .view-layer {
             display: none; opacity: 0; transform: translateY(20px);
             transition: opacity 0.8s var(--ease-luxury), transform 0.8s var(--ease-luxury);
@@ -70,7 +70,7 @@
 
         .view-layer.active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* --- SHOP GRID --- */
+        /* --- CATÁLOGO --- */
         .catalogue-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
             gap: 20px; padding: 20px;
@@ -99,7 +99,6 @@
 
         .product-card:hover .img-container img { transform: scale(1.08); }
 
-        /* --- UI CONTROLS --- */
         .size-btn {
             width: 42px; height: 42px; border: 1px solid #ddd;
             display: flex; align-items: center; justify-content: center;
@@ -112,12 +111,12 @@
             width: 100%; padding: 20px; background: #000; color: #fff;
             font-size: 10px; font-weight: 900; text-transform: uppercase;
             letter-spacing: 3px; transition: 0.5s var(--ease-luxury);
-            margin-top: 15px; position: relative; overflow: hidden;
+            margin-top: 15px;
         }
 
-        .add-to-cart-trigger:hover { background: var(--brand-green); letter-spacing: 5px; }
+        .add-to-cart-trigger:hover { background: var(--brand-green); }
 
-        /* --- CART DRAWER --- */
+        /* --- CARRITO --- */
         #cart-sidebar {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 480px;
             height: 100vh; background: #fff; z-index: 6000;
@@ -132,20 +131,20 @@
 <body>
 
     <div id="preloader">
-        <h2 class="text-white text-3xl font-black italic tracking-tighter">LEM<span class="text-[#6DAE5A]">.</span></h2>
+        <h2 class="text-white text-3xl font-black italic tracking-tighter uppercase">LEM MODA</h2>
         <div class="loader-line"><div class="loader-fill"></div></div>
     </div>
 
     <nav class="nav-master" id="header-nav">
         <div class="logo-box cursor-pointer" onclick="goTo('home')">
             <img src="logo_lem.png" alt="LEM MODA" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-            <span style="display:none" class="text-3xl font-black italic tracking-tighter">LEM <span class="text-[#6DAE5A]">MODA</span></span>
+            <span style="display:none" class="text-3xl font-black italic tracking-tighter uppercase">LEM <span class="text-[#6DAE5A]">MODA</span></span>
         </div>
         
         <div class="hidden lg:flex gap-16 text-[10px] font-black uppercase tracking-[0.4em]">
-            <span onclick="goTo('home')" class="cursor-pointer hover:text-[#6DAE5A] transition">Home</span>
+            <span onclick="goTo('home')" class="cursor-pointer hover:text-[#6DAE5A] transition">Inicio</span>
             <span onclick="goTo('shop')" class="cursor-pointer hover:text-[#6DAE5A] transition">Colección</span>
-            <span onclick="goTo('essence')" class="cursor-pointer hover:text-[#6DAE5A] transition">The Leaf</span>
+            <span onclick="goTo('essence')" class="cursor-pointer hover:text-[#6DAE5A] transition">Identidad</span>
         </div>
 
         <button onclick="toggleCartDrawer()" class="relative group">
@@ -156,13 +155,13 @@
 
     <aside id="cart-sidebar">
         <div class="flex justify-between items-center mb-16">
-            <h3 class="text-4xl font-black italic uppercase tracking-tighter">Bolsa</h3>
-            <button onclick="toggleCartDrawer()" class="text-xl hover:rotate-90 transition-transform duration-500">✕</button>
+            <h3 class="text-4xl font-black italic uppercase tracking-tighter">Mi Bolsa</h3>
+            <button onclick="toggleCartDrawer()" class="text-xl">✕</button>
         </div>
         <div id="cart-list" class="flex-grow overflow-y-auto space-y-8 pr-4"></div>
         <div class="pt-10 mt-6 border-t border-zinc-100">
             <div class="flex justify-between items-baseline mb-10">
-                <span class="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Total Estimado</span>
+                <span class="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Total</span>
                 <span id="cart-total" class="text-4xl font-black tracking-tighter">$0.00</span>
             </div>
             <button onclick="sendOrder()" class="w-full bg-black text-white py-7 font-black uppercase tracking-[0.4em] text-[11px] hover:bg-[#6DAE5A] transition-colors">
@@ -178,10 +177,10 @@
             </video>
             <div class="relative z-10 text-center text-white px-6">
                 <h1 class="text-7xl md:text-[12rem] font-black italic uppercase leading-[0.8] tracking-tighter mb-12">
-                    Urban<br><span class="text-[#6DAE5A]">Mystic</span>
+                    Mística<br><span class="text-[#6DAE5A]">Urbana</span>
                 </h1>
                 <button onclick="goTo('shop')" class="bg-white text-black px-20 py-7 rounded-full font-black uppercase text-[11px] tracking-[0.5em] hover:bg-[#6DAE5A] hover:text-white transition-all transform hover:-translate-y-2">
-                    Discover Drop
+                    Explorar Drop
                 </button>
             </div>
         </div>
@@ -189,9 +188,9 @@
 
     <main id="shop" class="view-layer pt-48 pb-32">
         <div class="max-w-[1800px] mx-auto">
-            <header class="px-10 mb-24">
-                <h2 class="text-[10rem] font-black italic uppercase leading-none tracking-tighter">Shop<span class="text-[#6DAE5A]">.</span></h2>
-                <p class="text-zinc-400 font-bold uppercase tracking-[0.8em] text-[10px] mt-4">LEM MODA DROP 2026</p>
+            <header class="px-10 mb-24 text-center lg:text-left">
+                <h2 class="text-[8rem] lg:text-[10rem] font-black italic uppercase leading-none tracking-tighter">Tienda<span class="text-[#6DAE5A]">.</span></h2>
+                <p class="text-zinc-400 font-bold uppercase tracking-[0.8em] text-[10px] mt-4">INVENTARIO LEM MODA 2026</p>
             </header>
             <div id="grid-mount" class="catalogue-grid"></div>
         </div>
@@ -199,17 +198,17 @@
 
     <main id="essence" class="view-layer bg-[#080808] text-white py-60">
         <div class="max-w-5xl mx-auto px-10 text-center">
-            <h2 class="text-7xl md:text-[12rem] font-black italic uppercase leading-none mb-24">The <span class="text-[#6DAE5A]">Leaf.</span></h2>
+            <h2 class="text-7xl md:text-[12rem] font-black italic uppercase leading-none mb-24">La <span class="text-[#6DAE5A]">Hoja.</span></h2>
             <div class="grid md:grid-cols-2 gap-32 text-left">
                 <div class="group">
                     <div class="h-1 w-12 bg-[#6DAE5A] mb-8 group-hover:w-full transition-all duration-1000"></div>
                     <h4 class="text-4xl font-black italic uppercase mb-6">Fuerza Colectiva</h4>
-                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">Nuestra hormiga simboliza la estructura y la persistencia de la comunidad LEM.</p>
+                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">Nuestra estructura simboliza la persistencia y la unidad de la comunidad LEM en Ecuador.</p>
                 </div>
                 <div class="group">
                     <div class="h-1 w-12 bg-white mb-8 group-hover:w-full transition-all duration-1000"></div>
-                    <h4 class="text-4xl font-black italic uppercase mb-6">Evolución Orgánica</h4>
-                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">La hoja representa diseños que nacen de lo natural y se elevan al arte urbano.</p>
+                    <h4 class="text-4xl font-black italic uppercase mb-6">Crecimiento Orgánico</h4>
+                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">Cada diseño nace de la evolución constante, elevando el estilo urbano a un nuevo estándar.</p>
                 </div>
             </div>
         </div>
@@ -270,7 +269,7 @@
 
         function handleAddToCart(id) {
             const size = document.querySelector(`#sizes-${id} .active`)?.innerText;
-            if(!size) return alert("Selecciona una talla.");
+            if(!size) return alert("Por favor, selecciona una talla.");
             const product = MOCK_DB.find(p => p.id === id);
             cart.push({ ...product, size, uid: Date.now() });
             syncStorage();
@@ -310,7 +309,7 @@
 
         function sendOrder() {
             if(cart.length === 0) return;
-            let text = "LEM MODA - NUEVA ORDEN\n\n";
+            let text = "*LEM MODA - NUEVO PEDIDO*\n\n";
             cart.forEach(p => text += `• ${p.name} (${p.size}) - $${p.price}\n`);
             text += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
             window.open(`https://wa.me/593979010077?text=${encodeURIComponent(text)}`);
