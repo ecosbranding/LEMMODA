@@ -28,7 +28,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- PRELOADER ANIMATION --- */
+        /* --- PRELOADER --- */
         #preloader {
             position: fixed; inset: 0;
             background: var(--brand-black); z-index: 9999;
@@ -48,7 +48,7 @@
 
         @keyframes fillProgress { to { width: 100%; } }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION: LOGO VERSION --- */
         .nav-master {
             position: fixed; top: 0; width: 100%; z-index: 5000;
             padding: 30px 60px; display: flex; justify-content: space-between; align-items: center;
@@ -60,7 +60,9 @@
             backdrop-filter: blur(15px); border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- SECTIONS ENGINE --- */
+        .logo-box img { height: 40px; width: auto; object-fit: contain; }
+
+        /* --- SECTIONS --- */
         .view-layer {
             display: none; opacity: 0; transform: translateY(20px);
             transition: opacity 0.8s var(--ease-luxury), transform 0.8s var(--ease-luxury);
@@ -135,14 +137,17 @@
     </div>
 
     <nav class="nav-master" id="header-nav">
-        <div class="text-3xl font-black italic tracking-tighter cursor-pointer" onclick="goTo('home')">
-            LEM <span class="text-[#6DAE5A]">MODA</span>
+        <div class="logo-box cursor-pointer" onclick="goTo('home')">
+            <img src="logo_lem.png" alt="LEM MODA" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <span style="display:none" class="text-3xl font-black italic tracking-tighter">LEM <span class="text-[#6DAE5A]">MODA</span></span>
         </div>
+        
         <div class="hidden lg:flex gap-16 text-[10px] font-black uppercase tracking-[0.4em]">
             <span onclick="goTo('home')" class="cursor-pointer hover:text-[#6DAE5A] transition">Home</span>
-            <span onclick="goTo('shop')" class="cursor-pointer hover:text-[#6DAE5A] transition">Catalogue</span>
+            <span onclick="goTo('shop')" class="cursor-pointer hover:text-[#6DAE5A] transition">Colección</span>
             <span onclick="goTo('essence')" class="cursor-pointer hover:text-[#6DAE5A] transition">The Leaf</span>
         </div>
+
         <button onclick="toggleCartDrawer()" class="relative group">
             <span class="text-2xl group-hover:scale-110 transition-transform inline-block">🛒</span>
             <span id="cart-badge" class="absolute -top-2 -right-2 bg-[#6DAE5A] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
@@ -154,15 +159,14 @@
             <h3 class="text-4xl font-black italic uppercase tracking-tighter">Bolsa</h3>
             <button onclick="toggleCartDrawer()" class="text-xl hover:rotate-90 transition-transform duration-500">✕</button>
         </div>
-        <div id="cart-list" class="flex-grow overflow-y-auto space-y-8 pr-4">
-            </div>
+        <div id="cart-list" class="flex-grow overflow-y-auto space-y-8 pr-4"></div>
         <div class="pt-10 mt-6 border-t border-zinc-100">
             <div class="flex justify-between items-baseline mb-10">
                 <span class="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Total Estimado</span>
                 <span id="cart-total" class="text-4xl font-black tracking-tighter">$0.00</span>
             </div>
             <button onclick="sendOrder()" class="w-full bg-black text-white py-7 font-black uppercase tracking-[0.4em] text-[11px] hover:bg-[#6DAE5A] transition-colors">
-                Finalizar Pedido 🐜
+                Finalizar Pedido
             </button>
         </div>
     </aside>
@@ -173,8 +177,8 @@
                 <source src="1000813695.mp4" type="video/mp4">
             </video>
             <div class="relative z-10 text-center text-white px-6">
-                <h1 class="text-7xl md:text-[14rem] font-black italic uppercase leading-[0.75] tracking-tighter mb-12">
-                    Luxury<br><span class="text-[#6DAE5A]">Street</span>
+                <h1 class="text-7xl md:text-[12rem] font-black italic uppercase leading-[0.8] tracking-tighter mb-12">
+                    Urban<br><span class="text-[#6DAE5A]">Mystic</span>
                 </h1>
                 <button onclick="goTo('shop')" class="bg-white text-black px-20 py-7 rounded-full font-black uppercase text-[11px] tracking-[0.5em] hover:bg-[#6DAE5A] hover:text-white transition-all transform hover:-translate-y-2">
                     Discover Drop
@@ -187,10 +191,9 @@
         <div class="max-w-[1800px] mx-auto">
             <header class="px-10 mb-24">
                 <h2 class="text-[10rem] font-black italic uppercase leading-none tracking-tighter">Shop<span class="text-[#6DAE5A]">.</span></h2>
-                <p class="text-zinc-400 font-bold uppercase tracking-[0.8em] text-[10px] mt-4">Selected Inventory 2026</p>
+                <p class="text-zinc-400 font-bold uppercase tracking-[0.8em] text-[10px] mt-4">LEM MODA DROP 2026</p>
             </header>
-            <div id="grid-mount" class="catalogue-grid">
-                </div>
+            <div id="grid-mount" class="catalogue-grid"></div>
         </div>
     </main>
 
@@ -200,20 +203,19 @@
             <div class="grid md:grid-cols-2 gap-32 text-left">
                 <div class="group">
                     <div class="h-1 w-12 bg-[#6DAE5A] mb-8 group-hover:w-full transition-all duration-1000"></div>
-                    <h4 class="text-4xl font-black italic uppercase mb-6">Collective Strength</h4>
-                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">Nuestra hormiga 🐜 simboliza la estructura y la persistencia. No vendemos ropa, vendemos la armadura de una comunidad que nunca se detiene.</p>
+                    <h4 class="text-4xl font-black italic uppercase mb-6">Fuerza Colectiva</h4>
+                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">Nuestra hormiga simboliza la estructura y la persistencia de la comunidad LEM.</p>
                 </div>
                 <div class="group">
                     <div class="h-1 w-12 bg-white mb-8 group-hover:w-full transition-all duration-1000"></div>
-                    <h4 class="text-4xl font-black italic uppercase mb-6">Organic Growth</h4>
-                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">La hoja representa la evolución constante. Diseños que nacen de la tierra y se elevan a la categoría de arte urbano.</p>
+                    <h4 class="text-4xl font-black italic uppercase mb-6">Evolución Orgánica</h4>
+                    <p class="text-zinc-500 text-xl font-light italic leading-relaxed">La hoja representa diseños que nacen de lo natural y se elevan al arte urbano.</p>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // --- DATA ARCHITECTURE ---
         const MOCK_DB = [
             { id: 1, name: "Navy Dayslay Hoodie", price: 85, img: "1000813647.jpeg" },
             { id: 2, name: "Tech Cargo Graphite", price: 115, img: "1000813649.jpg" },
@@ -223,17 +225,15 @@
             { id: 6, name: "Essential White Tee", price: 38, img: "1000813673.jpg" },
             { id: 7, name: "Midnight Cargo Dama", price: 105, img: "1000813672.jpg" },
             { id: 8, name: "Acid Wash Street", price: 55, img: "1000813674.jpg" },
-            { id: 9, name: "Carbon Tech Pant", price: 130, img: "1000813675.jpg" }
+            { id: 9, name: "Carbon Tech Pant", price: 130, img: "1000813675.jpg" },
+            { id: 10, name: "Mystic Urban Jacket", price: 145, img: "1000813683.jpg" }
         ];
 
-        // --- APP STATE ---
         let cart = JSON.parse(localStorage.getItem('lem_cart')) || [];
 
-        // --- CORE FUNCTIONS ---
         function goTo(id) {
             document.querySelectorAll('.view-layer').forEach(v => v.classList.remove('active'));
-            const target = document.getElementById(id);
-            target.classList.add('active');
+            document.getElementById(id).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if(id === 'shop') mountShop();
         }
@@ -264,18 +264,15 @@
             el.classList.add('active');
         }
 
-        // --- CART ENGINE ---
         function toggleCartDrawer() {
             document.getElementById('cart-sidebar').classList.toggle('open');
         }
 
         function handleAddToCart(id) {
             const size = document.querySelector(`#sizes-${id} .active`)?.innerText;
-            if(!size) return alert("🐜 Selecciona una talla para continuar.");
-
+            if(!size) return alert("Selecciona una talla.");
             const product = MOCK_DB.find(p => p.id === id);
             cart.push({ ...product, size, uid: Date.now() });
-            
             syncStorage();
             if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCartDrawer();
         }
@@ -287,15 +284,12 @@
 
         function renderCartItems() {
             const container = document.getElementById('cart-list');
-            const badge = document.getElementById('cart-badge');
-            const totalDisplay = document.getElementById('cart-total');
-
-            badge.innerText = cart.length;
+            document.getElementById('cart-badge').innerText = cart.length;
             const total = cart.reduce((acc, p) => acc + p.price, 0);
-            totalDisplay.innerText = `$${total.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
 
             container.innerHTML = cart.map((item, index) => `
-                <div class="flex gap-6 items-center animate-reveal">
+                <div class="flex gap-6 items-center">
                     <div class="w-20 aspect-[3/4] bg-zinc-100 overflow-hidden rounded">
                         <img src="${item.img}" class="w-full h-full object-cover">
                     </div>
@@ -304,7 +298,7 @@
                         <p class="text-[9px] text-zinc-400 font-bold uppercase mt-2 tracking-widest">Talla: ${item.size}</p>
                         <p class="text-[11px] font-black mt-3 text-[#6DAE5A]">$${item.price.toFixed(2)}</p>
                     </div>
-                    <button onclick="removeItem(${index})" class="text-zinc-300 hover:text-black transition-colors">✕</button>
+                    <button onclick="removeItem(${index})" class="text-zinc-300">✕</button>
                 </div>
             `).join('');
         }
@@ -316,13 +310,12 @@
 
         function sendOrder() {
             if(cart.length === 0) return;
-            let text = "🐜 *LEM MODA - NUEVA ORDEN*\n\n";
+            let text = "LEM MODA - NUEVA ORDEN\n\n";
             cart.forEach(p => text += `• ${p.name} (${p.size}) - $${p.price}\n`);
             text += `\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
             window.open(`https://wa.me/593979010077?text=${encodeURIComponent(text)}`);
         }
 
-        // --- UX GLOBAL EFFECTS ---
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('header-nav');
             window.scrollY > 100 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
